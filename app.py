@@ -13,9 +13,12 @@ lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys(
 st.header(lecture)
 
 if lecture in terms:
- for term in terms[lecture]:
-    st.subheader(f"🖥 {term['kk']} / {term['ru']} / {term['en']}")
+ filtered_terms = [term for term in terms[lecture] if search_query in term['kk'].lower() or search_query in term['ru'].lower() or search_query in term['en'].lower()]
 
+ if search_query and not filtered_terms:
+        st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
+
+ for term in filtered_terms if search_query else terms[lecture]:
     with st.expander("📖 Анықтама / Определение / Definition"):
         st.markdown(f"**KK:** {term['definition']['kk']}")
         st.markdown(f"**RU:** {term['definition']['ru']}")
