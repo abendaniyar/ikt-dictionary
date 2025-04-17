@@ -7,6 +7,8 @@ with open("data.json", "r", encoding="utf-8") as f:
 st.set_page_config(page_title="Электрондық терминологиялық сөздік", layout="wide")
 st.title("📘АКТ курсы бойынша электрондық ұғымдық-терминологиялық сөздік")
 
+search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
+
 lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
 st.header(lecture)
 
