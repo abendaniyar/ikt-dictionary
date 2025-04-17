@@ -1,7 +1,7 @@
 
 import streamlit as st
 import json
-with open("C:\\Users\\Lenovo\\Downloads\\ikt_dictionary_project\\data.json", "r", encoding="utf-8") as f:
+with open("data.json", "r", encoding="utf-8") as f:
     terms = json.load(f)
 
 st.set_page_config(page_title="Электрондық терминологиялық сөздік", layout="wide")
