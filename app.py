@@ -11,39 +11,63 @@ st.title("📘АКТ курсы бойынша электрондық ұғымд
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
 
-# Дәрістерді навигатор ретінде көрсету
-lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
+if search_query:
+    st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
 
-st.header(lecture)
+    found_terms = []  # Барлық дәрістерден сәйкес терминдерді жинайтын тізім
 
-# Іздеу сұранысына сәйкес терминдерді сүзу
-if lecture in terms:
-    filtered_terms = [term for term in terms[lecture] if search_query in term['kk'].lower() or search_query in term['ru'].lower() or search_query in term['en'].lower()]
+    for lecture, term_list in terms.items():
+        for term in term_list:
+            if search_query in term['kk'].lower() or search_query in term['ru'].lower() or search_query in term['en'].lower():
+                found_terms.append((lecture, term))
 
-    if search_query and not filtered_terms:
+    if not found_terms:
         st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
+    else:
+        for lecture, term in found_terms:
+            st.subheader(f"📂 {lecture} | 🖥 {term['kk']} / {term['ru']} / {term['en']}")
 
-    for term in filtered_terms if search_query else terms[lecture]:
-        st.subheader(f"🖥 {term['kk']} / {term['ru']} / {term['en']}")
+            with st.expander("📖 Анықтама / Определение / Definition"):
+                st.markdown(f"**KK:** {term['definition']['kk']}")
+                st.markdown(f"**RU:** {term['definition']['ru']}")
+                st.markdown(f"**EN:** {term['definition']['en']}")
 
-        with st.expander("📖 Анықтама / Определение / Definition"):
-            st.markdown(f"**KK:** {term['definition']['kk']}")
-            st.markdown(f"**RU:** {term['definition']['ru']}")
-            st.markdown(f"**EN:** {term['definition']['en']}")
+            with st.expander("💬 Мысал / Пример / Example"):
+                st.markdown(f"**KK:** {term['example']['kk']}")
+                st.markdown(f"**RU:** {term['example']['ru']}")
+                st.markdown(f"**EN:** {term['example']['en']}")
 
-        with st.expander("💬 Мысал / Пример / Example"):
-            st.markdown(f"**KK:** {term['example']['kk']}")
-            st.markdown(f"**RU:** {term['example']['ru']}")
-            st.markdown(f"**EN:** {term['example']['en']}")
+            if term.get("image"):
+                st.image(term['image'], caption="Иллюстрация", use_column_width=True)
 
-        if term.get("image"):
-            st.image(term['image'], caption="Иллюстрация", use_column_width=True)
+            if term.get("source"):
+                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
 
-        if term.get("source"):
-            st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
-
-        st.markdown("---")
+            st.markdown("---")
 else:
-    st.warning("Бұл дәрісте мәліметтер табылмады. Басқа дәрісті таңдаңыз.")
+    # Дәрістерді навигатор ретінде көрсету
+    lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
+    st.header(lecture)
 
-st.success("Іздеу функциясы қосылды! 🚀 Терминдерді табу енді оңайырақ.")
+    if lecture in terms:
+        for term in terms[lecture]:
+            st.subheader(f"🖥 {term['kk']} / {term['ru']} / {term['en']}")
+
+            with st.expander("📖 Анықтама / Определение / Definition"):
+                st.markdown(f"**KK:** {term['definition']['kk']}")
+                st.markdown(f"**RU:** {term['definition']['ru']}")
+                st.markdown(f"**EN:** {term['definition']['en']}")
+
+            with st.expander("💬 Мысал / Пример / Example"):
+                st.markdown(f"**KK:** {term['example']['kk']}")
+                st.markdown(f"**RU:** {term['example']['ru']}")
+                st.markdown(f"**EN:** {term['example']['en']}")
+
+            if term.get("image"):
+                st.image(term['image'], caption="Иллюстрация", use_column_width=True)
+
+            if term.get("source"):
+                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
+
+            st.markdown("---")
+
