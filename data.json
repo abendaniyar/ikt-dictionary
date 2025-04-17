@@ -1,0 +1,439 @@
+{
+  "Дәріс 1. Кіріспе": [
+    {
+      "kk": "Ақпарат",
+      "ru": "Информация",
+      "en": "Information",
+      "definition": {
+        "kk": "Ақпарат — қоршаған орта туралы мәлімет.",
+        "ru": "Информация — сведения об окружающем мире.",
+        "en": "Information is data about the surrounding environment."
+      },
+      "example": {
+        "kk": "Ақпарат компьютер арқылы беріледі.",
+        "ru": "Информация передаётся через компьютер.",
+        "en": "Information is transmitted via computer."
+      },
+      "image": "",
+      "source": "https://kk.wikipedia.org/wiki/Ақпарат"
+    },
+    {
+      "kk": "Ақпараттық технологиялар",
+      "ru": "Информационные технологии",
+      "en": "Information Technology",
+      "definition": {
+        "kk": "Ақпаратты жинау, өңдеу, сақтау және тарату үшін қолданылатын технологиялар жиынтығы.",
+        "ru": "Совокупность технологий для сбора, обработки, хранения и передачи информации.",
+        "en": "Technologies used for collecting, processing, storing, and transmitting information."
+      },
+      "example": {
+        "kk": "Ақпараттық технологиялар білім беру саласында кеңінен қолданылады.",
+        "ru": "Информационные технологии широко применяются в сфере образования.",
+        "en": "Information technologies are widely used in education."
+      },
+      "image": "",
+      "source": "https://kk.wikipedia.org/wiki/Ақпараттық_технология"
+    },
+    {
+      "kk": "Стандарт",
+      "ru": "Стандарт",
+      "en": "Standard",
+      "definition": {
+        "kk": "Стандарт — белгілі бір салада келісілген ережелер жиынтығы.",
+        "ru": "Стандарт — набор согласованных правил в определённой области.",
+        "en": "Standard is a set of agreed rules in a specific field."
+      },
+      "example": {
+        "kk": "ISO стандарттары халықаралық деңгейде қолданылады.",
+        "ru": "Стандарты ISO используются на международном уровне.",
+        "en": "ISO standards are used internationally."
+      },
+      "image": "",
+      "source": "https://kk.wikipedia.org/wiki/Стандарт"
+    },
+    {
+      "kk": "Цифрландыру",
+      "ru": "Цифровизация",
+      "en": "Digitalization",
+      "definition": {
+        "kk": "Цифрландыру — ақпаратты сандық форматқа көшіру процесі.",
+        "ru": "Цифровизация — процесс перевода информации в цифровой формат.",
+        "en": "Digitalization is the process of converting information into a digital format."
+      },
+      "example": {
+        "kk": "Мемлекеттік қызметтер цифрландырылып жатыр.",
+        "ru": "Государственные услуги оцифровываются.",
+        "en": "Public services are being digitalized."
+      },
+      "image": "",
+      "source": "https://kk.wikipedia.org/wiki/Цифрландыру"
+    },
+    {
+      "kk": "АКТ",
+      "ru": "ИКТ",
+      "en": "ICT",
+      "definition": {
+        "kk": "Ақпараттық-коммуникациялық технологиялар — ақпарат пен байланыс технологияларының жиынтығы.",
+        "ru": "Информационно-коммуникационные технологии — совокупность технологий связи и обработки информации.",
+        "en": "ICT is the combination of communication and information technologies."
+      },
+      "example": {
+        "kk": "АКТ білім беруде маңызды рөл атқарады.",
+        "ru": "ИКТ играют важную роль в образовании.",
+        "en": "ICT plays an important role in education."
+      },
+      "image": "",
+      "source": "https://kk.wikipedia.org/wiki/Ақпараттық-коммуникациялық_технологиялар"
+    }
+  ],
+  "Дәріс 2. Компьютер архитектурасы": [
+    {
+      "kk": "Процессор",
+      "ru": "Процессор",
+      "en": "Processor",
+      "definition": {
+        "kk": "Компьютердің негізгі есептеу элементі.",
+        "ru": "Основной вычислительный элемент компьютера.",
+        "en": "The main computing element of a computer."
+      },
+      "example": {
+        "kk": "Процессор бағдарламаларды орындау үшін қолданылады.",
+        "ru": "Процессор используется для выполнения программ.",
+        "en": "The processor is used to execute programs."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Аналық тақта",
+      "ru": "Материнская плата",
+      "en": "Motherboard",
+      "definition": {
+        "kk": "Компьютер компоненттерін біріктіретін негізгі плата.",
+        "ru": "Основная плата, объединяющая компоненты компьютера.",
+        "en": "The main board that integrates computer components."
+      },
+      "example": {
+        "kk": "Аналық тақта барлық компоненттерді байланыстырады.",
+        "ru": "Материнская плата связывает все компоненты.",
+        "en": "The motherboard connects all components."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Жедел жад",
+      "ru": "Оперативная память",
+      "en": "RAM",
+      "definition": {
+        "kk": "Бағдарламалар мен мәліметтерді уақытша сақтайтын жад.",
+        "ru": "Память для временного хранения программ и данных.",
+        "en": "Memory for temporary storage of programs and data."
+      },
+      "example": {
+        "kk": "Жедел жад бағдарламалардың жылдам орындалуына ықпал етеді.",
+        "ru": "Оперативная память способствует быстрому выполнению программ.",
+        "en": "RAM helps programs run quickly."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Тұрақты жад",
+      "ru": "Постоянная память",
+      "en": "ROM",
+      "definition": {
+        "kk": "Құрылғының жұмыс істеуіне қажетті тұрақты мәліметтер сақтайтын жад.",
+        "ru": "Память для хранения постоянных данных, необходимых для работы устройства.",
+        "en": "Memory that stores permanent data needed for device operation."
+      },
+      "example": {
+        "kk": "Тұрақты жад жүйе бағдарламаларын сақтайды.",
+        "ru": "Постоянная память сохраняет системные программы.",
+        "en": "ROM stores system programs."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Қуат көзі",
+      "ru": "Блок питания",
+      "en": "Power Supply",
+      "definition": {
+        "kk": "Компьютерге электр энергиясын жеткізетін блок.",
+        "ru": "Блок, обеспечивающий компьютер электроэнергией.",
+        "en": "A unit that supplies electricity to the computer."
+      },
+      "example": {
+        "kk": "Қуат көзі тұрақты токты қамтамасыз етеді.",
+        "ru": "Блок питания обеспечивает постоянный ток.",
+        "en": "The power supply provides stable current."
+      },
+      "image": "",
+      "source": ""
+    }
+  ],
+  "Дәріс 3. Компьютердің программалық қамтамасыз етілуі": [
+    {
+      "kk": "Операциялық жүйе",
+      "ru": "Операционная система",
+      "en": "Operating System",
+      "definition": {
+        "kk": "Компьютерді басқаруға арналған негізгі бағдарламалық платформа.",
+        "ru": "Основная программная платформа для управления компьютером.",
+        "en": "The main software platform for managing a computer."
+      },
+      "example": {
+        "kk": "Windows және Linux танымал операциялық жүйелер.",
+        "ru": "Windows и Linux популярные операционные системы.",
+        "en": "Windows and Linux are popular operating systems."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Қолданбалы бағдарламалар",
+      "ru": "Прикладные программы",
+      "en": "Applications",
+      "definition": {
+        "kk": "Белгілі бір тапсырмаларды орындауға арналған бағдарламалар жиынтығы.",
+        "ru": "Набор программ для выполнения определённых задач.",
+        "en": "A set of programs designed to perform specific tasks."
+      },
+      "example": {
+        "kk": "Microsoft Word мәтінді өңдеу үшін қолданылады.",
+        "ru": "Microsoft Word используется для обработки текста.",
+        "en": "Microsoft Word is used for text processing."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Драйвер",
+      "ru": "Драйвер",
+      "en": "Driver",
+      "definition": {
+        "kk": "Аппараттық құралдармен жұмыс істеуге мүмкіндік беретін бағдарлама.",
+        "ru": "Программа для работы с аппаратными устройствами.",
+        "en": "A program that enables working with hardware devices."
+      },
+      "example": {
+        "kk": "Принтердің драйвері компьютерге принтерді басқаруға мүмкіндік береді.",
+        "ru": "Драйвер принтера позволяет компьютеру управлять принтером.",
+        "en": "Printer drivers allow the computer to manage the printer."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Антивирус",
+      "ru": "Антивирус",
+      "en": "Antivirus",
+      "definition": {
+        "kk": "Компьютерлік вирустардан қорғауға арналған бағдарлама.",
+        "ru": "Программа для защиты от компьютерных вирусов.",
+        "en": "A program designed to protect against computer viruses."
+      },
+      "example": {
+        "kk": "Антивирус бағдарламасы зиянды бағдарламаларды анықтайды.",
+        "ru": "Антивирус обнаруживает вредоносные программы.",
+        "en": "The antivirus detects harmful software."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Бағдарламалау тілдері",
+      "ru": "Языки программирования",
+      "en": "Programming Languages",
+      "definition": {
+        "kk": "Компьютерлік бағдарламалар құруға арналған құралдар жиынтығы.",
+        "ru": "Набор инструментов для создания компьютерных программ.",
+        "en": "A set of tools for creating computer programs."
+      },
+      "example": {
+        "kk": "Python бағдарламалауды үйрену үшін кеңінен қолданылады.",
+        "ru": "Python широко используется для изучения программирования.",
+        "en": "Python is widely used for learning programming."
+      },
+      "image": "",
+      "source": ""
+    }
+  ],
+  
+  "Дәріс 4. Ақпаратты өңдеу": [
+    {
+      "kk": "Мәліметтер базасы",
+      "ru": "База данных",
+      "en": "Database",
+      "definition": {
+        "kk": "Мәліметтерді сақтау және басқаруға арналған жүйе.",
+        "ru": "Система для хранения и управления данными.",
+        "en": "A system for storing and managing data."
+      },
+      "example": {
+        "kk": "Мәліметтер базасы клиенттердің ақпаратын ұйымдастырады.",
+        "ru": "База данных организует информацию о клиентах.",
+        "en": "The database organizes customer information."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Алгоритм",
+      "ru": "Алгоритм",
+      "en": "Algorithm",
+      "definition": {
+        "kk": "Белгілі бір тапсырманы орындау үшін қажетті әрекеттердің реттілігі.",
+        "ru": "Последовательность действий для выполнения определённой задачи.",
+        "en": "A sequence of actions to complete a specific task."
+      },
+      "example": {
+        "kk": "Сұрыптау алгоритмдері деректерді ретке келтіреді.",
+        "ru": "Алгоритмы сортировки упорядочивают данные.",
+        "en": "Sorting algorithms organize data."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Өңдеу жылдамдығы",
+      "ru": "Скорость обработки",
+      "en": "Processing Speed",
+      "definition": {
+        "kk": "Компьютердің деректерді өңдеу жылдамдығын сипаттайтын көрсеткіш.",
+        "ru": "Показатель скорости обработки данных компьютером.",
+        "en": "A measure of the speed at which a computer processes data."
+      },
+      "example": {
+        "kk": "Жоғары жылдамдықты процессор деректерді тез өңдей алады.",
+        "ru": "Высокоскоростной процессор быстро обрабатывает данные.",
+        "en": "A high-speed processor can quickly process data."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Форматтау",
+      "ru": "Форматирование",
+      "en": "Formatting",
+      "definition": {
+        "kk": "Мәліметтердің құрылымын белгілеу процесі.",
+        "ru": "Процесс установления структуры данных.",
+        "en": "The process of defining the structure of data."
+      },
+      "example": {
+        "kk": "Деректерді кестелерге форматтау оларды оқуды жеңілдетеді.",
+        "ru": "Форматирование данных в таблицах облегчает их чтение.",
+        "en": "Formatting data into tables makes it easier to read."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Кэш",
+      "ru": "Кэш",
+      "en": "Cache",
+      "definition": {
+        "kk": "Мәліметтерді уақытша сақтау үшін қолданылатын жад түрі.",
+        "ru": "Тип памяти для временного хранения данных.",
+        "en": "A type of memory used for temporary data storage."
+      },
+      "example": {
+        "kk": "Кэш браузердің жылдамдығын арттырады.",
+        "ru": "Кэш увеличивает скорость работы браузера.",
+        "en": "Cache increases browser speed."
+      },
+      "image": "",
+      "source": ""
+    }
+  ],
+  "Дәріс 5. Компьютерлік желілер": [
+    {
+      "kk": "Жергілікті желі",
+      "ru": "Локальная сеть",
+      "en": "LAN",
+      "definition": {
+        "kk": "Бір ғимарат ішінде бірнеше құрылғыны байланыстыратын желі.",
+        "ru": "Сеть, соединяющая устройства внутри одного здания.",
+        "en": "A network connecting devices within a single building."
+      },
+      "example": {
+        "kk": "Жергілікті желі кеңселерде кеңінен қолданылады.",
+        "ru": "Локальная сеть широко используется в офисах.",
+        "en": "LAN is widely used in offices."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Әлемдік желі",
+      "ru": "Глобальная сеть",
+      "en": "WAN",
+      "definition": {
+        "kk": "Әр түрлі аймақтарды байланыстыратын кең ауқымды желі.",
+        "ru": "Широкомасштабная сеть, соединяющая разные регионы.",
+        "en": "A large-scale network that connects different regions."
+      },
+      "example": {
+        "kk": "Интернет әлемдік желінің ең танымал мысалы.",
+        "ru": "Интернет — самый известный пример глобальной сети.",
+        "en": "The Internet is the most well-known example of a WAN."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "IP адрес",
+      "ru": "IP-адрес",
+      "en": "IP Address",
+      "definition": {
+        "kk": "Құрылғыны желіде тану үшін пайдаланылатын сандық идентификатор.",
+        "ru": "Цифровой идентификатор устройства в сети.",
+        "en": "A numerical identifier used to recognize a device on a network."
+      },
+      "example": {
+        "kk": "Серверге қосылу үшін IP адрес қажет.",
+        "ru": "Для подключения к серверу требуется IP-адрес.",
+        "en": "An IP address is needed to connect to a server."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Маршрутизатор",
+      "ru": "Маршрутизатор",
+      "en": "Router",
+      "definition": {
+        "kk": "Желінің деректерін тасымалдауға арналған құрылғы.",
+        "ru": "Устройство для передачи данных в сети.",
+        "en": "A device used for transmitting data in a network."
+      },
+      "example": {
+        "kk": "Маршрутизатор бірнеше құрылғыларға интернетті жеткізеді.",
+        "ru": "Маршрутизатор распределяет интернет на несколько устройств.",
+        "en": "A router distributes internet to multiple devices."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Брандмауэр",
+      "ru": "Брандмауэр",
+      "en": "Firewall",
+      "definition": {
+        "kk": "Желіні рұқсатсыз қол жеткізуден қорғауға арналған жүйе.",
+        "ru": "Система защиты сети от несанкционированного доступа.",
+        "en": "A system that protects the network from unauthorized access."
+      },
+      "example": {
+        "kk": "Брандмауэр зиянды шабуылдардан қорғайды.",
+        "ru": "Брандмауэр защищает от вредоносных атак.",
+        "en": "A firewall protects against malicious attacks."
+      },
+      "image": "",
+      "source": ""
+    }
+  ]
+}
+
