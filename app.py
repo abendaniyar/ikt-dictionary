@@ -5,7 +5,7 @@ import json
 with open("data.json", "r", encoding="utf-8") as f:
     terms = json.load(f)
 
-st.set_page_config(page_title="Электрондық терминологиялық сөздік", layout="wide")
+st.set_page_config(page_title="Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
 st.title("📘АКТ курсы бойынша электрондық ұғымдық-терминологиялық сөздік")
 
 # Іздеу функциясын қосу
@@ -36,7 +36,22 @@ if search_query:
                 st.markdown(f"**KK:** {term['example']['kk']}")
                 st.markdown(f"**RU:** {term['example']['ru']}")
                 st.markdown(f"**EN:** {term['example']['en']}")
+            # 🔁 Семантические связи (тезаурус)
+            if 'relations' in term:
+                with st.expander("🧠 Семантикалық байланыстар / Semantic Relations"):
+                    rel = term['relations']
+                    if rel.get('synonyms'):
+                        st.markdown(f"**🔁 Синонимдер / Synonyms:** {', '.join(rel['synonyms'])}")
+                    if rel.get('antonyms'):
+                        st.markdown(f"**🆚 Антонимдер / Antonyms:** {', '.join(rel['antonyms'])}")
+                    if rel.get('broader_term'):
+                        st.markdown(f"**🔼 Жалпылама ұғым / Broader term:** {rel['broader_term']}")
+                    if rel.get('narrower_terms'):
+                        st.markdown(f"**🔽 Арнайы ұғымдар / Narrower terms:** {', '.join(rel['narrower_terms'])}")
+                    if rel.get('related_terms'):
+                        st.markdown(f"**🔗 Қатысты ұғымдар / Related terms:** {', '.join(rel['related_terms'])}")
 
+            
             if term.get("image"):
                 st.image(term['image'], caption="Иллюстрация", use_column_width=True)
 
