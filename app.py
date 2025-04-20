@@ -38,18 +38,18 @@ if search_query:
                 st.markdown(f"**EN:** {term['example']['en']}")
             # 🔁 Семантические связи (тезаурус)
             if 'relations' in term:
-                with st.expander("🧠 Семантикалық байланыстар / Semantic Relations"):
+                with st.expander("🧠 Семантикалық байланыстар / Семантические связи / Semantic Relations"):
                     rel = term['relations']
                     if rel.get('synonyms'):
-                        st.markdown(f"**🔁 Синонимдер / Synonyms:** {', '.join(rel['synonyms'])}")
+                        st.markdown(f"**🔁 Синонимдер / Синонимы / Synonyms:** {', '.join(rel['synonyms'])}")
                     if rel.get('antonyms'):
-                        st.markdown(f"**🆚 Антонимдер / Antonyms:** {', '.join(rel['antonyms'])}")
+                        st.markdown(f"**🆚 Антонимдер / Антонимы / Antonyms:** {', '.join(rel['antonyms'])}")
                     if rel.get('broader_term'):
-                        st.markdown(f"**🔼 Жалпылама ұғым / Broader term:** {rel['broader_term']}")
+                        st.markdown(f"**🔼 Жалпылама ұғым / Обобщающее понятие / Broader term:** {rel['broader_term']}")
                     if rel.get('narrower_terms'):
-                        st.markdown(f"**🔽 Арнайы ұғымдар / Narrower terms:** {', '.join(rel['narrower_terms'])}")
+                        st.markdown(f"**🔽 Арнайы ұғымдар / Специальные понятия / Narrower terms:** {', '.join(rel['narrower_terms'])}")
                     if rel.get('related_terms'):
-                        st.markdown(f"**🔗 Қатысты ұғымдар / Related terms:** {', '.join(rel['related_terms'])}")
+                        st.markdown(f"**🔗 Қатысты ұғымдар / В родственном понятии / Related terms:** {', '.join(rel['related_terms'])}")
 
             
             if term.get("image"):
