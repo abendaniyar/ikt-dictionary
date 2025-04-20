@@ -31,6 +31,12 @@
         "ru": "Информационные технологии широко применяются в сфере образования.",
         "en": "Information technologies are widely used in education."
       },
+      "relations": {
+        "synonyms": ["Дерек", "Мәлімет"],
+        "broader_term": "Ақпараттық технологиялар",
+        "narrower_terms": ["Деректер", "Білім"],
+        "related_terms": ["Цифрландыру", "Ақпаратты өңдеу"]
+  },
       "image": "",
       "source": "https://kk.wikipedia.org/wiki/Ақпараттық_технология"
     },
@@ -87,6 +93,28 @@
     }
   ],
   "Дәріс 2. Компьютер архитектурасы": [
+    {
+  "kk": "Компьютер",
+  "ru": "Компьютер",
+  "en": "Computer",
+  "definition": {
+    "kk": "Компьютер — ақпаратты автоматты түрде өңдейтін электронды құрылғы.",
+    "ru": "Компьютер — электронное устройство для автоматической обработки информации.",
+    "en": "A computer is an electronic device for automatic information processing."
+  },
+  "example": {
+    "kk": "Компьютер деректерді жылдам өңдейді.",
+    "ru": "Компьютер быстро обрабатывает данные.",
+    "en": "The computer processes data quickly."
+  },
+  "relations": {
+    "synonyms": ["ЭЕМ"],
+    "broader_term": "Ақпараттық құрылғылар",
+    "narrower_terms": ["Ноутбук", "Жұмыс үстелі компьютері"],
+    "related_terms": ["Процессор", "Жад", "ОЖ"]
+  },
+  "source": "https://kk.wikipedia.org/wiki/Компьютер"
+}
     {
       "kk": "Процессор",
       "ru": "Процессор",
@@ -188,6 +216,11 @@
         "ru": "Windows и Linux популярные операционные системы.",
         "en": "Windows and Linux are popular operating systems."
       },
+      "relations": {
+        "broader_term": "Программалық қамтамасыз ету",
+        "narrower_terms": ["Windows", "Linux", "macOS"],
+        "related_terms": ["Файлдық жүйе", "Процессор", "Интерфейс"]
+  },
       "image": "",
       "source": ""
     },
