@@ -14,6 +14,12 @@
         "ru": "Информация передаётся через компьютер.",
         "en": "Information is transmitted via computer."
       },
+      "relations": {
+        "synonyms": ["Дерек", "Мәлімет"],
+        "broader_term": "Ақпараттық технологиялар",
+        "narrower_terms": ["Деректер", "Білім"],
+        "related_terms": ["Цифрландыру", "Ақпаратты өңдеу"]
+  },
       "image": "",
       "source": "https://kk.wikipedia.org/wiki/Ақпарат"
     },
@@ -31,13 +37,7 @@
         "ru": "Информационные технологии широко применяются в сфере образования.",
         "en": "Information technologies are widely used in education."
       },
-      "relations": {
-        "synonyms": ["Дерек", "Мәлімет"],
-        "broader_term": "Ақпараттық технологиялар",
-        "narrower_terms": ["Деректер", "Білім"],
-        "related_terms": ["Цифрландыру", "Ақпаратты өңдеу"]
-  },
-      "image": "",
+            "image": "",
       "source": "https://kk.wikipedia.org/wiki/Ақпараттық_технология"
     },
     {
