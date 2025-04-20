@@ -90,7 +90,29 @@
       },
       "image": "",
       "source": "https://kk.wikipedia.org/wiki/Ақпараттық-коммуникациялық_технологиялар"
-    }
+    }, 
+    {
+  "kk": "Мәлімет",
+  "ru": "Данные",
+  "en": "Data",
+  "definition": {
+    "kk": "Мәлімет – жүйелі түрде сақталған және өңделген ақпарат, ол талдау, зерттеу және шешім қабылдау мақсатында қолданылады.",
+    "ru": "Данные – это систематически сохраненная и обработанная информация, используемая для анализа, исследования и принятия решений.",
+    "en": "Data are systematically stored and processed information used for analysis, research, and decision-making."
+  },
+  "example": {
+    "kk": "Мысалы, компьютерге енгізілген мәліметтер",
+    "ru": "Например, данные, введенные в компьютер",
+    "en": "For example, data entered into a computer"
+  },
+  "relations": {
+    "synonyms": ["Ақпарат", "Мәліметтер"],
+    "antonyms": [],
+    "broader_term": "Ақпарат",
+    "narrower_terms": [],
+    "related_terms": ["Информация", "Результат"]
+  }
+}
   ],
   "Дәріс 2. Компьютер архитектурасы": [
     {
