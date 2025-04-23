@@ -53,7 +53,10 @@ if search_query:
 
             
             if term.get("image"):
-                st.image(term["image"], caption="Иллюстрация", use_container_width=True)
+                st.image(term["image"], caption="Көру", width=200)
+                if st.button(f"📷 Үлкейту: {term['kk']}", key=f"zoom_{term['kk']}"):
+                    with st.modal(f"{term['kk']} — толық сурет"):
+                        st.image(term["image"], use_column_width=True)
 
             if term.get("source"):
                 st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
@@ -79,7 +82,10 @@ else:
                 st.markdown(f"**EN:** {term['example']['en']}")
 
             if term.get("image"):
-                st.image(term["image"], caption="Иллюстрация", use_container_width=True)
+                st.image(term["image"], caption="Көру", width=200)
+                if st.button(f"📷 Үлкейту: {term['kk']}", key=f"zoom_{term['kk']}"):
+                    with st.modal(f"{term['kk']} — толық сурет"):
+                        st.image(term["image"], use_column_width=True)
 
             if term.get("source"):
                 st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
