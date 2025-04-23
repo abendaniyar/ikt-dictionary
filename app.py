@@ -79,7 +79,7 @@ else:
                 st.markdown(f"**EN:** {term['example']['en']}")
 
             if term.get("image"):
-                st.image(term['image'], caption="Иллюстрация", use_column_width=True)
+                st.image(term["image"], caption="Иллюстрация", use_container_width=True)
 
             if term.get("source"):
                 st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
