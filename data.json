@@ -41,6 +41,24 @@
       "source": "https://kk.wikipedia.org/wiki/Ақпараттық_технология"
     },
     {
+      "kk": "Ақпараттық-коммуникациялық технологиялар (АКТ)",
+      "ru": "Информационно-коммуникационные технологии (ИКТ)",
+      "en": "ICT",
+      "definition": {
+        "kk": "Ақпараттық-коммуникациялық технологиялар — ақпарат пен байланыс технологияларының жиынтығы.",
+        "ru": "Информационно-коммуникационные технологии — совокупность технологий связи и обработки информации.",
+        "en": "ICT is the combination of communication and information technologies."
+      },
+      "example": {
+        "kk": "АКТ білім беруде маңызды рөл атқарады.",
+        "ru": "ИКТ играют важную роль в образовании.",
+        "en": "ICT plays an important role in education."
+      },
+      "image": "",
+      "source": "https://kk.wikipedia.org/wiki/Ақпараттық-коммуникациялық_технологиялар"
+    },
+    
+    {
       "kk": "Стандарт",
       "ru": "Стандарт",
       "en": "Standard",
@@ -58,6 +76,118 @@
       "source": "https://kk.wikipedia.org/wiki/Стандарт"
     },
     {
+  "kk": "Информатика",
+  "ru": "Информатика",
+  "en": "Computer science",
+  "definition": {
+    "kk": "Информатика – компьютерлер мен ақпараттық жүйелерді пайдалана отырып, ақпаратты өңдеу, сақтау және тасымалдау әдістерін зерттейтін ғылым.",
+    "ru": "Информатика — это наука, изучающая методы обработки, хранения и передачи информации с использованием компьютеров и информационных систем.",
+    "en": "Computer Science is the study of methods for processing, storing, and transmitting information using computers and information systems."
+  },
+  "example": {
+    "kk": "Мысалы, информатика пәнінде алгоритмдер мен бағдарламалау негіздері оқытылады.",
+    "ru": "Например, на уроках информатики изучаются алгоритмы и основы программирования.",
+    "en": "For example, computer science courses cover algorithms and the fundamentals of programming."
+  },
+  "relations": {
+    "synonyms": ["компьютерлік ғылым"],
+    "homonyms": [],
+    "general_concept": {
+      "kk": "Информатика – ақпаратты өңдеу, сақтау және тарату процестерін, сондай-ақ адам мен компьютер арасындағы өзара әрекеттесуді зерттейтін ғылым.",
+      "ru": "Информатика — это наука, изучающая процессы обработки, хранения и передачи информации, а также взаимодействие человека и компьютера.",
+      "en": "Computer Science is the study of the processes involved in processing, storing, and transmitting information, as well as the interaction between humans and computers."
+    },
+    "specific_concepts": {
+      "kk": ["бағдарламалау", "алгоритмдер", "мәліметтер құрылымы"],
+      "ru": ["программирование", "алгоритмы", "структуры данных"],
+      "en": ["programming", "algorithms", "data structures"]
+    },
+    "associative": {
+      "kk": ["жасанды интеллект", "инновация", "компьютерлер", "цифрлық әлем"],
+      "ru": ["искусственный интеллект", "инновации", "компьютеры", "цифровой мир"],
+      "en": ["artificial intelligence", "innovation", "computers", "digital world"]
+    }
+  }
+},
+{
+  "kk": "Компьютермен жұмыс дағдылары (КД)",
+  "ru": "Компьютерные навыки (КН)",
+  "en": "Computer Skills (CS)",
+  "definition": {
+    "kk": "Компьютермен жұмыс дағдылары – бұл компьютерді тиімді пайдалану, ақпаратпен жұмыс істеу және цифрлық құралдар арқылы коммуникация жүргізу үшін қажетті білім мен дағдылар жиынтығы.",
+    "ru": "Компьютерные навыки — это совокупность знаний и умений, необходимых для эффективного использования компьютера, работы с информацией и коммуникации с помощью цифровых инструментов.",
+    "en": "Computer skills are the set of knowledge and abilities required to effectively use a computer, work with information, and communicate via digital tools."
+  },
+  "example": {
+    "kk": "Мысалы, мәтіндік редакторларды пайдалану, электрондық пошта арқылы байланысу және интернетте ақпарат іздеу.",
+    "ru": "Например, использование текстовых редакторов, общение через электронную почту и поиск информации в интернете.",
+    "en": "For instance, using word processors, communicating via email, and searching for information on the internet."
+  },   
+      "image": "",
+      "source": ""
+    },
+    {
+  "kk": "Конвергенция",
+  "ru": "Конвергенция",
+  "en": "Convergence",
+  "definition": {
+    "kk": "Конвергенция – бұл әртүрлі элементтердің немесе технологиялардың біріккен немесе бір-біріне жақындаған күйі, олардың функциялары мен ерекшеліктері біртұтас жүйеде үйлесімді түрде жұмыс істеуін қамтамасыз етеді.",
+    "ru": "Конвергенция – это состояние или процесс сближения различных элементов или технологий, в результате которого их функции и особенности интегрируются в единую систему.",
+    "en": "Convergence is a state or process in which different elements or technologies come together or become increasingly alike, integrating their functions into a unified system."
+  },
+  "example": {
+    "kk": "Мысалы, қазіргі заманғы смартфондарда компьютерлік, телефондық және мультимедиялық функциялардың конвергенциясы байқалады.",
+    "ru": "Например, современные смартфоны демонстрируют конвергенцию компьютерных, телефонных и мультимедийных функций.",
+    "en": "For example, modern smartphones exhibit convergence of computing, telecommunication, and multimedia features."
+  },
+  "relations": {
+    "synonyms": [
+      "интеграция",
+      "слияние"
+    ],
+    "homonyms": [],
+    "general_concept": {
+      "kk": "Конвергенция ұғымы әртүрлі элементтердің немесе жүйелердің біртұтас құрылымға бірігуін сипаттайды.",
+      "ru": "Конвергенция описывает процесс объединения различных элементов или систем в единую конструкцию.",
+      "en": "Convergence describes the process of uniting different elements or systems into a single cohesive structure."
+    },
+    "specific_concepts": {
+      "kk": [
+        "технологиялық конвергенция",
+        "коммуникациялық конвергенция"
+      ],
+      "ru": [
+        "технологическая конвергенция",
+        "коммуникационная конвергенция"
+      ],
+      "en": [
+        "technological convergence",
+        "communication convergence"
+      ]
+    },
+    "associative": {
+      "kk": [
+        "инновация",
+        "синергия",
+        "интеграция",
+        "коммуникация"
+      ],
+      "ru": [
+        "инновация",
+        "синергия",
+        "интеграция",
+        "коммуникация"
+      ],
+      "en": [
+        "innovation",
+        "synergy",
+        "integration",
+        "communication"
+      ]
+    }
+  }
+},
+    {
       "kk": "Цифрландыру",
       "ru": "Цифровизация",
       "en": "Digitalization",
@@ -73,27 +203,10 @@
       },
       "image": "",
       "source": "https://kk.wikipedia.org/wiki/Цифрландыру"
-    },
-    {
-      "kk": "АКТ",
-      "ru": "ИКТ",
-      "en": "ICT",
-      "definition": {
-        "kk": "Ақпараттық-коммуникациялық технологиялар — ақпарат пен байланыс технологияларының жиынтығы.",
-        "ru": "Информационно-коммуникационные технологии — совокупность технологий связи и обработки информации.",
-        "en": "ICT is the combination of communication and information technologies."
-      },
-      "example": {
-        "kk": "АКТ білім беруде маңызды рөл атқарады.",
-        "ru": "ИКТ играют важную роль в образовании.",
-        "en": "ICT plays an important role in education."
-      },
-      "image": "",
-      "source": "https://kk.wikipedia.org/wiki/Ақпараттық-коммуникациялық_технологиялар"
     }
   ],
   "Дәріс 2. Компьютер архитектурасы": [
-    {
+        {
   "kk": "Компьютер",
   "ru": "Компьютер",
   "en": "Computer",
@@ -116,6 +229,124 @@
   "source": "https://kk.wikipedia.org/wiki/Компьютер"
 },
     {
+  "kk": "Компьютер архитектурасы",
+  "ru": "Компьютерная архитекттура",
+  "en": "Computer Architecture",
+  "definition": {
+    "kk": "Компьютер архитектурасы – бұл компьютердің құрылымын, негізгі компоненттерін және олардың өзара байланысын зерттейтін ғылым. Ол жүйенің өнімділігін, функционалдығын және жұмыс принциптерін анықтайды.",
+    "ru": "Компьютерная архитектура – это наука, изучающая структуру компьютера, его основные компоненты и взаимосвязи, определяющие производительность, функциональность и принципы работы системы.",
+    "en": "Computer architecture is the study of the structure of computers, their core components, and interconnections that determine system performance, functionality, and operational principles."
+  },
+  "example": {
+    "kk": "Мысалы, процессор, оперативті жады және сақтау құрылғылары арасындағы үйлесімді жұмыс компьютер архитектурасының негізін құрайды.",
+    "ru": "Например, слаженная работа процессора, оперативной памяти и устройств хранения данных является основой компьютерной архитектуры.",
+    "en": "For example, the coordinated operation of the CPU, RAM, and storage devices is fundamental to computer architecture."
+  },
+  "relations": {
+    "synonyms": [
+      "компьютерлік құрылым",
+      "системелік архитектура"
+    ],
+    "homonyms": [],
+    "general_concept": {
+      "kk": "Компьютер архитектурасы компьютердің жұмыс істеу принциптері мен ішкі құрылымын түсіндіреді.",
+      "ru": "Компьютерная архитектура описывает принцип работы и внутреннюю структуру компьютера.",
+      "en": "Computer architecture explains the operational principles and internal structure of a computer."
+    },
+    "specific_concepts": {
+      "kk": [
+        "процессор архитектурасы",
+        "жады архитектурасы",
+        "жеткізу шиналарының архитектурасы"
+      ],
+      "ru": [
+        "архитектура процессора",
+        "архитектура памяти",
+        "архитектура шин"
+      ],
+      "en": [
+        "processor architecture",
+        "memory architecture",
+        "bus architecture"
+      ]
+    },
+    "associative": {
+      "kk": [
+        "жүйелік дизайн",
+        "инновация",
+        "технология",
+        "дигитал трансформация"
+      ],
+      "ru": [
+        "системный дизайн",
+        "инновации",
+        "технологии",
+        "цифровая трансформация"
+      ],
+      "en": [
+        "system design",
+        "innovation",
+        "technology",
+        "digital transformation"
+      ]
+    }
+  }
+      
+      "image": "https://drive.google.com/file/d/1Z8GgYCcEjFyHWWEYsTPvGRnMbHbXV87O/view?usp=sharing",
+      "source": ""
+},
+{
+      "kk": "Басқару құрылғысы",
+      "ru": "Устройство управления",
+      "en": "Control Unit",
+      "definition": {
+        "kk": "Басқару құрылғысы — компьютердің түрлі компоненттерінің жұмысын үйлестіретін және командаларды орындауды басқаратын негізгі бөлім.",
+        "ru": "Устройство управления — это основная часть компьютера, координирующая работу различных компонентов и управляющая выполнением команд.",
+        "en": "The control unit is the central component of a computer that orchestrates the functioning of its various parts and manages the execution of commands."
+      },
+      "example": {
+        "kk": "Басқару құрылғысы командаларды интерпретациялап, оларды процессорға жібереді.",
+        "ru": "Устройство управления интерпретирует команды и отправляет их в процессор.",
+        "en": "The control unit interprets instructions and sends them to the processor."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Екілік код",
+      "ru": "Двоичный код",
+      "en": "Binary Code",
+      "definition": {
+        "kk": "Екілік код – компьютерлік жүйелерде ақпаратты сақтау, өңдеу және тасымалдау үшін қолданылатын негізгі кодтау жүйесі. Ол екі таңбадан, яғни 0 және 1-ден тұрады.",
+        "ru": "Двоичный код – основная система кодирования для хранения, обработки и передачи информации в компьютерных системах. Она использует два символа: 0 и 1.",
+        "en": "Binary code is the fundamental encoding system used for storing, processing, and transmitting information in computer systems. It is composed of two symbols: 0 and 1."
+      },
+      "example": {
+        "kk": "Мысалы, ондық сан 5 екілік түрде «101» деп жазылады.",
+        "ru": "Например, десятичное число 5 записывается в двоичном виде как «101».",
+        "en": "For example, the decimal number 5 is represented in binary as \"101\"."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Регистр",
+      "ru": "Регистр",
+      "en": "Register",
+      "definition": {
+        "kk": "Регистр – процессордың ішіндегі кішігірім, бірақ өте жылдам жады, ол есептеулер мен операциялар кезінде уақытша мәліметтерді сақтайды.",
+        "ru": "Регистр – небольшая, но очень быстрая область памяти внутри процессора, которая временно хранит данные во время выполнения операций.",
+        "en": "A register is a small but very fast memory area within the processor that temporarily stores data during computations."
+      },
+      "example": {
+        "kk": "Мысалы, процессор арифметикалық операциялар кезінде регистрлерді пайдаланады.",
+        "ru": "Например, процессор использует регистры во время арифметических операций.",
+        "en": "For example, the processor utilizes registers during arithmetic operations."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
       "kk": "Процессор",
       "ru": "Процессор",
       "en": "Processor",
@@ -128,6 +359,40 @@
         "kk": "Процессор бағдарламаларды орындау үшін қолданылады.",
         "ru": "Процессор используется для выполнения программ.",
         "en": "The processor is used to execute programs."
+      },
+      "image": "https://drive.google.com/file/d/1YOYRiENrynsYcSJAMkbccQIB-NE2sq0-/view?usp=sharing",
+      "source": ""
+    },
+    {
+      "kk": "Арифметикалық-логикалық құрылғы",
+      "ru": "Арифметико-логическое устройство",
+      "en": "Arithmetic Logic Unit",
+      "definition": {
+        "kk": "Арифметикалық-логикалық құрылғы – процессордың негізгі бөліктерінің бірі, ол арифметикалық (қосу, алу, көбейту, бөлу) және логикалық (AND, OR, NOT) операцияларды орындайды.",
+        "ru": "Арифметико-логическое устройство – один из ключевых компонентов процессора, выполняющий арифметические (сложение, вычитание, умножение, деление) и логические (AND, OR, NOT) операции.",
+        "en": "The arithmetic logic unit (ALU) is one of the core components of a processor, performing arithmetic (addition, subtraction, multiplication, division) and logical (AND, OR, NOT) operations."
+      },
+      "example": {
+        "kk": "Мысалы, арифметикалық-логикалық құрылғы компьютердің негізгі есептеу операцияларын орындайды.",
+        "ru": "Например, арифметико-логическое устройство выполняет основные вычислительные операции в компьютере.",
+        "en": "For example, the ALU executes fundamental computational operations in a computer."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Сумматор",
+      "ru": "Сумматор",
+      "en": "Adder",
+      "definition": {
+        "kk": "Сумматор – компьютердің арифметикалық операцияларының бірі болып, екілік сандарды қосу операциясын орындауға арналған логикалық құрылғы.",
+        "ru": "Сумматор – логическая схема, предназначенная для выполнения операции сложения двоичных чисел.",
+        "en": "An adder is a digital circuit designed to perform the arithmetic operation of adding binary numbers."
+      },
+      "example": {
+        "kk": "Сумматор екі биттік сандарды қосып, олардың қосындысын есептейді.",
+        "ru": "Сумматор складывает два двоичных числа, вычисляя их сумму.",
+        "en": "The adder computes the sum by adding two binary numbers."
       },
       "image": "",
       "source": ""
@@ -150,8 +415,76 @@
       "source": ""
     },
     {
+      "kk": "Компьютер жады",
+      "ru": "Компьютерная память",
+      "en": "Computer Memory",
+      "definition": {
+        "kk": "Компьютер жады — компьютердің деректерді уақытша немесе тұрақты түрде сақтау үшін қолданылатын компоненті.",
+        "ru": "Компьютерная память — компонент, используемый для временного или постоянного хранения данных в компьютере.",
+        "en": "Computer memory is a component used for both temporary and permanent storage of data in a computer."
+      },
+      "example": {
+        "kk": "Компьютер жады программалардың жылдам жұмысын қамтамасыз етеді және ақпаратты сақтайды.",
+        "ru": "Компьютерная память обеспечивает быструю работу программ и хранит информацию.",
+        "en": "Computer memory ensures the fast operation of programs and stores information."
+      },
+      "image": "https://drive.google.com/file/d/1eGzP43ZolSR5MYWb2JGOTn2ckv_x6vYr/view?usp=drive_link",
+      "source": ""
+    }, 
+     {
+      "kk": "Ішкі жады",
+      "ru": "Внутренняя память",
+      "en": "Internal Memory",
+      "definition": {
+        "kk": "Ішкі жады – компьютердің процессорға жақын орналасқан және жылдам қол жетімділікті қамтамасыз ететін жады, мысалы, кэш немесе регистрлер.",
+        "ru": "Внутренняя память – память, располагающаяся близко к процессору и обеспечивающая быстрый доступ, например, кэш или регистры.",
+        "en": "Internal memory refers to memory located close to the CPU, providing fast access, such as cache or registers."
+      },
+      "example": {
+        "kk": "Процессор ішкі жадыға тез қол жеткізіп, есептерді жылдамырақ орындайды.",
+        "ru": "Процессор использует внутреннюю память для быстрой обработки данных.",
+        "en": "The processor accesses internal memory quickly to execute tasks faster."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Сыртқы жады",
+      "ru": "Внешняя память",
+      "en": "External Memory",
+      "definition": {
+        "kk": "Сыртқы жады – деректерді ұзақ мерзімге сақтау үшін қолданылатын жады құрылғысы, мысалы, қатты диск немесе SSD.",
+        "ru": "Внешняя память – устройства для долговременного хранения данных, например, жесткий диск или SSD.",
+        "en": "External memory refers to storage devices used for long-term data retention, such as a hard disk or SSD."
+      },
+      "example": {
+        "kk": "Сыртқы жады үлкен көлемдегі файлдарды сақтап, деректерді ұзақ мерзімге сақтайды.",
+        "ru": "Внешняя память хранит большие объемы данных на длительный срок.",
+        "en": "External memory is used to store large amounts of data for long-term use."
+      },
+      "image": "",
+      "source": ""
+    }, 
+     {
+      "kk": "Жүйелік блок",
+      "ru": "Системный блок",
+      "en": "System Unit",
+      "definition": {
+        "kk": "Жүйелік блок – компьютердің негізгі компоненттері мен электр құрылғыларын біріктіретін корпус. Ол процессор, жедел жад, сақтау құрылғылары және басқа да компоненттерді орналастырады.",
+        "ru": "Системный блок – это корпус, объединяющий основные компоненты и электрические устройства компьютера. В нем размещаются процессор, оперативная память, устройства хранения и другие компоненты.",
+        "en": "The system unit is the chassis that houses the essential components and electrical devices of a computer. It contains the processor, RAM, storage devices, and other components."
+      },
+      "example": {
+        "kk": "Жүйелік блок компьютердің «миы» ретінде қызмет етеді, себебі оның ішінде барлық маңызды компоненттер орналасқан.",
+        "ru": "Системный блок служит «мозгом» компьютера, так как в нем находятся все основные компоненты.",
+        "en": "The system unit acts as the 'brain' of the computer, housing all the critical components."
+      },
+      "image": "https://artemsannikov.ru/wp-content/uploads/2015/01/device-system-unit.jpg",
+      "source": ""
+    }, 
+    {
       "kk": "Жедел жад",
-      "ru": "Оперативная память",
+      "ru": "Оперативная память (ОЗУ)",
       "en": "RAM",
       "definition": {
         "kk": "Бағдарламалар мен мәліметтерді уақытша сақтайтын жад.",
@@ -163,12 +496,12 @@
         "ru": "Оперативная память способствует быстрому выполнению программ.",
         "en": "RAM helps programs run quickly."
       },
-      "image": "",
+      "image": "https://vseplus.com/uploads/articles/749/749_1.jpg",
       "source": ""
     },
     {
       "kk": "Тұрақты жад",
-      "ru": "Постоянная память",
+      "ru": "Постоянная память (ПЗУ)",
       "en": "ROM",
       "definition": {
         "kk": "Құрылғының жұмыс істеуіне қажетті тұрақты мәліметтер сақтайтын жад.",
@@ -180,7 +513,7 @@
         "ru": "Постоянная память сохраняет системные программы.",
         "en": "ROM stores system programs."
       },
-      "image": "",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSZu1RZ72DsSs-aOp8qK-l_n8d3W060a67vw&s",
       "source": ""
     },
     {
@@ -197,7 +530,194 @@
         "ru": "Блок питания обеспечивает постоянный ток.",
         "en": "The power supply provides stable current."
       },
+      "image": "https://stack-systems.com.ua/media/magefan_blog/9687902d-0a9f-11e1-b8f4-0019dbf63c892.jpg",
+      "source": ""
+    }, 
+     {
+      "kk": "Монитор",
+      "ru": "Монитор",
+      "en": "Monitor",
+      "definition": {
+        "kk": "Монитор – компьютердің бейнелік ақпаратты көрсетуге арналған шығару құрылғысы.",
+        "ru": "Монитор – устройство для отображения визуальной информации компьютера.",
+        "en": "Monitor is an output device used to display visual information from a computer."
+      },
+      "example": {
+        "kk": "Компьютерге қосылған монитор арқылы ақпарат көрінеді.",
+        "ru": "Через подключённый монитор отображается информация.",
+        "en": "Information is displayed through the connected monitor."
+      },
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/MonitorLCDlcd.svg/1200px-MonitorLCDlcd.svg.png",
+      "source": ""
+    },
+    {
+      "kk": "Пернетақта",
+      "ru": "Клавиатура",
+      "en": "Keyboard",
+      "definition": {
+        "kk": "Пернетақта – компьютерге деректерді енгізу үшін қолданылатын құрылғы.",
+        "ru": "Клавиатура – устройство для ввода данных в компьютер.",
+        "en": "Keyboard is an input device used for data entry into a computer."
+      },
+      "example": {
+        "kk": "Пернетақта арқылы мәтіндер енгізіледі.",
+        "ru": "С помощью клавиатуры вводятся тексты.",
+        "en": "Text is entered using a keyboard."
+      },
+      "image": "https://manuals.plus/wp-content/uploads/2022/09/geemarc-KBSV3_BLK-Standard-Big-Letter-Keyboard-featured.png",
+      "source": ""
+    },
+    {
+      "kk": "Тінтуір",
+      "ru": "Мышь",
+      "en": "Mouse",
+      "definition": {
+        "kk": "Тінтуір – компьютердің графикалық интерфейсін басқаруға арналған енгізу құрылғысы.",
+        "ru": "Мышь – устройство для управления графическим интерфейсом компьютера.",
+        "en": "Mouse is an input device used to control the computer's graphical interface."
+      },
+      "example": {
+        "kk": "Тінтуір арқылы экрандағы элементтер таңдалады.",
+        "ru": "С помощью мыши выбираются элементы на экране.",
+        "en": "Elements on the screen are selected using a mouse."
+      },
+      "image": "https://www.delux-asia.kz/upload/catalog/item170/0_black_big.jpg",
+      "source": ""
+    },
+    {
+      "kk": "Принтер",
+      "ru": "Принтер",
+      "en": "Printer",
+      "definition": {
+        "kk": "Принтер – компьютердегі деректерді қағаз бетіне басып шығару үшін пайдаланылатын құрылғы.",
+        "ru": "Принтер – устройство для вывода информации с компьютера на бумагу.",
+        "en": "Printer is a device used to print data from a computer onto paper."
+      },
+      "example": {
+        "kk": "Принтер арқылы құжатты басып шығаруға болады.",
+        "ru": "При помощи принтера можно распечатать документ.",
+        "en": "A document can be printed using a printer."
+      },
+      "image": "https://cdn.lifehacker.ru/wp-content/uploads/2019/10/Copy-of-Copy-of-Copy-of-Copy-of-Book-2_1570775107.jpg",
+      "source": ""
+    },
+    {
+      "kk": "Плоттер",
+      "ru": "Плоттер",
+      "en": "Plotter",
+      "definition": {
+        "kk": "Плоттер – жоғары дәлдіктегі графикалық құрылғы, үлкен форматтағы сызбалар мен техникалық чертеждерді басып шығару үшін пайдаланылады.",
+        "ru": "Плоттер – устройство для высокоточной печати больших графических изображений и технических чертежей.",
+        "en": "Plotter is a high-precision graphical device used to print large-format drawings and technical blueprints."
+      },
+      "example": {
+        "kk": "Архитекторлар өз сызбаларын плоттер арқылы басып шығарады.",
+        "ru": "Архитекторы печатают свои чертежи с помощью плоттера.",
+        "en": "Architects print their drawings using a plotter."
+      },
+      "image": "https://strgimgr.umico.az/sized/840/318478-dbb2c66b4a3c565c7e22dfe56d7b6c2f.jpg",
+      "source": ""
+    },
+    {
+      "kk": "Сканер",
+      "ru": "Сканер",
+      "en": "Scanner",
+      "definition": {
+        "kk": "Сканер – қағаз құжаттарын және суреттерді цифрлық форматқа айналдыратын құрылғы.",
+        "ru": "Сканер – устройство для преобразования бумажных документов и изображений в цифровой формат.",
+        "en": "Scanner is a device that converts paper documents and images into digital format."
+      },
+      "example": {
+        "kk": "Сканер арқылы ескі құжаттардың цифрлық көшірмесін алуға болады.",
+        "ru": "С помощью сканера можно создать цифровую копию старых документов.",
+        "en": "A digital copy of old documents can be obtained using a scanner."
+      },
+      "image": "https://www.quickscan.ru/files/9085/4286/st640.jpg",
+      "source": ""
+    },
+    {
+      "kk": "Дисковод",
+      "ru": "Дисковод",
+      "en": "Disk Drive",
+      "definition": {
+        "kk": "Дисковод – оптикалық немесе магниттік дискілерді оқу және жазу үшін қолданылатын құрылғы.",
+        "ru": "Дисковод – устройство для чтения и записи оптических или магнитных дисков.",
+        "en": "Disk drive is a device used for reading and writing optical or magnetic disks."
+      },
+      "example": {
+        "kk": "Дисковод арқылы DVD және CD дискілері оқылады.",
+        "ru": "DVD и CD диски читаются с помощью дисковода.",
+        "en": "DVD and CD disks are read using a disk drive."
+      },
+      "image": "https://patron-service.ru/images/thumbnails/720/720/detailed/3419/0112003_1.jpg",
+      "source": ""
+    },
+    {
+      "kk": "Модем",
+      "ru": "Модем",
+      "en": "Modem",
+      "definition": {
+        "kk": "Модем – компьютерді желіге қосу үшін, деректерді сандық сигналдарға модуляциялау және демодуляциялау арқылы байланыс орнататын құрылғы.",
+        "ru": "Модем – устройство для подключения компьютера к сети, осуществляющее модуляцию и демодуляцию цифровых сигналов.",
+        "en": "Modem is a device used to connect a computer to a network, modulating and demodulating digital signals."
+      },
+      "example": {
+        "kk": "Модем арқылы компьютер интернетке қосылады.",
+        "ru": "С помощью модема компьютер подключается к интернету.",
+        "en": "A computer connects to the internet using a modem."
+      },
+      "image": "https://englishlib.org/dictionary/wlibrary/m/60259c5c052fd8.92997254.jpg",
+      "source": ""
+    },
+    {
+      "kk": "Мультимедиа",
+      "ru": "Мультимедиа",
+      "en": "Multimedia",
+      "definition": {
+        "kk": "Мультимедиа – аудио, видео және графикалық ақпаратты біріктіретін, қолданушыға бай және интерактивті контент ұсынатын технологиялар жиынтығы.",
+        "ru": "Мультимедиа – совокупность технологий, объединяющих аудио, видео и графическую информацию для создания интерактивного контента.",
+        "en": "Multimedia is a set of technologies that combine audio, video, and graphics to deliver rich, interactive content."
+      },
+      "example": {
+        "kk": "Мультимедиалық презентациялар оқыту процесінде кеңінен қолданылады.",
+        "ru": "Мультимедийные презентации широко используются в образовательном процессе.",
+        "en": "Multimedia presentations are widely used in the educational process."
+      },
       "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Стриммер",
+      "ru": "Стриммер",
+      "en": "Streamer",
+      "definition": {
+        "kk": "Стриммер – ағынды (стриминг) ақпаратты, яғни аудио немесе видео контентті таратуға арналған құрылғы немесе бағдарлама.",
+        "ru": "Стриммер – устройство или программа для передачи потокового аудио или видео контента.",
+        "en": "Streamer is a device or software used for delivering streaming audio or video content."
+      },
+      "example": {
+        "kk": "Стриммер қызметтері арқылы интернетте тікелей эфир трансляцияланады.",
+        "ru": "С помощью стриммера осуществляется прямая трансляция в интернете.",
+        "en": "Streaming services use streamers to broadcast live content over the internet."
+      },
+      "image": "",
+      "source": ""
+    },
+    {
+      "kk": "Желілік адаптер",
+      "ru": "Сетевой адаптер",
+      "en": "Network Adapter",
+      "definition": {
+        "kk": "Желілік адаптер – компьютерді желіге қосып, деректерді тасымалдауды қамтамасыз ететін құрылғы.",
+        "ru": "Сетевой адаптер – устройство для подключения компьютера к сети и обеспечения передачи данных.",
+        "en": "A network adapter is a device that connects a computer to a network and enables data transfer."
+      },
+      "example": {
+        "kk": "Желілік адаптер компьютерді интернетке немесе жергілікті желіге қосуға мүмкіндік береді.",
+        "ru": "Сетевой адаптер позволяет подключить компьютер к интернету или локальной сети.",
+        "en": "A network adapter enables a computer to connect to the internet or a local network."
+      },
+      "image": "https://nevateka.ru/upload/iblock/f4e/283160_v01_b.jpg",
       "source": ""
     }
   ],
