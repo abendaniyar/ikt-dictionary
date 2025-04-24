@@ -12,11 +12,39 @@ st.title("📘АКТ курсы бойынша электрондық ұғымд
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
 
+def speak_buttons(term):
+    kk = term['kk']
+    ru = term['ru']
+    en = term['en']
+    html(f"""
+        <div style='margin-bottom: 10px;'>
+            <button onclick=\"speakKK()\" style='margin-right: 10px;'>🔊 Қазақша</button>
+            <button onclick=\"speakRU()\" style='margin-right: 10px;'>🔊 Орысша</button>
+            <button onclick=\"speakEN()\">🔊 Ағылшынша</button>
+        </div>
+        <script>
+            function speakKK() {{
+                var msg = new SpeechSynthesisUtterance("{kk}");
+                msg.lang = "kk-KZ";
+                window.speechSynthesis.speak(msg);
+            }}
+            function speakRU() {{
+                var msg = new SpeechSynthesisUtterance("{ru}");
+                msg.lang = "ru-RU";
+                window.speechSynthesis.speak(msg);
+            }}
+            function speakEN() {{
+                var msg = new SpeechSynthesisUtterance("{en}");
+                msg.lang = "en-US";
+                window.speechSynthesis.speak(msg);
+            }}
+        </script>
+    """, height=60)
+
 if search_query:
     st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
 
-    found_terms = []  # Барлық дәрістерден сәйкес терминдерді жинайтын тізім
-
+    found_terms = []
     for lecture, term_list in terms.items():
         for term in term_list:
             if search_query in term['kk'].lower() or search_query in term['ru'].lower() or search_query in term['en'].lower():
@@ -28,24 +56,7 @@ if search_query:
         for lecture, term in found_terms:
             term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
             st.markdown(f"### 📂 {lecture}<br>🖥 {term_text}", unsafe_allow_html=True)
-            html(f"""
-                <button onclick=\"speak()\" style=""
-                    background-color: #f0f0f0;
-                    border: none;
-                    padding: 4px 10px;
-                    border-radius: 6px;
-                    cursor: pointer;
-                    margin-top: -10px;
-                    margin-bottom: 10px;
-                "">🔊 Терминді тыңдау</button>
-                <script>
-                function speak() {{
-                    var msg = new SpeechSynthesisUtterance("{term_text}");
-                    msg.lang = "kk-KZ";
-                    window.speechSynthesis.speak(msg);
-                }}
-                </script>
-            """, height=40)
+            speak_buttons(term)
 
             with st.expander("📖 Анықтама / Определение / Definition"):
                 st.markdown(f"**KK:** {term['definition']['kk']}")
@@ -91,24 +102,7 @@ else:
         for term in terms[lecture]:
             term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
             st.markdown(f"### 🖥 {term_text}")
-            html(f"""
-                <button onclick=\"speak()\" style=""
-                    background-color: #f0f0f0;
-                    border: none;
-                    padding: 4px 10px;
-                    border-radius: 6px;
-                    cursor: pointer;
-                    margin-top: -10px;
-                    margin-bottom: 10px;
-                "">🔊 Терминді тыңдау</button>
-                <script>
-                function speak() {{
-                    var msg = new SpeechSynthesisUtterance("{term_text}");
-                    msg.lang = "kk-KZ";
-                    window.speechSynthesis.speak(msg);
-                }}
-                </script>
-            """, height=40)
+            speak_buttons(term)
 
             with st.expander("📖 Анықтама / Определение / Definition"):
                 st.markdown(f"**KK:** {term['definition']['kk']}")
