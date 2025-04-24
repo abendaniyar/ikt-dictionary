@@ -1,5 +1,6 @@
 import streamlit as st
 import json
+from streamlit.components.v1 import html
 
 # JSON файлды жүктеу
 with open("data.json", "r", encoding="utf-8") as f:
@@ -25,7 +26,26 @@ if search_query:
         st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
     else:
         for lecture, term in found_terms:
-            st.subheader(f"📂 {lecture} | 🖥 {term['kk']} / {term['ru']} / {term['en']}")
+            term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
+            st.markdown(f"### 📂 {lecture}<br>🖥 {term_text}", unsafe_allow_html=True)
+            html(f"""
+                <button onclick=\"speak()\" style=""
+                    background-color: #f0f0f0;
+                    border: none;
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    margin-top: -10px;
+                    margin-bottom: 10px;
+                "">🔊 Терминді тыңдау</button>
+                <script>
+                function speak() {{
+                    var msg = new SpeechSynthesisUtterance("{term_text}");
+                    msg.lang = "kk-KZ";
+                    window.speechSynthesis.speak(msg);
+                }}
+                </script>
+            """, height=40)
 
             with st.expander("📖 Анықтама / Определение / Definition"):
                 st.markdown(f"**KK:** {term['definition']['kk']}")
@@ -36,7 +56,7 @@ if search_query:
                 st.markdown(f"**KK:** {term['example']['kk']}")
                 st.markdown(f"**RU:** {term['example']['ru']}")
                 st.markdown(f"**EN:** {term['example']['en']}")
-            # 🔁 Семантические связи (тезаурус)
+
             if 'relations' in term:
                 with st.expander("🧠 Семантикалық байланыстар / Семантические связи / Semantic Relations"):
                     rel = term['relations']
@@ -51,7 +71,6 @@ if search_query:
                     if rel.get('related_terms'):
                         st.markdown(f"**🔗 Қатысты ұғымдар / В родственном понятии / Related terms:** {', '.join(rel['related_terms'])}")
 
-            
             if term.get("image"):
                 st.markdown(
                     f'<a href="{term["image"]}" target="_blank">'
@@ -65,13 +84,31 @@ if search_query:
 
             st.markdown("---")
 else:
-    # Дәрістерді навигатор ретінде көрсету
     lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
     st.header(lecture)
 
     if lecture in terms:
         for term in terms[lecture]:
-            st.subheader(f"🖥 {term['kk']} / {term['ru']} / {term['en']}")
+            term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
+            st.markdown(f"### 🖥 {term_text}")
+            html(f"""
+                <button onclick=\"speak()\" style=""
+                    background-color: #f0f0f0;
+                    border: none;
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    margin-top: -10px;
+                    margin-bottom: 10px;
+                "">🔊 Терминді тыңдау</button>
+                <script>
+                function speak() {{
+                    var msg = new SpeechSynthesisUtterance("{term_text}");
+                    msg.lang = "kk-KZ";
+                    window.speechSynthesis.speak(msg);
+                }}
+                </script>
+            """, height=40)
 
             with st.expander("📖 Анықтама / Определение / Definition"):
                 st.markdown(f"**KK:** {term['definition']['kk']}")
