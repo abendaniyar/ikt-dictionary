@@ -19,8 +19,8 @@ def speak_buttons(term):
     html(f"""
         <div style='margin-bottom: 10px;'>
             <button onclick=\"speakKK()\" style='margin-right: 10px;'>🔊 Қазақша</button>
-            <button onclick=\"speakRU()\" style='margin-right: 10px;'>🔊 Орысша</button>
-            <button onclick=\"speakEN()\">🔊 Ағылшынша</button>
+            <button onclick=\"speakRU()\" style='margin-right: 10px;'>🔊 Русский</button>
+            <button onclick=\"speakEN()\">🔊 English</button>
         </div>
         <script>
             function speakKK() {{
