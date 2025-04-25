@@ -40,6 +40,24 @@ def speak_buttons(term):
             }}
         </script>
     """, height=60)
+# Семантикалық карта (негізгі бетте)
+with st.expander("📚 Семантикалық карта / Semantic map"):
+    for lecture, term_list in terms.items():
+        for term in term_list:
+            if 'relations' in term:
+                st.markdown(f"🔸 **{term['kk']}** — ", unsafe_allow_html=True)
+                rel = term['relations']
+                if rel.get('synonyms'):
+                    synonyms = ', '.join([f"`{syn}`" for syn in rel['synonyms']])
+                    st.markdown(f"  🔁 Синонимдер: {synonyms}")
+                if rel.get('broader_term'):
+                    st.markdown(f"  🔼 Жалпылама ұғым: `{rel['broader_term']}`")
+                if rel.get('narrower_terms'):
+                    nar = ', '.join([f"`{n}`" for n in rel['narrower_terms']])
+                    st.markdown(f"  🔽 Арнайы ұғымдар: {nar}")
+                if rel.get('related_terms'):
+                    rels = ', '.join([f"`{r}`" for r in rel['related_terms']])
+                    st.markdown(f"  🔗 Қатысты: {rels}")
 
 if search_query:
     st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
