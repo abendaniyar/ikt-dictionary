@@ -19,8 +19,8 @@ def speak_buttons(term):
     html(f"""
         <div style='margin-bottom: 10px;'>
             <button onclick=\"speakKK()\" style='margin-right: 10px;'>🔊 Қазақша</button>
-            <button onclick=\"speakRU()\" style='margin-right: 10px;'>🔊 Русский</button>
-            <button onclick=\"speakEN()\">🔊 English</button>
+            <button onclick=\"speakRU()\" style='margin-right: 10px;'>🔊 Орысша</button>
+            <button onclick=\"speakEN()\">🔊 Ағылшынша</button>
         </div>
         <script>
             function speakKK() {{
@@ -40,9 +40,16 @@ def speak_buttons(term):
             }}
         </script>
     """, height=60)
-# Семантикалық карта (негізгі бетте)
-with st.expander("📚 Семантикалық карта / Semantic map"):
-    for lecture, term_list in terms.items():
+
+# Дәріс таңдауы
+lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
+
+# Семантикалық карта батырмасы
+show_map = st.sidebar.checkbox("📚 Семантикалық картаны көрсету")
+
+if show_map:
+    st.subheader("📚 Семантикалық карта / Semantic Map")
+    for lecture_name, term_list in terms.items():
         for term in term_list:
             if 'relations' in term:
                 st.markdown(f"🔸 **{term['kk']}** — ", unsafe_allow_html=True)
@@ -61,19 +68,18 @@ with st.expander("📚 Семантикалық карта / Semantic map"):
 
 if search_query:
     st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
-
     found_terms = []
-    for lecture, term_list in terms.items():
+    for lecture_name, term_list in terms.items():
         for term in term_list:
             if search_query in term['kk'].lower() or search_query in term['ru'].lower() or search_query in term['en'].lower():
-                found_terms.append((lecture, term))
+                found_terms.append((lecture_name, term))
 
     if not found_terms:
         st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
     else:
-        for lecture, term in found_terms:
+        for lecture_name, term in found_terms:
             term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
-            st.markdown(f"### 📂 {lecture}<br>🖥 {term_text}", unsafe_allow_html=True)
+            st.markdown(f"### 📂 {lecture_name}<br>🖥 {term_text}", unsafe_allow_html=True)
             speak_buttons(term)
 
             with st.expander("📖 Анықтама / Определение / Definition"):
@@ -85,20 +91,6 @@ if search_query:
                 st.markdown(f"**KK:** {term['example']['kk']}")
                 st.markdown(f"**RU:** {term['example']['ru']}")
                 st.markdown(f"**EN:** {term['example']['en']}")
-
-            if 'relations' in term:
-                with st.expander("🧠 Семантикалық байланыстар / Семантические связи / Semantic Relations"):
-                    rel = term['relations']
-                    if rel.get('synonyms'):
-                        st.markdown(f"**🔁 Синонимдер / Синонимы / Synonyms:** {', '.join(rel['synonyms'])}")
-                    if rel.get('antonyms'):
-                        st.markdown(f"**🆚 Антонимдер / Антонимы / Antonyms:** {', '.join(rel['antonyms'])}")
-                    if rel.get('broader_term'):
-                        st.markdown(f"**🔼 Жалпылама ұғым / Обобщающее понятие / Broader term:** {rel['broader_term']}")
-                    if rel.get('narrower_terms'):
-                        st.markdown(f"**🔽 Арнайы ұғымдар / Специальные понятия / Narrower terms:** {', '.join(rel['narrower_terms'])}")
-                    if rel.get('related_terms'):
-                        st.markdown(f"**🔗 Қатысты ұғымдар / В родственном понятии / Related terms:** {', '.join(rel['related_terms'])}")
 
             if term.get("image"):
                 st.markdown(
@@ -113,34 +105,31 @@ if search_query:
 
             st.markdown("---")
 else:
-    lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
     st.header(lecture)
+    for term in terms[lecture]:
+        term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
+        st.markdown(f"### 🖥 {term_text}")
+        speak_buttons(term)
 
-    if lecture in terms:
-        for term in terms[lecture]:
-            term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
-            st.markdown(f"### 🖥 {term_text}")
-            speak_buttons(term)
+        with st.expander("📖 Анықтама / Определение / Definition"):
+            st.markdown(f"**KK:** {term['definition']['kk']}")
+            st.markdown(f"**RU:** {term['definition']['ru']}")
+            st.markdown(f"**EN:** {term['definition']['en']}")
 
-            with st.expander("📖 Анықтама / Определение / Definition"):
-                st.markdown(f"**KK:** {term['definition']['kk']}")
-                st.markdown(f"**RU:** {term['definition']['ru']}")
-                st.markdown(f"**EN:** {term['definition']['en']}")
+        with st.expander("💬 Мысал / Пример / Example"):
+            st.markdown(f"**KK:** {term['example']['kk']}")
+            st.markdown(f"**RU:** {term['example']['ru']}")
+            st.markdown(f"**EN:** {term['example']['en']}")
 
-            with st.expander("💬 Мысал / Пример / Example"):
-                st.markdown(f"**KK:** {term['example']['kk']}")
-                st.markdown(f"**RU:** {term['example']['ru']}")
-                st.markdown(f"**EN:** {term['example']['en']}")
+        if term.get("image"):
+            st.markdown(
+                f'<a href="{term["image"]}" target="_blank">'
+                f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
+                f'</a>',
+                unsafe_allow_html=True
+            )
 
-            if term.get("image"):
-                st.markdown(
-                    f'<a href="{term["image"]}" target="_blank">'
-                    f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
-                    f'</a>',
-                    unsafe_allow_html=True
-                )
+        if term.get("source"):
+            st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
 
-            if term.get("source"):
-                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
-
-            st.markdown("---")
+        st.markdown("---")
