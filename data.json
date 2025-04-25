@@ -1700,6 +1700,39 @@
       "source": ""
     },
     {
+  "kk": "Шлюз",
+  "ru": "Шлюз",
+  "en": "Gateway",
+  "definition": {
+    "kk": "Шлюз – желілер арасындағы деректер алмасуды қамтамасыз ететін құрылғы немесе бағдарлама.",
+    "ru": "Шлюз — это устройство или программа, обеспечивающие обмен данными между сетями.",
+    "en": "Gateway is a device or software that enables data exchange between networks."
+  },
+  "example": {
+    "kk": "Шлюз арқылы жергілікті желі мен интернет арасында байланыс орнатылады.",
+    "ru": "С помощью шлюза устанавливается связь между локальной сетью и интернетом.",
+    "en": "A gateway establishes communication between a local network and the internet."
+  },
+  "relations": {
+    "synonyms": ["желілік шлюз"],
+    "general_concept": {
+      "kk": "Шлюз деректерді түрлендіру және маршруттау функциясын орындайды.",
+      "ru": "Шлюз выполняет функции преобразования и маршрутизации данных.",
+      "en": "Gateway performs data conversion and routing functions."
+    },
+    "specific_concepts": {
+      "kk": ["желілік байланыс", "деректер алмасу"],
+      "ru": ["сетевое соединение", "обмен данными"],
+      "en": ["network connection", "data exchange"]
+    },
+    "associative": {
+      "kk": ["байланыс", "технология"],
+      "ru": ["связь", "технологии"],
+      "en": ["connection", "technology"]
+    }
+  }
+},
+    {
       "kk": "Брандмауэр",
       "ru": "Брандмауэр",
       "en": "Firewall",
@@ -1984,6 +2017,377 @@
     }
   }
 }
-  ]
+  ],
+  
+  "Дәріс 7. Smart технологиялар": [
+  {
+  "kk": "SMART технология",
+  "ru": "SMART технология",
+  "en": "SMART Technology",
+  "definition": {
+    "kk": "SMART технология – білім беру, бизнес және тұрмыстық жағдайлар үшін интерактивті және интеллектуалды шешімдер ұсынатын инновациялық технологиялар жиынтығы.",
+    "ru": "SMART технология — это совокупность инновационных технологий, предлагающих интерактивные и интеллектуальные решения для образования, бизнеса и бытовых нужд.",
+    "en": "SMART technology is a collection of innovative technologies offering interactive and intelligent solutions for education, business, and household needs."
+  },
+  "example": {
+    "kk": "SMART тақталар оқушылар мен мұғалімдердің оқу процесін жеңілдетеді.",
+    "ru": "SMART-доски упрощают процесс обучения для учеников и учителей.",
+    "en": "SMART boards simplify the learning process for students and teachers."
+  },
+  "relations": {
+    "synonyms": ["интерактивті технология"],
+    "general_concept": {
+      "kk": "SMART технология білім беру мен кәсіпкерлік салаларында тиімділікті арттырады.",
+      "ru": "SMART технология увеличивает эффективность в области образования и бизнеса.",
+      "en": "SMART technology enhances efficiency in education and business."
+    },
+    "specific_concepts": {
+      "kk": ["интерактивті тақта", "ақылды шешімдер"],
+      "ru": ["интерактивные доски", "умные решения"],
+      "en": ["interactive boards", "smart solutions"]
+    },
+    "associative": {
+      "kk": ["инновация", "технология"],
+      "ru": ["инновации", "технологии"],
+      "en": ["innovation", "technology"]
+    }
+  }
+},
+    {
+  "kk": "SMART үй",
+  "ru": "Умный дом",
+  "en": "Smart Home",
+  "definition": {
+    "kk": "SMART үй – тұрмыстық құрылғылар мен жүйелерді автоматтандыру және қашықтан басқару мүмкіндігін ұсынатын технология.",
+    "ru": "Умный дом — это технология автоматизации и удалённого управления бытовыми устройствами и системами.",
+    "en": "Smart home is a technology that provides automation and remote control of household devices and systems."
+  },
+  "example": {
+    "kk": "SMART үйде жарықтандыруды смартфон арқылы басқаруға болады.",
+    "ru": "В умном доме можно управлять освещением через смартфон.",
+    "en": "In a smart home, lighting can be controlled through a smartphone."
+  },
+  "relations": {
+    "synonyms": ["ақылды үй"],
+    "general_concept": {
+      "kk": "SMART үй тұрмыстық жайлылықты арттырады және энергия тиімділігін қамтамасыз етеді.",
+      "ru": "Умный дом повышает бытовой комфорт и обеспечивает энергоэффективность.",
+      "en": "Smart home enhances household comfort and ensures energy efficiency."
+    },
+    "specific_concepts": {
+      "kk": ["ақылды құрылғылар", "автоматтандыру"],
+      "ru": ["умные устройства", "автоматизация"],
+      "en": ["smart devices", "automation"]
+    },
+    "associative": {
+      "kk": ["қашықтан басқару", "технология"],
+      "ru": ["удалённое управление", "технологии"],
+      "en": ["remote control", "technology"]
+    }
+  }
+},
+{
+  "kk": "Ақылды құрылғылар",
+  "ru": "Умные устройства",
+  "en": "Smart Devices",
+  "definition": {
+    "kk": "Ақылды құрылғылар – интернетке қосылып, пайдаланушыларға қосымша мүмкіндіктер мен деректер алмасуды ұсынатын электронды құрылғылар.",
+    "ru": "Умные устройства — это электронные устройства, подключённые к интернету, предлагающие дополнительные возможности и обмен данными.",
+    "en": "Smart devices are electronic gadgets connected to the internet that offer additional features and data exchange."
+  },
+  "example": {
+    "kk": "Ақылды сағаттар пайдаланушыларға денсаулық деректерін бақылауға мүмкіндік береді.",
+    "ru": "Умные часы позволяют пользователям отслеживать данные о здоровье.",
+    "en": "Smartwatches enable users to monitor health data."
+  },
+  "relations": {
+    "synonyms": ["ақылды гаджеттер"],
+    "general_concept": {
+      "kk": "Ақылды құрылғылар өмір сапасын жақсартады.",
+      "ru": "Умные устройства улучшают качество жизни.",
+      "en": "Smart devices improve the quality of life."
+    },
+    "specific_concepts": {
+      "kk": ["смартфон", "сағат"],
+      "ru": ["смартфон", "часы"],
+      "en": ["smartphone", "watch"]
+    },
+    "associative": {
+      "kk": ["қосымшалар", "пайдалану"],
+      "ru": ["приложения", "использование"],
+      "en": ["applications", "usage"]
+    }
+  }
+},
+{
+  "kk": "Wi-Fi",
+  "ru": "Wi-Fi",
+  "en": "Wi-Fi",
+  "definition": {
+    "kk": "Wi-Fi – сымсыз желілер арқылы деректерді жоғары жылдамдықта беруді қамтамасыз ететін технология.",
+    "ru": "Wi-Fi — это технология, обеспечивающая передачу данных на высокой скорости через беспроводные сети.",
+    "en": "Wi-Fi is a technology that provides high-speed data transfer over wireless networks."
+  },
+  "example": {
+    "kk": "Wi-Fi қосылымы арқылы интернетке сымсыз қол жеткізуге болады.",
+    "ru": "Через подключение Wi-Fi можно получить беспроводной доступ к интернету.",
+    "en": "Wi-Fi connection allows wireless access to the internet."
+  },
+  "relations": {
+    "synonyms": ["сымсыз желі"],
+    "general_concept": {
+      "kk": "Wi-Fi технологиясы пайдаланушыларды кабельдерден босатады және мобильділікке мүмкіндік береді.",
+      "ru": "Технология Wi-Fi освобождает пользователей от проводов и обеспечивает мобильность.",
+      "en": "Wi-Fi technology frees users from cables and enables mobility."
+    },
+    "specific_concepts": {
+      "kk": ["роутер", "сымсыз желі"],
+      "ru": ["роутер", "беспроводная сеть"],
+      "en": ["router", "wireless network"]
+    },
+    "associative": {
+      "kk": ["интернет", "қол жетімділік"],
+      "ru": ["интернет", "доступ"],
+      "en": ["internet", "access"]
+    }
+  }
+},
+
+   {
+  "kk": "Блокчейн",
+  "ru": "Блокчейн",
+  "en": "Blockchain",
+  "definition": {
+    "kk": "Блокчейн – ақпараттың сақталуын және қауіпсіздігін қамтамасыз ететін, транзакцияларды тексеру үшін қолданылатын таралған деректер базасы технологиясы.",
+    "ru": "Блокчейн — это технология распределённой базы данных, обеспечивающая сохранность и безопасность информации и проверку транзакций.",
+    "en": "Blockchain is a distributed database technology that ensures the security and integrity of information while verifying transactions."
+  },
+  "example": {
+    "kk": "Блокчейн криптовалюталар транзакцияларын қауіпсіз етуде маңызды рөл атқарады.",
+    "ru": "Блокчейн играет важную роль в обеспечении безопасности транзакций с криптовалютами.",
+    "en": "Blockchain plays a vital role in securing cryptocurrency transactions."
+  },
+  "relations": {
+    "synonyms": ["таратылған журнал"],
+    "general_concept": {
+      "kk": "Блокчейн технологиясы деректердің өзгермейтіндігін қамтамасыз етеді.",
+      "ru": "Технология блокчейн обеспечивает неизменяемость данных.",
+      "en": "Blockchain technology ensures data immutability."
+    },
+    "specific_concepts": {
+      "kk": ["криптовалюта", "транзакция"],
+      "ru": ["криптовалюта", "транзакция"],
+      "en": ["cryptocurrency", "transaction"]
+    },
+    "associative": {
+      "kk": ["қауіпсіздік", "сенімділік"],
+      "ru": ["безопасность", "надёжность"],
+      "en": ["security", "reliability"]
+    }
+  }
+} 
+  ],
+  
+  "Дәріс 8. Е - технологиялар": [
+ {
+  "kk": "Электрондық технология",
+  "ru": "Электронные технологии",
+  "en": "Electronic Technology",
+  "definition": {
+    "kk": "Электрондық технология – деректерді өңдеу, беру және сақтау үшін электронды құрылғылар мен жүйелерді пайдаланатын инновациялық шешімдер жиынтығы.",
+    "ru": "Электронные технологии — это набор инновационных решений, использующих электронные устройства и системы для обработки, передачи и хранения данных.",
+    "en": "Electronic technology is a set of innovative solutions using electronic devices and systems for data processing, transmission, and storage."
+  },
+  "example": {
+    "kk": "Электрондық технологиялар арқылы өндіріс процесін автоматтандыру жүзеге асырылады.",
+    "ru": "С помощью электронных технологий осуществляется автоматизация производственного процесса.",
+    "en": "Electronic technologies enable the automation of production processes."
+  },
+  "relations": {
+    "synonyms": ["цифрлық технологиялар"],
+    "general_concept": {
+      "kk": "Электрондық технологиялар ақпаратты басқару мен өндіріске тиімділік қосады.",
+      "ru": "Электронные технологии повышают эффективность управления информацией и производства.",
+      "en": "Electronic technologies enhance the efficiency of information management and production."
+    },
+    "specific_concepts": {
+      "kk": ["құрылғылар", "инновация"],
+      "ru": ["устройства", "инновации"],
+      "en": ["devices", "innovation"]
+    },
+    "associative": {
+      "kk": ["ақпарат", "интернет"],
+      "ru": ["информация", "интернет"],
+      "en": ["information", "internet"]
+    }
+  }
+},
+    {
+  "kk": "Электронды білім беру",
+  "ru": "Электронное образование",
+  "en": "E-learning",
+  "definition": {
+    "kk": "Электронды білім беру – интернет пен электрондық құралдарды пайдалана отырып, оқу және оқыту процесін ұйымдастыру әдісі.",
+    "ru": "Электронное образование — это способ организации процесса обучения и преподавания с использованием интернета и электронных инструментов.",
+    "en": "E-learning is a method of organizing the learning and teaching process using the internet and electronic tools."
+  },
+  "example": {
+    "kk": "Электронды білім беру платформалары оқушыларға қашықтан оқуға мүмкіндік береді.",
+    "ru": "Платформы электронного образования позволяют ученикам учиться удалённо.",
+    "en": "E-learning platforms enable students to learn remotely."
+  },
+  "relations": {
+    "synonyms": ["электронды оқыту"],
+    "general_concept": {
+      "kk": "Электронды білім беру білім алуды икемді және қолжетімді етеді.",
+      "ru": "Электронное образование делает процесс обучения гибким и доступным.",
+      "en": "E-learning makes education flexible and accessible."
+    },
+    "specific_concepts": {
+      "kk": ["қашықтан оқу", "онлайн курстар"],
+      "ru": ["дистанционное обучение", "онлайн-курсы"],
+      "en": ["distance learning", "online courses"]
+    },
+    "associative": {
+      "kk": ["платформа", "мультимедиа"],
+      "ru": ["платформа", "мультимедиа"],
+      "en": ["platform", "multimedia"]
+    }
+  }
+},
+{
+  "kk": "Электронды үкімет",
+  "ru": "Электронное правительство",
+  "en": "E-government",
+  "definition": {
+    "kk": "Электронды үкімет – азаматтар мен мемлекеттік органдар арасында қызмет көрсету процесін жеңілдету үшін ақпараттық технологияларды қолдану.",
+    "ru": "Электронное правительство — это использование информационных технологий для упрощения процесса предоставления услуг гражданам и государственными органами.",
+    "en": "E-government is the use of information technologies to simplify the service delivery process between citizens and government bodies."
+  },
+  "example": {
+    "kk": "Электронды үкімет порталы арқылы салықтарды төлеуге болады.",
+    "ru": "Через портал электронного правительства можно оплачивать налоги.",
+    "en": "Taxes can be paid through the e-government portal."
+  },
+  "relations": {
+    "synonyms": ["электронды әкімшілік"],
+    "general_concept": {
+      "kk": "Электронды үкімет азаматтарға жылдам және ыңғайлы қызметтер ұсынады.",
+      "ru": "Электронное правительство предоставляет гражданам быстрые и удобные услуги.",
+      "en": "E-government provides citizens with fast and convenient services."
+    },
+    "specific_concepts": {
+      "kk": ["қызметтер", "ақпараттық жүйе"],
+      "ru": ["услуги", "информационная система"],
+      "en": ["services", "information system"]
+    },
+    "associative": {
+      "kk": ["технология", "ресурстар"],
+      "ru": ["технология", "ресурсы"],
+      "en": ["technology", "resources"]
+    }
+  }
+},
+    {
+  "kk": "Электронды сауда",
+  "ru": "Электронная коммерция",
+  "en": "E-commerce",
+  "definition": {
+    "kk": "Электронды сауда – интернет арқылы тауарлар мен қызметтерді сатып алу және сату процесі.",
+    "ru": "Электронная коммерция — это процесс покупки и продажи товаров и услуг через интернет.",
+    "en": "E-commerce is the process of buying and selling goods and services over the internet."
+  },
+  "example": {
+    "kk": "Электронды сауда платформалары арқылы тапсырыстар жасауға болады.",
+    "ru": "Через платформы электронной коммерции можно делать заказы.",
+    "en": "Orders can be placed through e-commerce platforms."
+  },
+  "relations": {
+    "synonyms": ["онлайн сауда"],
+    "general_concept": {
+      "kk": "Электронды сауда сауда-саттық процесін жеңілдетеді және уақыт үнемдейді.",
+      "ru": "Электронная коммерция упрощает процесс торговли и экономит время.",
+      "en": "E-commerce simplifies the trading process and saves time."
+    },
+    "specific_concepts": {
+      "kk": ["онлайн дүкендер", "төлемдер"],
+      "ru": ["онлайн-магазины", "платежи"],
+      "en": ["online stores", "payments"]
+    },
+    "associative": {
+      "kk": ["интернет", "қолжетімділік"],
+      "ru": ["интернет", "доступ"],
+      "en": ["internet", "access"]
+    }
+  }
+},
+    {
+  "kk": "Портал",
+  "ru": "Портал",
+  "en": "Portal",
+  "definition": {
+    "kk": "Портал – интернет немесе интранет арқылы пайдаланушыларға белгілі бір тақырып бойынша ақпарат пен қызметтер ұсынатын веб-құрал.",
+    "ru": "Портал — это веб-инструмент, предоставляющий пользователям информацию и услуги по определённой теме через интернет или интранет.",
+    "en": "A portal is a web tool that provides users with information and services on a specific topic through the internet or intranet."
+  },
+  "example": {
+    "kk": "Е-үкімет порталы арқылы азаматтар мемлекеттік қызметтерге қол жеткізе алады.",
+    "ru": "Через портал электронного правительства граждане могут получить доступ к государственным услугам.",
+    "en": "Through the e-government portal, citizens can access public services."
+  },
+  "relations": {
+    "synonyms": ["веб-платформа"],
+    "general_concept": {
+      "kk": "Порталдар пайдаланушыларға қажетті ақпаратты бір жерден алуға мүмкіндік береді.",
+      "ru": "Порталы позволяют пользователям получать необходимую информацию в одном месте.",
+      "en": "Portals allow users to access necessary information in one place."
+    },
+    "specific_concepts": {
+      "kk": ["ақпараттық жүйе", "қызметтер"],
+      "ru": ["информационная система", "услуги"],
+      "en": ["information system", "services"]
+    },
+    "associative": {
+      "kk": ["интернет", "қолжетімділік"],
+      "ru": ["интернет", "доступ"],
+      "en": ["internet", "access"]
+    }
+  }
+},
+{
+  "kk": "Провайдинг",
+  "ru": "Провайдинг",
+  "en": "Providing",
+  "definition": {
+    "kk": "Провайдинг – пайдаланушыларға интернет, байланыс, бұлттық қызметтер немесе басқа да ресурстарды ұсыну процесі.",
+    "ru": "Провайдинг — это процесс предоставления пользователям интернета, связи, облачных услуг или других ресурсов.",
+    "en": "Providing is the process of delivering internet, communication, cloud services, or other resources to users."
+  },
+  "example": {
+    "kk": "Интернет провайдинг қызметтері арқылы үйге интернет қосуға болады.",
+    "ru": "С помощью услуг интернет-провайдинга можно подключить интернет домой.",
+    "en": "Internet providing services can be used to connect internet at home."
+  },
+  "relations": {
+    "synonyms": ["қызмет көрсету"],
+    "general_concept": {
+      "kk": "Провайдинг пайдаланушылардың ресурстарға қол жеткізуін қамтамасыз етеді.",
+      "ru": "Провайдинг обеспечивает доступ пользователей к ресурсам.",
+      "en": "Providing ensures user access to resources."
+    },
+    "specific_concepts": {
+      "kk": ["интернет", "бұлттық қызмет"],
+      "ru": ["интернет", "облачные услуги"],
+      "en": ["internet", "cloud services"]
+    },
+    "associative": {
+      "kk": ["қолжетімділік", "байланыс"],
+      "ru": ["доступ", "связь"],
+      "en": ["access", "connection"]
+    }
+  }
 }
+
+  ]
+    }
 
