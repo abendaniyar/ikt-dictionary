@@ -2388,6 +2388,370 @@
   }
 }
 
-  ]
+  ],
+    "Дәріс 9. Internet технологиялар": [
+    {
+  "kk": "Интернет",
+  "ru": "Интернет",
+  "en": "Internet",
+  "definition": {
+    "kk": "Интернет – бүкіл әлемдегі компьютерлер мен желілерді байланыстыратын жаһандық ақпараттық желі.",
+    "ru": "Интернет — это глобальная информационная сеть, соединяющая компьютеры и сети по всему миру.",
+    "en": "The Internet is a global information network that connects computers and networks worldwide."
+  },
+  "example": {
+    "kk": "Интернет арқылы ақпарат алмасуға және байланыс орнатуға болады.",
+    "ru": "С помощью интернета можно обмениваться информацией и устанавливать связь.",
+    "en": "The Internet allows information exchange and communication."
+  },
+  "relations": {
+    "synonyms": ["бүкіләлемдік желі"],
+    "general_concept": {
+      "kk": "Интернет деректер алмасудың басты платформасы болып табылады.",
+      "ru": "Интернет является основной платформой для обмена данными.",
+      "en": "The Internet serves as the primary platform for data exchange."
+    },
+    "specific_concepts": {
+      "kk": ["веб-сайт", "электронды пошта"],
+      "ru": ["веб-сайт", "электронная почта"],
+      "en": ["website", "email"]
+    },
+    "associative": {
+      "kk": ["қол жетімділік", "байланыс"],
+      "ru": ["доступ", "связь"],
+      "en": ["access", "connection"]
     }
-
+  }
+},
+  {
+  "kk": "TCP құжаты",
+  "ru": "TCP-документ",
+  "en": "TCP Document",
+  "definition": {
+    "kk": "TCP құжаты – Интернеттегі деректерді жіберу және қабылдау үшін пайдаланылатын Трансмиссиялық басқару протоколының сипаттамаларын анықтайтын техникалық құжат.",
+    "ru": "TCP-документ — это технический документ, определяющий спецификации протокола управления передачей для отправки и получения данных в интернете.",
+    "en": "A TCP document is a technical document that specifies the Transmission Control Protocol for sending and receiving data over the internet."
+  },
+  "example": {
+    "kk": "TCP құжаты Интернетте сенімді байланыс орнатуға мүмкіндік береді.",
+    "ru": "TCP-документ позволяет устанавливать надёжные соединения в интернете.",
+    "en": "A TCP document enables reliable connections over the Internet."
+  },
+  "relations": {
+    "synonyms": ["TCP стандарты"],
+    "general_concept": {
+      "kk": "TCP деректер пакеттерін басқаруды және сенімді жеткізуді қамтамасыз етеді.",
+      "ru": "TCP обеспечивает управление пакетами данных и их надёжную доставку.",
+      "en": "TCP ensures data packet management and reliable delivery."
+    },
+    "specific_concepts": {
+      "kk": ["желілер", "протокол"],
+      "ru": ["сети", "протокол"],
+      "en": ["networks", "protocol"]
+    },
+    "associative": {
+      "kk": ["деректер", "қосылу"],
+      "ru": ["данные", "подключение"],
+      "en": ["data", "connection"]
+    }
+  }
+},
+   {
+  "kk": "ARPANET",
+  "ru": "ARPANET",
+  "en": "ARPANET",
+  "definition": {
+    "kk": "ARPANET – АҚШ-тың Қорғаныс министрлігі құрған алғашқы компьютерлік желі, ол қазіргі Интернеттің негізін қалады.",
+    "ru": "ARPANET — это первая компьютерная сеть, созданная Министерством обороны США, которая положила основу современному интернету.",
+    "en": "ARPANET was the first computer network created by the U.S. Department of Defense, laying the foundation for the modern Internet."
+  },
+  "example": {
+    "kk": "ARPANET ғылыми-зерттеу мақсатында қолданылды.",
+    "ru": "ARPANET использовалась для научных исследований.",
+    "en": "ARPANET was used for research purposes."
+  },
+  "relations": {
+    "synonyms": ["алғашқы желі"],
+    "general_concept": {
+      "kk": "ARPANET қазіргі интернет технологияларының дамуына негіз болды.",
+      "ru": "ARPANET стала основой для развития современных интернет-технологий.",
+      "en": "ARPANET formed the basis for the development of modern internet technologies."
+    },
+    "specific_concepts": {
+      "kk": ["деректер алмасу", "ғылым"],
+      "ru": ["обмен данными", "наука"],
+      "en": ["data exchange", "science"]
+    },
+    "associative": {
+      "kk": ["тарих", "инновация"],
+      "ru": ["история", "инновация"],
+      "en": ["history", "innovation"]
+    }
+  }
+},
+  {
+  "kk": "FTP",
+  "ru": "FTP",
+  "en": "FTP",
+  "definition": {
+    "kk": "FTP (Файлдарды тасымалдау протоколы) – интернет арқылы файлдарды жіберу және қабылдау үшін пайдаланылатын стандартты желілік протокол.",
+    "ru": "FTP (Протокол передачи файлов) — это стандартный сетевой протокол для отправки и получения файлов через интернет.",
+    "en": "FTP (File Transfer Protocol) is a standard network protocol used to send and receive files over the Internet."
+  },
+  "example": {
+    "kk": "FTP сервері файлдарды орталықтандырылған түрде сақтауға мүмкіндік береді.",
+    "ru": "FTP-сервер позволяет централизованно хранить файлы.",
+    "en": "An FTP server allows centralized file storage."
+  },
+  "relations": {
+    "synonyms": ["файлдарды тасымалдау"],
+    "general_concept": {
+      "kk": "FTP үлкен көлемдегі файлдарды беру үшін қолданылады.",
+      "ru": "FTP используется для передачи файлов большого объёма.",
+      "en": "FTP is used for transferring large files."
+    },
+    "specific_concepts": {
+      "kk": ["сервер", "желілер"],
+      "ru": ["сервер", "сети"],
+      "en": ["server", "networks"]
+    },
+    "associative": {
+      "kk": ["деректер", "қолжетімділік"],
+      "ru": ["данные", "доступ"],
+      "en": ["data", "access"]
+    }
+  }
+},
+      {
+  "kk": "Электронды пошта",
+  "ru": "Электронная почта",
+  "en": "Email",
+  "definition": {
+    "kk": "Электронды пошта – интернет арқылы мәтіндік хабарламалар мен файлдарды жіберуге және алуға мүмкіндік беретін байланыс құралы.",
+    "ru": "Электронная почта — это средство связи, позволяющее отправлять и получать текстовые сообщения и файлы через интернет.",
+    "en": "Email is a communication tool that allows sending and receiving text messages and files via the internet."
+  },
+  "example": {
+    "kk": "Электронды пошта арқылы құжаттарды әріптестермен бөлісуге болады.",
+    "ru": "Через электронную почту можно делиться документами с коллегами.",
+    "en": "Email can be used to share documents with colleagues."
+  },
+  "relations": {
+    "synonyms": ["E-mail", "цифрлық пошта"],
+    "general_concept": {
+      "kk": "Электронды пошта ресми және бейресми байланыс үшін кең таралған құрал.",
+      "ru": "Электронная почта широко используется для официальной и неофициальной связи.",
+      "en": "Email is widely used for formal and informal communication."
+    },
+    "specific_concepts": {
+      "kk": ["хабарламалар", "желі"],
+      "ru": ["сообщения", "сеть"],
+      "en": ["messages", "network"]
+    },
+    "associative": {
+      "kk": ["байланыс", "құжат алмасу"],
+      "ru": ["связь", "обмен документами"],
+      "en": ["communication", "document exchange"]
+    }
+  }
+},
+{
+  "kk": "ІР (Internet Protocol)",
+  "ru": "IP (Интернет-протокол)",
+  "en": "IP (Internet Protocol)",
+  "definition": {
+    "kk": "ІР – интернет арқылы деректер пакеттерінің жеткізілуін реттейтін байланыс ережелерінің жиынтығы.",
+    "ru": "IP — это набор правил связи, регулирующих доставку пакетов данных через интернет.",
+    "en": "IP is a set of communication rules that govern the delivery of data packets over the internet."
+  },
+  "example": {
+    "kk": "ІР мекенжайы құрылғылар арасындағы деректер жіберуді анықтайды.",
+    "ru": "IP-адрес определяет отправку данных между устройствами.",
+    "en": "IP address identifies the data transmission between devices."
+  },
+  "relations": {
+    "synonyms": ["Интернет протоколы"],
+    "general_concept": {
+      "kk": "ІР деректерді жіберу және маршруттау үшін жауапты.",
+      "ru": "IP отвечает за передачу и маршрутизацию данных.",
+      "en": "IP is responsible for transmitting and routing data."
+    },
+    "specific_concepts": {
+      "kk": ["мекенжай", "деректер пакеттері"],
+      "ru": ["адрес", "пакеты данных"],
+      "en": ["address", "data packets"]
+    },
+    "associative": {
+      "kk": ["байланыс", "желілер"],
+      "ru": ["связь", "сети"],
+      "en": ["connection", "networks"]
+    }
+  }
+},
+{
+  "kk": "IP мекенжай",
+  "ru": "IP-адрес",
+  "en": "IP Address",
+  "definition": {
+    "kk": "IP мекенжай – желідегі әр құрылғыны бірегей идентификациялауға мүмкіндік беретін нөмір.",
+    "ru": "IP-адрес — это номер, позволяющий уникально идентифицировать каждое устройство в сети.",
+    "en": "IP Address is a unique number that identifies each device on a network."
+  },
+  "example": {
+    "kk": "IP мекенжайды пайдаланып, интернеттегі құрылғылар арасындағы байланыс орнатылады.",
+    "ru": "С помощью IP-адреса устанавливается связь между устройствами в интернете.",
+    "en": "An IP address is used to establish communication between devices on the internet."
+  },
+  "relations": {
+    "synonyms": ["желілік адрес"],
+    "general_concept": {
+      "kk": "IP мекенжай деректер пакеттерін бағыттау үшін маңызды.",
+      "ru": "IP-адрес важен для маршрутизации пакетов данных.",
+      "en": "IP addresses are essential for data packet routing."
+    },
+    "specific_concepts": {
+      "kk": ["IPv4", "IPv6"],
+      "ru": ["IPv4", "IPv6"],
+      "en": ["IPv4", "IPv6"]
+    },
+    "associative": {
+      "kk": ["желілік байланыс", "интернет"],
+      "ru": ["сетевое соединение", "интернет"],
+      "en": ["network connection", "internet"]
+    }
+  }
+},
+ {
+  "kk": "DNS (Domain Name System)",
+  "ru": "DNS (Система доменных имён)",
+  "en": "DNS (Domain Name System)",
+  "definition": {
+    "kk": "DNS – домендік атауларды IP мекенжайларға түрлендіретін интернет жүйесі.",
+    "ru": "DNS — это интернет-система, преобразующая доменные имена в IP-адреса.",
+    "en": "DNS is an internet system that converts domain names into IP addresses."
+  },
+  "example": {
+    "kk": "DNS арқылы \"example.com\" доменін нақты IP мекенжайға бағыттауға болады.",
+    "ru": "С помощью DNS можно направить домен \"example.com\" на конкретный IP-адрес.",
+    "en": "DNS can direct the domain \"example.com\" to a specific IP address."
+  },
+  "relations": {
+    "synonyms": ["домендік атаулар жүйесі"],
+    "general_concept": {
+      "kk": "DNS интернетте домендік атауларды пайдалану үшін қолайлы етеді.",
+      "ru": "DNS упрощает использование доменных имён в интернете.",
+      "en": "DNS simplifies the use of domain names on the internet."
+    },
+    "specific_concepts": {
+      "kk": ["домендер", "IP мекенжай"],
+      "ru": ["домены", "IP-адрес"],
+      "en": ["domains", "IP address"]
+    },
+    "associative": {
+      "kk": ["желілік бағыттау", "интернет ресурстар"],
+      "ru": ["сетевое маршрутизация", "ресурсы интернета"],
+      "en": ["network routing", "internet resources"]
+    }
+  }
+},
+  {
+  "kk": "URL (Uniform Resource Locator)",
+  "ru": "URL (Единый указатель ресурса)",
+  "en": "URL (Uniform Resource Locator)",
+  "definition": {
+    "kk": "URL – интернеттегі ресурстың орналасу орнын анықтайтын мәтіндік жол.",
+    "ru": "URL — это текстовая строка, определяющая местоположение ресурса в интернете.",
+    "en": "URL is a text string that specifies the location of a resource on the internet."
+  },
+  "example": {
+    "kk": "https://example.com URL арқылы веб-сайтқа кіруге болады.",
+    "ru": "С помощью URL https://example.com можно зайти на веб-сайт.",
+    "en": "Using the URL https://example.com, you can access a website."
+  },
+  "relations": {
+    "synonyms": ["веб мекенжай"],
+    "general_concept": {
+      "kk": "URL интернеттегі ресурсқа жылдам қолжетімділік ұсынады.",
+      "ru": "URL предоставляет быстрый доступ к ресурсу в интернете.",
+      "en": "URL provides quick access to a resource on the internet."
+    },
+    "specific_concepts": {
+      "kk": ["веб-сайт", "хостинг"],
+      "ru": ["веб-сайт", "хостинг"],
+      "en": ["website", "hosting"]
+    },
+    "associative": {
+      "kk": ["ресурстар", "интернет"],
+      "ru": ["ресурсы", "интернет"],
+      "en": ["resources", "internet"]
+    }
+  }
+},
+  {
+  "kk": "HTTP (Hypertext Transfer Protocol)",
+  "ru": "HTTP (Протокол передачи гипертекста)",
+  "en": "HTTP (Hypertext Transfer Protocol)",
+  "definition": {
+    "kk": "HTTP – интернет арқылы гипермәтіндік ақпаратты жіберу және қабылдау үшін пайдаланылатын байланыс протоколы.",
+    "ru": "HTTP — это протокол связи, используемый для отправки и получения гипертекстовой информации через интернет.",
+    "en": "HTTP is a communication protocol used for transmitting and receiving hypertext information over the internet."
+  },
+  "example": {
+    "kk": "HTTP веб-сервер мен браузер арасындағы байланыс орнатады.",
+    "ru": "HTTP устанавливает связь между веб-сервером и браузером.",
+    "en": "HTTP establishes communication between the web server and the browser."
+  },
+  "relations": {
+    "synonyms": ["гипермәтіндік протокол"],
+    "general_concept": {
+      "kk": "HTTP веб-қызметтерді пайдалану үшін қажетті негіз болып табылады.",
+      "ru": "HTTP является основой для использования веб-сервисов.",
+      "en": "HTTP serves as the foundation for using web services."
+    },
+    "specific_concepts": {
+      "kk": ["веб-сервер", "браузер"],
+      "ru": ["веб-сервер", "браузер"],
+      "en": ["web server", "browser"]
+    },
+    "associative": {
+      "kk": ["байланыс", "веб-сайттар"],
+      "ru": ["связь", "веб-сайты"],
+      "en": ["connection", "websites"]
+    }
+  }
+},
+ {
+  "kk": "WWW",
+  "ru": "WWW (Всемирная паутина)",
+  "en": "WWW (World Wide Web)",
+  "definition": {
+    "kk": "WWW – интернет арқылы ақпаратқа қол жеткізуді қамтамасыз ететін өзара байланысқан гипермәтіндік құжаттардың ғаламдық жүйесі.",
+    "ru": "WWW — это глобальная система взаимосвязанных гипертекстовых документов, обеспечивающая доступ к информации через интернет.",
+    "en": "WWW is a global system of interconnected hypertext documents that provides access to information over the internet."
+  },
+  "example": {
+    "kk": "WWW арқылы веб-сайттарға қол жеткізуге болады.",
+    "ru": "Через WWW можно получить доступ к веб-сайтам.",
+    "en": "WWW provides access to websites."
+  },
+  "relations": {
+    "synonyms": ["Интернет жүйесі", "Веб"],
+    "general_concept": {
+      "kk": "WWW пайдаланушыларға ақпаратты іздеу және пайдалану мүмкіндігін береді.",
+      "ru": "WWW предоставляет пользователям возможность искать и использовать информацию.",
+      "en": "WWW gives users the ability to search and use information."
+    },
+    "specific_concepts": {
+      "kk": ["веб-сайт", "гипермәтін"],
+      "ru": ["веб-сайт", "гипертекст"],
+      "en": ["website", "hypertext"]
+    },
+    "associative": {
+      "kk": ["ақпарат", "интернет"],
+      "ru": ["информация", "интернет"],
+      "en": ["information", "internet"]
+    }
+  }
+}
+    ]
+    }
