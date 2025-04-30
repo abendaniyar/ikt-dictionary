@@ -5,9 +5,9 @@
       "ru": "Информация",
       "en": "Information",
       "definition": {
-        "kk": "Ақпарат — қоршаған орта туралы мәлімет.",
-        "ru": "Информация — сведения об окружающем мире.",
-        "en": "Information is data about the surrounding environment."
+        "kk": "Ақпарат — белгілі бір объект немесе құбылыстар туралы деректердің жүйелі түрде жинақталуы, құрылымдалуы және өңделуі нәтижесінде пайда болатын, мағыналық және интерпретацияланатын жиынтық. Ақпарат танымдық, басқарушылық және коммуникациялық процестердің негізін құрап, деректерді нақтылы білімге айналдыруда маңызды рөл атқарады.",
+        "ru": "Информация – совокупность данных, полученных, структурированных и обработанных таким образом, что они обретают смысл и могут быть интерпретированы. Информация является основой познавательных, управленческих и коммуникативных процессов, обеспечивая переход от необработанных данных к осмысленным знаниям и сообщениям.",
+        "en": "Information – a systematically collected, structured, and processed set of data that acquires meaning and can be interpreted. Information forms the basis of cognitive, managerial, and communicative processes, enabling the transformation of raw data into coherent knowledge and actionable insights."
       },
       "example": {
         "kk": "Ақпарат компьютер арқылы беріледі.",
@@ -28,9 +28,9 @@
       "ru": "Информационные технологии",
       "en": "Information Technology",
       "definition": {
-        "kk": "Ақпаратты жинау, өңдеу, сақтау және тарату үшін қолданылатын технологиялар жиынтығы.",
-        "ru": "Совокупность технологий для сбора, обработки, хранения и передачи информации.",
-        "en": "Technologies used for collecting, processing, storing, and transmitting information."
+        "kk": "Ақпараттық технологиялар – ақпаратты цифрлық форматта өндіру, өңдеу, сақтау және тарату мақсатында қолданылатын компьютерлік жүйелер мен телекоммуникациялық құралдардың кешені. Бұл технологиялар ғылым, өндіріс, басқару және білім беру салаларында деректердің автоматтандырылған өңдеуін және интерпретациясын қамтамасыз ете отырып, ақпараттық ағындардың тиімді басқарылуына ықпал етеді.",
+        "ru": "Информационные технологии – совокупность средств, методов и процессов, предназначенных для создания, обработки, хранения и передачи информации в цифровом виде. Эти технологии включают компьютерное оборудование, программное обеспечение, телекоммуникационные системы и сети, а также специализированные прикладные решения, которые обеспечивают автоматизацию и оптимизацию информации в науке, производстве, управлении и образовательной сфере.",
+        "en": "Information Technologies – a comprehensive set of tools, methods, and processes aimed at the creation, processing, storage, and transmission of information in digital form. This domain encompasses computer hardware, software, telecommunication systems, networks, and specialized application solutions that facilitate the automation and optimization of data handling in science, industry, management, and education."
       },
       "example": {
         "kk": "Ақпараттық технологиялар білім беру саласында кеңінен қолданылады.",
@@ -45,9 +45,9 @@
       "ru": "Информационно-коммуникационные технологии (ИКТ)",
       "en": "ICT",
       "definition": {
-        "kk": "Ақпараттық-коммуникациялық технологиялар — ақпарат пен байланыс технологияларының жиынтығы.",
-        "ru": "Информационно-коммуникационные технологии — совокупность технологий связи и обработки информации.",
-        "en": "ICT is the combination of communication and information technologies."
+        "kk": "Ақпараттық-коммуникациялық технологиялар – қазіргі заманғы цифрлық трансформация дәуірінде ақпаратты өндіру, өңдеу, сақтау және тарату процестерінде қолданылатын компьютерлік жүйелер мен телекоммуникациялық инфрақұрылымдардың интеграциясы. Бұл технологиялар ақпараттық және коммуникациялық құралдардың синергиялық әрекетін қамтамасыз ете отырып, ғылыми зерттеулерден бастап білім беру, өндіріс және басқару салаларына дейін деректер ағындарын автоматтандырылған түрде тиімді басқаруға мүмкіндік береді.",
+        "ru": "Информационно-коммуникационные технологии (ИКТ) – это комплекс интегрированных методов, технических средств и процессов, объединяющих возможности информационных технологий и средств телекоммуникаций для создания, обработки, хранения и передачи данных в цифровом формате. ИКТ обеспечивают автоматизацию и оптимизацию информационных процессов, способствуя повышению эффективности и инновационности в научных исследованиях, образовании, промышленности и управлении.",
+        "en": "Information and Communication Technologies (ICT) – a comprehensive integration of digital tools, methodologies, and processes that combine the capabilities of information processing with modern communication systems. ICT encompasses computer hardware, software, telecommunication infrastructure, and networking protocols which together enable the efficient production, management, storage, and transmission of data. This integrated framework significantly enhances connectivity and operational efficiency across research, education, industry, and governance."
       },
       "example": {
         "kk": "АКТ білім беруде маңызды рөл атқарады.",
@@ -63,9 +63,9 @@
       "ru": "Стандарт",
       "en": "Standard",
       "definition": {
-        "kk": "Стандарт — белгілі бір салада келісілген ережелер жиынтығы.",
-        "ru": "Стандарт — набор согласованных правил в определённой области.",
-        "en": "Standard is a set of agreed rules in a specific field."
+        "kk": "Стандарт – белгілі бір саладағы өндіріс, қызмет көрсету немесе процесті ұйымдастыру мақсатында ресми түрде бекітілген талаптар мен нұсқаулар жинағы. Ол нақты нормалар мен критерийлерді айқындай отырып, сапаны, қауіпсіздікті және үйлесімділікті қамтамасыз етуге бағытталған, ғылыми және практикалық негізде әзірленеді.",
+        "ru": "Стандарт – это нормативный документ, разработанный и утвержденный компетентными органами или профессиональным сообществом, устанавливающий требования, нормы и критерии для организации процессов, обеспечения качества, безопасности и совместимости продукции, услуг или технологических процессов. Он служит основой для поддержания единообразия, оптимизации деятельности и повышения эффективности в различных областях.",
+        "en": "Standard – A standard is an officially established normative document developed and approved by competent authorities or professional communities. It outlines the specific guidelines, requirements, and criteria for organizing processes and ensuring quality, safety, and compatibility of products, services, or operational procedures. This document serves as a reference framework to maintain uniformity and optimize performance across various domains."
       },
       "example": {
         "kk": "ISO стандарттары халықаралық деңгейде қолданылады.",
@@ -80,9 +80,9 @@
   "ru": "Информатика",
   "en": "Computer science",
   "definition": {
-    "kk": "Информатика – компьютерлер мен ақпараттық жүйелерді пайдалана отырып, ақпаратты өңдеу, сақтау және тасымалдау әдістерін зерттейтін ғылым.",
-    "ru": "Информатика — это наука, изучающая методы обработки, хранения и передачи информации с использованием компьютеров и информационных систем.",
-    "en": "Computer Science is the study of methods for processing, storing, and transmitting information using computers and information systems."
+    "kk": "Информатика – бұл ақпаратты өңдеу, сақтау, беру және талдау процестерінің негіздері, әдістері мен алгоритмдерін зерттейтін ғылыми бағыт. Ол математика, логика және инженерия салаларындағы теориялық негіздерді біріктіріп, компьютерлік жүйелер мен бағдарламалық қамтамасыз етуді жобалау мен жүзеге асырудың әдістемелік базаcын құрайды.",
+    "ru": "Информатика – это научная дисциплина, изучающая принципы, методы и алгоритмы обработки, хранения, передачи и анализа информации с помощью компьютерных систем. Объединяя теоретические основы математики, логики и инженерии, информатика служит фундаментом для разработки и применения современных вычислительных технологий, программного обеспечения и алгоритмических методов.",
+    "en": "Computer Science - a scientific discipline that investigates the principles, methods, and algorithms involved in processing, storing, transmitting, and analyzing information using computer systems. By integrating theoretical foundations from mathematics, logic, and engineering, informatics underpins the development and application of modern computational technologies, software solutions, and algorithmic approaches."
   },
   "example": {
     "kk": "Мысалы, информатика пәнінде алгоритмдер мен бағдарламалау негіздері оқытылады.",
@@ -114,9 +114,9 @@
   "ru": "Компьютерные навыки (КН)",
   "en": "Computer Skills (CS)",
   "definition": {
-    "kk": "Компьютермен жұмыс дағдылары – бұл компьютерді тиімді пайдалану, ақпаратпен жұмыс істеу және цифрлық құралдар арқылы коммуникация жүргізу үшін қажетті білім мен дағдылар жиынтығы.",
-    "ru": "Компьютерные навыки — это совокупность знаний и умений, необходимых для эффективного использования компьютера, работы с информацией и коммуникации с помощью цифровых инструментов.",
-    "en": "Computer skills are the set of knowledge and abilities required to effectively use a computer, work with information, and communicate via digital tools."
+    "kk": "Компьютерлік дағдылар (КД) – компьютерлік жүйелерді қолдану мен басқарудағы практикалық білім мен тәжірибе жиынтығы. Оларға аппараттық құралдар мен бағдарламалық қамтамасыз етуді тиімді пайдалану, мәліметтерді өңдеу, талдау және сақтау процестерін автоматтандыру әдістерін меңгеру жатады. Компьютерлік дағдылар заманауи цифрлық ортада ақпараттық жүйелерді тиімді ұйымдастыру және басқаруға мүмкіндік береді.",
+    "ru": "Компьютерные навыки (КН) – совокупность практических знаний, умений и компетенций, необходимых для эффективного использования и управления компьютерными системами и программным обеспечением. Они включают навыки работы с аппаратными средствами, программами для обработки, анализа и хранения информации, а также умение автоматизировать и оптимизировать процессы в цифровой среде. Компьютерные навыки играют ключевую роль в развитии цифровой экономики, образования и профессиональной деятельности.",
+    "en": "Computer skills – a set of practical abilities, knowledge, and competencies essential for the effective use and management of computer systems and software applications. These skills encompass the operation of hardware devices, the use of software for data processing, analysis, and storage, and the capacity to automate and optimize processes within digital environments. Computer skills are fundamental to driving digital innovation in education, industry, and various professional fields."
   },
   "example": {
     "kk": "Мысалы, мәтіндік редакторларды пайдалану, электрондық пошта арқылы байланысу және интернетте ақпарат іздеу.",
@@ -131,9 +131,9 @@
   "ru": "Конвергенция",
   "en": "Convergence",
   "definition": {
-    "kk": "Конвергенция – бұл әртүрлі элементтердің немесе технологиялардың біріккен немесе бір-біріне жақындаған күйі, олардың функциялары мен ерекшеліктері біртұтас жүйеде үйлесімді түрде жұмыс істеуін қамтамасыз етеді.",
-    "ru": "Конвергенция – это состояние или процесс сближения различных элементов или технологий, в результате которого их функции и особенности интегрируются в единую систему.",
-    "en": "Convergence is a state or process in which different elements or technologies come together or become increasingly alike, integrating their functions into a unified system."
+    "kk": "Конвергенция – жүйелердің, процестердің немесе элементтердің ортақ нәтижеге не белгілі бір шекті мәнге ұмтылуы, сонымен бірге олардың үйлесімді интеграциялануы. Мысалы, математикалық анализде тізбектер мен функциялардың шегі белгілі бір мәнге жақындауы конвергенция процесі ретінде қарастырылады. Сонымен қатар, ақпараттық технологиялар, экономика және әлеуметтік ғылымдарда конвергенция ұғымы әр түрлі бағыттағы процестердің бірлесе жұмыс істеуі мен интеграциясын сипаттайды.",
+    "ru": "Конвергенция – это процесс, при котором различные системы, процессы или элементы стремятся к достижению общего результата или приближаются к определённому пределу, объединяясь и интегрируясь в единую систему. В математическом анализе конвергенция описывает поведение последовательностей или функций, стремящихся к определённому значению. В более широком смысле термин применяется в экономике, информационных технологиях и социальных науках для обозначения тенденции к слиянию разрозненных процессов в целостную, гармонизированную систему.",
+    "en": "Convergence – a process whereby distinct systems, processes, or elements progressively move toward a common limit or outcome, ultimately merging and integrating into a unified structure. In mathematical analysis, convergence refers to the behavior of sequences or functions as they approach a specific value. More broadly, the concept is employed in fields such as economics, information technology, and social sciences to describe the tendency of disparate processes to coalesce into a cohesive whole."
   },
   "example": {
     "kk": "Мысалы, қазіргі заманғы смартфондарда компьютерлік, телефондық және мультимедиялық функциялардың конвергенциясы байқалады.",
@@ -192,9 +192,9 @@
       "ru": "Цифровизация",
       "en": "Digitalization",
       "definition": {
-        "kk": "Цифрландыру — ақпаратты сандық форматқа көшіру процесі.",
-        "ru": "Цифровизация — процесс перевода информации в цифровой формат.",
-        "en": "Digitalization is the process of converting information into a digital format."
+        "kk": "Цифрландыру – дәстүрлі (аналогтық) ақпарат көздерін, процестерді және қызметтерді цифрлық форматқа көшіру, сақтау және өңдеуді қамтамасыз ететін трансформациялық процесс. Бұл өзгеріс цифрлық инфрақұрылым мен ақпараттық технологияларды енгізу арқылы жүзеге асады, соның нәтижесінде экономика, білім беру, басқару және басқа да әлеуметтік салаларда тиімділіктің жоғарылауы мен инновацияның дамуына ықпал етеді.",
+        "ru": "Цифровизация – процесс перехода от традиционных аналоговых методов хранения, обработки и передачи информации к цифровым форматам посредством внедрения современных информационных технологий и цифровой инфраструктуры. Такой переход способствует повышению эффективности, улучшению доступности данных и интеграции цифровых систем в различных сферах — от экономики и образования до управления и социальных услуг.",
+        "en": "Digitalization – the transformative process of converting traditional analog forms of data, processes, and services into digital formats through the implementation of modern information technologies and digital infrastructure. This change enhances operational efficiency, improves data accessibility, and fosters the integration of digital systems across various sectors such as economy, education, management, and social services."
       },
       "example": {
         "kk": "Мемлекеттік қызметтер цифрландырылып жатыр.",
