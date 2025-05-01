@@ -1666,23 +1666,6 @@
   }
 },
     {
-      "kk": "IP мекенжайы",
-      "ru": "IP-адрес",
-      "en": "IP Address",
-      "definition": {
-        "kk": "IP мекенжайы – интернет желісіндегі немесе жергілікті желідегі құрылғының бірегей сандық идентификаторы. Ол желілік құрылғыларды анықтау және деректерді беруді қамтамасыз ету үшін қолданылады. IP мекенжайларының екі түрі бар: IPv4 (32 биттік) және IPv6 (128 биттік), бұл нұсқалардың әрқайсысы желі архитектурасына және маршруттау механизмдеріне әсер етеді.",
-        "ru": "IP-адрес – уникальный числовой идентификатор устройства в интернет-сети или локальной сети. Он используется для определения сетевых устройств и обеспечения передачи данных. IP-адреса бывают двух типов: IPv4 (32-битный) и IPv6 (128-битный), каждая из этих версий влияет на архитектуру сети и механизмы маршрутизации.",
-        "en": "IP address – a unique numerical identifier assigned to a device within an internet or local network. It is used to identify network devices and enable data transmission. IP addresses exist in two formats: IPv4 (32-bit) and IPv6 (128-bit), each impacting network architecture and routing mechanisms."
-      },
-      "example": {
-        "kk": "Серверге қосылу үшін IP мекенжайы қажет.",
-        "ru": "Для подключения к серверу требуется IP-адрес.",
-        "en": "An IP address is needed to connect to a server."
-      },
-      "image": "",
-      "source": ""
-    },
-    {
       "kk": "Маршрутизатор",
       "ru": "Маршрутизатор",
       "en": "Router",
@@ -1756,9 +1739,9 @@
   "ru": "Облачные вычисления",
   "en": "Cloud Computing",
   "definition": {
-    "kk": "Бұлтты есептеулер – интернет арқылы деректерді өңдеу, сақтау және басқару қызметтерін ұсынатын технология.",
-    "ru": "Облачные вычисления – технология предоставления услуг обработки, хранения и управления данными через интернет.",
-    "en": "Cloud computing is a technology that offers data processing, storage, and management services over the internet."
+    "kk": "Бұлтты есептеу - интернет арқылы есептеу ресурстары мен қызметтеріне қол жеткізуді қамтамасыз ететін технологиялық модель. Ол деректерді өңдеу, ақпаратты сақтау және бағдарламалық жасақтаманы басқару мүмкіндіктерін ұсынады. Бұлтты есептеу көптеген пайдаланушылар үшін масштабталатын және икемді инфрақұрылымды қамтамасыз етеді.",
+    "ru": "Облачные вычисления – технологическая модель, обеспечивающая доступ к вычислительным ресурсам и сервисам через интернет. Она предоставляет возможности обработки данных, хранения информации и управления программным обеспечением. Облачные вычисления предоставляют масштабируемую и гибкую инфраструктуру для множества пользователей.",
+    "en": "Cloud computing – a technological model that provides access to computing resources and services via the internet. It offers capabilities for data processing, storage, and software management. Cloud computing enables scalable and flexible infrastructure for multiple users."
   },
   "example": {
     "kk": "Google Drive бұлтты есептеулердің бір түрі болып табылады.",
@@ -1789,9 +1772,9 @@
   "ru": "Облачное хранилище",
   "en": "Cloud Storage",
   "definition": {
-    "kk": "Бұлтты сақтау – деректерді интернет арқылы қол жетімді орталықтандырылған серверлерде сақтау қызметі.",
-    "ru": "Облачное хранилище — это услуга хранения данных на централизованных серверах, доступных через интернет.",
-    "en": "Cloud storage is a service for storing data on centralized servers accessible via the internet."
+    "kk": "Бұлтты сақтау – интернет арқылы деректерді қашықтан сақтау және басқару технологиясы. Ол ақпараттың сақталуын, сақтық көшірмесін жасауды және деректерге қауіпсіз қол жеткізуді қамтамасыз етеді. Бұлтты сақтау кең ауқымды инфрақұрылымға негізделген және жеке, қоғамдық немесе гибридті болуы мүмкін.",
+    "ru": "Облачное хранилище – технология удалённого хранения и управления данными через интернет. Оно обеспечивает хранение информации, резервное копирование и безопасный доступ к данным. Облачные хранилища базируются на масштабируемой инфраструктуре и могут быть частными, публичными или гибридными.",
+    "en": "Cloud storage – a technology for remotely storing and managing data via the internet. It provides data storage, backup, and secure access capabilities. Cloud storage is based on scalable infrastructure and can be deployed as private, public, or hybrid models."
   },
   "example": {
     "kk": "Dropbox деректерді бұлтта сақтауға мүмкіндік береді.",
@@ -1822,9 +1805,9 @@
   "ru": "Облачные платформы",
   "en": "Cloud Platforms",
   "definition": {
-    "kk": "Бұлтты платформалар – бұлтты технологиялар арқылы бағдарламалар мен қызметтерді іске асыруға арналған орталар.",
-    "ru": "Облачные платформы — это среды для запуска программ и сервисов через облачные технологии.",
-    "en": "Cloud platforms are environments for running applications and services using cloud technologies."
+    "kk": "Бұлтты платформалар – интернет-технологияларға негізделген қосымшаларды сақтау, өңдеу және орналастыру қызметтерін ұсынатын Инфрақұрылым. Олар пайдаланушыларға есептеу қуатын, желілік ресурстарды және бағдарламалық жасақтаманы қашықтан басқаруға мүмкіндік береді. Бұлтты платформалар IaaS, PaaS және SaaS модельдеріне негізделген.",
+    "ru": "Облачные платформы – инфраструктура, предоставляющая услуги хранения, обработки данных и размещения приложений на основе интернет-технологий. Они позволяют пользователям удалённо управлять вычислительными мощностями, сетевыми ресурсами и программным обеспечением. Облачные платформы функционируют на основе моделей IaaS, PaaS и SaaS.",
+    "en": "Cloud platforms – an infrastructure that provides storage, data processing, and application hosting services over the internet. They enable users to remotely manage computing power, networking resources, and software applications. Cloud platforms operate based on IaaS, PaaS, and SaaS models."
   },
   "example": {
     "kk": "Amazon AWS – бұлтты платформалардың бірі.",
@@ -1856,9 +1839,9 @@
   "ru": "Мобильные приложения",
   "en": "Mobile Applications",
   "definition": {
-    "kk": "Мобильді қосымшалар – смартфондар мен планшеттерде пайдалануға арналған бағдарламалық қамтамасыз ету.",
-    "ru": "Мобильные приложения – это программное обеспечение, предназначенное для использования на смартфонах и планшетах.",
-    "en": "Mobile applications are software designed for use on smartphones and tablets."
+    "kk": "Мобильді қосымшалар - смартфондарға, планшеттерге және басқа мобильді құрылғыларға арналған бағдарламалық жасақтама. Бұл пайдаланушыларға әртүрлі қызметтерге қол жеткізуге, деректерді өңдеуге және интернет арқылы ақпарат алмасуға мүмкіндік береді. Мобильді қосымшалар платформалық (iOS, Android) және вебке бағытталған.",
+    "ru": "Мобильные приложения – программное обеспечение, разработанное для смартфонов, планшетов и других мобильных устройств. Оно позволяет пользователям получать доступ к различным сервисам, обрабатывать данные и обмениваться информацией через интернет. Мобильные приложения бывают платформенными (iOS, Android) и веб-ориентированными.",
+    "en": "Mobile applications – software designed for smartphones, tablets, and other mobile devices. They enable users to access various services, process data, and exchange information via the internet. Mobile applications exist in platform-specific (iOS, Android) and web-based versions."
   },
   "example": {
     "kk": "Instagram – танымал мобильді қосымша.",
@@ -1889,9 +1872,9 @@
   "ru": "Мобильные сервисы",
   "en": "Mobile Services",
   "definition": {
-    "kk": "Мобилді қызметтер – смартфондар мен басқа да мобильді құрылғыларға ұсынылатын онлайн сервистер.",
-    "ru": "Мобильные сервисы — это онлайн-сервисы, предоставляемые для смартфонов и других мобильных устройств.",
-    "en": "Mobile services are online services provided for smartphones and other mobile devices."
+    "kk": "Мобильді қызметтер-мобильді құрылғылар арқылы пайдаланушыларға қолжетімді цифрлық және коммуникациялық қызметтер жиынтығы. Оларға ақпарат алмасу, навигация, онлайн төлемдер, әлеуметтік медиа және басқа мүмкіндіктер кіреді. Мобильді қызметтер ұялы желілер, GPS және бұлтты технологиялар негізінде жұмыс істейді.",
+    "ru": "Мобильные сервисы – совокупность цифровых и коммуникационных услуг, доступных пользователям через мобильные устройства. Они включают обмен информацией, навигацию, онлайн-платежи, социальные сети и другие функции. Мобильные сервисы работают на основе сотовых сетей, GPS и облачных технологий.",
+    "en": "Mobile services – a collection of digital and communication services accessible to users via mobile devices. They include information exchange, navigation, online payments, social media, and other functionalities. Mobile services operate based on cellular networks, GPS, and cloud technologies."
   },
   "example": {
     "kk": "Мобилді банк қызметтері арқылы шоттарды бақылауға болады.",
@@ -1923,9 +1906,9 @@
   "ru": "Виртуальная машина",
   "en": "Virtual Machine",
   "definition": {
-    "kk": "Виртуалды машина – физикалық компьютердің ресурстарын пайдалана отырып, тәуелсіз операциялық жүйені іске асыратын бағдарламалық жүйе.",
-    "ru": "Виртуальная машина – это программная система, запускающая независимую операционную систему, используя ресурсы физического компьютера.",
-    "en": "A virtual machine is software that runs an independent operating system using the resources of a physical computer."
+    "kk": "Виртуалды машина - бұл физикалық компьютердің функционалдығын имитациялайтын және оқшауланған операциялық жүйені іске қосуға мүмкіндік беретін бағдарламалық жасақтама. Виртуалды машиналар серверді шоғырландыру, бағдарламалық жасақтаманы тестілеу және қауіпсіздік механизмдерін енгізу үшін кеңінен қолданылады.",
+    "ru": "Виртуальная машина – программно созданная вычислительная среда, имитирующая функциональность физического компьютера и позволяющая запускать изолированную операционную систему. Виртуальные машины широко применяются для серверной консолидации, тестирования программного обеспечения и реализации механизмов безопасности.",
+    "en": "Virtual machine – a software-created computing environment that simulates the functionality of a physical computer and allows an isolated operating system to run. Virtual machines are widely used for server consolidation, software testing, and security implementation."
   },
   "example": {
     "kk": "VMware виртуалды машиналарды басқаруға арналған платформа болып табылады.",
@@ -1956,9 +1939,9 @@
   "ru": "Мобильная связь",
   "en": "Mobile Communication",
   "definition": {
-    "kk": "Мобильді байланыс – ұялы желі арқылы ақпаратты беру және алу технологиясы.",
-    "ru": "Мобильная связь – это технология передачи и получения информации через сотовую сеть.",
-    "en": "Mobile communication is the technology for transmitting and receiving information via a cellular network."
+    "kk": "Ұялы байланыс-радио толқындарын немесе спутниктік технологияларды қолдана отырып, ақпараттың сымсыз берілуін қамтамасыз ететін телекоммуникациялық жүйе. Оған телефонмен сөйлесу, хабарлама жіберу, интернетке қосылу және деректерді беру қызметтері кіреді. Ұялы байланыс ұялы желілердің инфрақұрылымына негізделген және GSM, CDMA, LTE, 5G технологияларын қолдана отырып дамиды.",
+    "ru": "Мобильная связь – телекоммуникационная система, обеспечивающая беспроводную передачу информации с использованием радиоволн или спутниковых технологий. Она включает услуги телефонных разговоров, отправки сообщений, подключения к интернету и передачи данных. Мобильная связь базируется на инфраструктуре сотовых сетей и развивается с применением технологий GSM, CDMA, LTE, 5G.",
+    "en": "Mobile communication – a telecommunications system enabling wireless transmission of information using radio waves or satellite technologies. It includes services such as phone calls, messaging, internet connectivity, and data transfer. Mobile communication relies on cellular network infrastructure and evolves with technologies like GSM, CDMA, LTE, and 5G."
   },
   "example": {
     "kk": "5G мобильді байланыс жылдамдығын арттырады.",
@@ -1989,9 +1972,9 @@
   "ru": "Мобильные устройства",
   "en": "Mobile Devices",
   "definition": {
-    "kk": "Мобильді құрылғылар – ұялы телефон, планшет және смарт-сағат сияқты портативті электронды құрылғылар.",
-    "ru": "Мобильные устройства — это портативные электронные устройства, такие как мобильные телефоны, планшеты и смарт-часы.",
-    "en": "Mobile devices are portable electronic devices such as mobile phones, tablets, and smartwatches."
+    "kk": "Мобильді құрылғылар - дербес қуат көздерінде жұмыс істейтін және сымсыз байланыс мүмкіндігі бар электрондық құрылғылар. Оларға Смартфондар, планшеттер, ақылды сағаттар және басқа портативті жүйелер кіреді. Мобильді құрылғылар ақпаратты өңдеу, Байланыс және Интернетке қол жеткізу үшін кеңінен қолданылады.",
+    "ru": "Мобильные устройства – электронные устройства, работающие на автономных источниках питания и имеющие возможность беспроводной связи. К ним относятся смартфоны, планшеты, умные часы и другие портативные системы. Мобильные устройства широко используются для обработки информации, коммуникации и доступа к интернету.",
+    "en": "Mobile devices – electronic devices powered by autonomous energy sources with wireless communication capabilities. These include smartphones, tablets, smartwatches, and other portable systems. Mobile devices are widely used for information processing, communication, and internet access."
   },
   "example": {
     "kk": "Мобильді құрылғылар арқылы интернетке қосылуға болады.",
@@ -2021,13 +2004,13 @@
   
   "Дәріс 7. Smart технологиялар": [
   {
-  "kk": "SMART технология",
+  "kk": "SMART технологиясы",
   "ru": "SMART технология",
   "en": "SMART Technology",
   "definition": {
-    "kk": "SMART технология – білім беру, бизнес және тұрмыстық жағдайлар үшін интерактивті және интеллектуалды шешімдер ұсынатын инновациялық технологиялар жиынтығы.",
-    "ru": "SMART технология — это совокупность инновационных технологий, предлагающих интерактивные и интеллектуальные решения для образования, бизнеса и бытовых нужд.",
-    "en": "SMART technology is a collection of innovative technologies offering interactive and intelligent solutions for education, business, and household needs."
+    "kk": "SMART технологиясы - интеллектуалды және автоматтандырылған жүйелерді пайдалану арқылы тиімділікті арттыратын инновациялық тәсілдердің жиынтығы. Ол деректерді өңдеуді, шешім қабылдауды және жасанды интеллект, сенсорлық деректер және алгоритмдер негізінде қызметтерді оңтайландыруды қамтиды. SMART технологиялары тұрмыстық құрылғылардан өнеркәсіптік автоматтандыруға дейін кеңінен қолданылады.",
+    "ru": "SMART технология – совокупность инновационных подходов, повышающих эффективность за счёт использования интеллектуальных и автоматизированных систем. Она включает обработку данных, принятие решений и оптимизацию услуг на основе искусственного интеллекта, сенсорных данных и алгоритмов. SMART технологии широко применяются от бытовых устройств до промышленной автоматизации.",
+    "en": "SMART technology – a collection of innovative approaches that enhance efficiency through the use of intelligent and automated systems. It involves data processing, decision-making, and service optimization using artificial intelligence, sensor data, and algorithms. SMART technologies are widely applied, from household devices to industrial automation."
   },
   "example": {
     "kk": "SMART тақталар оқушылар мен мұғалімдердің оқу процесін жеңілдетеді.",
@@ -2054,23 +2037,23 @@
   }
 },
     {
-  "kk": "SMART үй",
+  "kk": "Ақылды үй",
   "ru": "Умный дом",
   "en": "Smart Home",
   "definition": {
-    "kk": "SMART үй – тұрмыстық құрылғылар мен жүйелерді автоматтандыру және қашықтан басқару мүмкіндігін ұсынатын технология.",
-    "ru": "Умный дом — это технология автоматизации и удалённого управления бытовыми устройствами и системами.",
-    "en": "Smart home is a technology that provides automation and remote control of household devices and systems."
+    "kk": "Ақылды үй - бұл тұрмыстық құрылғыларды, қауіпсіздік жүйелерін және энергияны үнемдеу технологияларын біріктіретін автоматтандырылған басқару жүйелерімен жабдықталған тұрғын үй. Ақылды үйлер пайдаланушылардың жайлылығын арттыру үшін жасанды интеллект, Заттар интернеті (IoT) және сенсорлық басқаруды қолданады.",
+    "ru": "Умный дом – жилое пространство, оснащённое автоматизированными системами управления, объединяющее бытовые устройства, системы безопасности и технологии энергосбережения. Умные дома используют искусственный интеллект, Интернет вещей (IoT) и сенсорное управление для повышения комфорта пользователей.",
+    "en": "Smart home – a living space equipped with automated control systems integrating household devices, security systems, and energy-saving technologies. Smart homes utilize artificial intelligence, the Internet of Things (IoT), and sensor-based control to enhance user convenience."
   },
   "example": {
-    "kk": "SMART үйде жарықтандыруды смартфон арқылы басқаруға болады.",
+    "kk": "Ақылды үйде жарықтандыруды смартфон арқылы басқаруға болады.",
     "ru": "В умном доме можно управлять освещением через смартфон.",
     "en": "In a smart home, lighting can be controlled through a smartphone."
   },
   "relations": {
-    "synonyms": ["ақылды үй"],
+    "synonyms": ["SMART үй"],
     "general_concept": {
-      "kk": "SMART үй тұрмыстық жайлылықты арттырады және энергия тиімділігін қамтамасыз етеді.",
+      "kk": "Ақылды үй тұрмыстық жайлылықты арттырады және энергия тиімділігін қамтамасыз етеді.",
       "ru": "Умный дом повышает бытовой комфорт и обеспечивает энергоэффективность.",
       "en": "Smart home enhances household comfort and ensures energy efficiency."
     },
@@ -2091,9 +2074,9 @@
   "ru": "Умные устройства",
   "en": "Smart Devices",
   "definition": {
-    "kk": "Ақылды құрылғылар – интернетке қосылып, пайдаланушыларға қосымша мүмкіндіктер мен деректер алмасуды ұсынатын электронды құрылғылар.",
-    "ru": "Умные устройства — это электронные устройства, подключённые к интернету, предлагающие дополнительные возможности и обмен данными.",
-    "en": "Smart devices are electronic gadgets connected to the internet that offer additional features and data exchange."
+    "kk": "Ақылды құрылғылар - деректерді өңдеу, Автоматтандыру және пайдаланушы тәжірибесі үшін жасанды интеллект, сенсорлар және байланыс технологияларын пайдаланатын электрондық құрылғылар. Оларға смартфондар, ақылды сағаттар, Тұрмыстық техника және өнеркәсіптік IoT жүйелері кіреді.",
+    "ru": "Умные устройства – электронные устройства, использующие искусственный интеллект, сенсоры и технологии связи для обработки данных, автоматизации и взаимодействия с пользователем. К ним относятся смартфоны, умные часы, бытовая техника и промышленные IoT-системы.",
+    "en": "Smart devices – electronic devices that utilize artificial intelligence, sensors, and communication technologies for data processing, automation, and user interaction. They include smartphones, smartwatches, household appliances, and industrial IoT systems."
   },
   "example": {
     "kk": "Ақылды сағаттар пайдаланушыларға денсаулық деректерін бақылауға мүмкіндік береді.",
@@ -2124,9 +2107,9 @@
   "ru": "Wi-Fi",
   "en": "Wi-Fi",
   "definition": {
-    "kk": "Wi-Fi – сымсыз желілер арқылы деректерді жоғары жылдамдықта беруді қамтамасыз ететін технология.",
-    "ru": "Wi-Fi — это технология, обеспечивающая передачу данных на высокой скорости через беспроводные сети.",
-    "en": "Wi-Fi is a technology that provides high-speed data transfer over wireless networks."
+    "kk": "Wi-Fi – радио толқындарын қолданатын сымсыз деректерді беру технологиясы. Бұл құрылғыларға жергілікті желілерде ақпарат алмасуға және интернетке қосылуға мүмкіндік береді. Wi-Fi IEEE 802.11 стандарттарына негізделген және әртүрлі жиілік диапазондарын қолданады (2.4 ГГц, 5 ГГц, 6 ГГц).",
+    "ru": "Wi-Fi – технология беспроводной передачи данных с использованием радиоволн. Она позволяет устройствам обмениваться информацией в локальных сетях и подключаться к интернету. Wi-Fi основан на стандартах IEEE 802.11 и использует различные диапазоны частот (2.4 ГГц, 5 ГГц, 6 ГГц).",
+    "en": "Wi-Fi – a wireless data transmission technology using radio waves. It enables devices to exchange information within local networks and access the internet. Wi-Fi is based on IEEE 802.11 standards and operates at various frequency ranges (2.4 GHz, 5 GHz, 6 GHz)."
   },
   "example": {
     "kk": "Wi-Fi қосылымы арқылы интернетке сымсыз қол жеткізуге болады.",
@@ -2158,9 +2141,9 @@
   "ru": "Блокчейн",
   "en": "Blockchain",
   "definition": {
-    "kk": "Блокчейн – ақпараттың сақталуын және қауіпсіздігін қамтамасыз ететін, транзакцияларды тексеру үшін қолданылатын таралған деректер базасы технологиясы.",
-    "ru": "Блокчейн — это технология распределённой базы данных, обеспечивающая сохранность и безопасность информации и проверку транзакций.",
-    "en": "Blockchain is a distributed database technology that ensures the security and integrity of information while verifying transactions."
+    "kk": "Блокчейн - деректерді қауіпсіз сақтауға және тасымалдауға арналған таратылған сандық тізілім жүйесі. Ол блокчейннен тұрады, олардың әрқайсысы ақпараттың өзгермейтіндігін қамтамасыз ете отырып, алдыңғысымен криптографиялық байланысты. Блокчейн қаржы, логистика, денсаулық сақтау және басқа салаларда сенімді технология ретінде қолданылады.",
+    "ru": "Блокчейн – распределённая цифровая система реестра, предназначенная для безопасного хранения и передачи данных. Она состоит из цепочки блоков, каждый из которых криптографически связан с предыдущим, обеспечивая неизменяемость информации. Блокчейн используется в финансах, логистике, здравоохранении и других отраслях как надёжная технология.",
+    "en": "Blockchain – a distributed digital ledger system designed for secure data storage and transmission. It consists of a chain of blocks, each cryptographically linked to the previous one, ensuring data immutability. Blockchain is widely used in finance, logistics, healthcare, and other industries as a trusted technology."
   },
   "example": {
     "kk": "Блокчейн криптовалюталар транзакцияларын қауіпсіз етуде маңызды рөл атқарады.",
@@ -2194,9 +2177,9 @@
   "ru": "Электронные технологии",
   "en": "Electronic Technology",
   "definition": {
-    "kk": "Электрондық технология – деректерді өңдеу, беру және сақтау үшін электронды құрылғылар мен жүйелерді пайдаланатын инновациялық шешімдер жиынтығы.",
-    "ru": "Электронные технологии — это набор инновационных решений, использующих электронные устройства и системы для обработки, передачи и хранения данных.",
-    "en": "Electronic technology is a set of innovative solutions using electronic devices and systems for data processing, transmission, and storage."
+    "kk": "Электрондық технологиялар - ақпаратты өңдеу, сақтау және беру үшін электроникаға негізделген құрылғылар мен жүйелерді пайдалану әдістері. Олар сандық есептеу құрылғыларын, байланыс желілерін, деректерді басқару жүйелерін және автоматтандырылған процестерді қамтиды. Электрондық технологиялар өнеркәсіпте, тұрмыстық техникада және цифрлық сервистерде қолданылады.",
+    "ru": "Электронные технологии – методы использования устройств и систем, основанных на электронике, для обработки, хранения и передачи информации. Они охватывают цифровые вычислительные устройства, коммуникационные сети, системы управления данными и автоматизированные процессы. Электронные технологии применяются в промышленности, бытовой технике и цифровых сервисах.",
+    "en": "Electronic technologies – methods of utilizing devices and systems based on electronics for information processing, storage, and transmission. They encompass digital computing devices, communication networks, data management systems, and automated processes. Electronic technologies are applied across industries, household appliances, and digital services."
   },
   "example": {
     "kk": "Электрондық технологиялар арқылы өндіріс процесін автоматтандыру жүзеге асырылады.",
@@ -2227,9 +2210,9 @@
   "ru": "Электронное образование",
   "en": "E-learning",
   "definition": {
-    "kk": "Электронды білім беру – интернет пен электрондық құралдарды пайдалана отырып, оқу және оқыту процесін ұйымдастыру әдісі.",
-    "ru": "Электронное образование — это способ организации процесса обучения и преподавания с использованием интернета и электронных инструментов.",
-    "en": "E-learning is a method of organizing the learning and teaching process using the internet and electronic tools."
+    "kk": "Электрондық білім беру - цифрлық технологиялар мен интернетті пайдалана отырып іске асырылатын оқыту жүйесі. Оған онлайн курстар, виртуалды сабақтар, интерактивті ресурстар және қашықтықтан оқыту платформалары кіреді. Электрондық білім беру білім беру процесін икемді, қолжетімді және жекелендірілген етеді.",
+    "ru": "Электронное образование – система обучения, реализуемая с использованием цифровых технологий и интернета. Оно включает онлайн-курсы, виртуальные классы, интерактивные ресурсы и платформы дистанционного обучения. Электронное образование делает образовательный процесс гибким, доступным и персонализированным.",
+    "en": "E-learning – an educational system implemented through digital technologies and the internet. It includes online courses, virtual classrooms, interactive resources, and distance learning platforms. E-learning enables a flexible, accessible, and personalized learning experience."
   },
   "example": {
     "kk": "Электронды білім беру платформалары оқушыларға қашықтан оқуға мүмкіндік береді.",
@@ -2260,9 +2243,9 @@
   "ru": "Электронное правительство",
   "en": "E-government",
   "definition": {
-    "kk": "Электронды үкімет – азаматтар мен мемлекеттік органдар арасында қызмет көрсету процесін жеңілдету үшін ақпараттық технологияларды қолдану.",
-    "ru": "Электронное правительство — это использование информационных технологий для упрощения процесса предоставления услуг гражданам и государственными органами.",
-    "en": "E-government is the use of information technologies to simplify the service delivery process between citizens and government bodies."
+    "kk": "Электрондық үкімет - мемлекеттік процестерді цифрлық Автоматтандыру және Азаматтарға, бизнеске және мемлекеттік қызметшілерге тиімді қызметтер көрсету жүйесі. Ол мемлекеттік деректер базасын біріктіруді, онлайн-сервистерді дамытуды және ашық үкімет платформасын құруды қамтиды.",
+    "ru": "Электронное правительство – система цифровой автоматизации государственных процессов и предоставления эффективных услуг гражданам, бизнесу и государственным служащим. Оно включает интеграцию государственных баз данных, развитие онлайн-сервисов и создание платформы открытого правительства.",
+    "en": "E-government – a system for digital automation of governmental processes and efficient service delivery to citizens, businesses, and public officials. It involves integration of government databases, development of online services, and creation of an open government platform."
   },
   "example": {
     "kk": "Электронды үкімет порталы арқылы салықтарды төлеуге болады.",
@@ -2293,9 +2276,9 @@
   "ru": "Электронная коммерция",
   "en": "E-commerce",
   "definition": {
-    "kk": "Электронды сауда – интернет арқылы тауарлар мен қызметтерді сатып алу және сату процесі.",
-    "ru": "Электронная коммерция — это процесс покупки и продажи товаров и услуг через интернет.",
-    "en": "E-commerce is the process of buying and selling goods and services over the internet."
+    "kk": "Электрондық коммерция - интернет пен цифрлық технологияларды пайдалана отырып, тауарлар мен қызметтерді сатып алу, сату және тарату процесі. Оған онлайн төлем жүйелері, цифрлық маркетинг және логистикалық инфрақұрылым кіреді. Электрондық коммерция жаһандық нарыққа қол жеткізуді қамтамасыз ете отырып, бизнес пен тұтынушылардың өзара әрекеттесу үлгісін өзгертеді.",
+    "ru": "Электронная коммерция – процесс покупки, продажи и распространения товаров и услуг с использованием интернета и цифровых технологий. Она включает онлайн-платежные системы, цифровой маркетинг и логистическую инфраструктуру. Электронная коммерция трансформирует модель взаимодействия между бизнесом и потребителями, обеспечивая доступ к глобальному рынку.",
+    "en": "E-commerce – the process of buying, selling, and distributing goods and services using the internet and digital technologies. It encompasses online payment systems, digital marketing, and delivery infrastructure. E-commerce transforms business-consumer interactions, enabling access to global markets."
   },
   "example": {
     "kk": "Электронды сауда платформалары арқылы тапсырыстар жасауға болады.",
@@ -2326,9 +2309,9 @@
   "ru": "Портал",
   "en": "Portal",
   "definition": {
-    "kk": "Портал – интернет немесе интранет арқылы пайдаланушыларға белгілі бір тақырып бойынша ақпарат пен қызметтер ұсынатын веб-құрал.",
-    "ru": "Портал — это веб-инструмент, предоставляющий пользователям информацию и услуги по определённой теме через интернет или интранет.",
-    "en": "A portal is a web tool that provides users with information and services on a specific topic through the internet or intranet."
+    "kk": "Портал - пайдаланушылардың ақпаратқа, қызметтер мен құралдарға интеграцияланған қол жеткізуін қамтамасыз ететін цифрлық платформа. Ол деректерді басқару мүмкіндіктерін, интерактивті мүмкіндіктерді және көп арналы байланыстарды ұсынады. Порталдар мемлекеттік, корпоративтік және білім беру салаларында кеңінен қолданылады.",
+    "ru": "Портал – цифровая платформа, обеспечивающая интегрированный доступ пользователей к информации, сервисам и инструментам. Она предоставляет возможности управления данными, интерактивные функции и многоканальные коммуникации. Порталы широко применяются в государственных, корпоративных и образовательных сферах.",
+    "en": "Portal – a digital platform that provides integrated user access to information, services, and tools. It offers data management, interactive functionalities, and multichannel communication capabilities. Portals are widely used in government, corporate, and educational sectors."
   },
   "example": {
     "kk": "Е-үкімет порталы арқылы азаматтар мемлекеттік қызметтерге қол жеткізе алады.",
@@ -2359,9 +2342,9 @@
   "ru": "Провайдинг",
   "en": "Providing",
   "definition": {
-    "kk": "Провайдинг – пайдаланушыларға интернет, байланыс, бұлттық қызметтер немесе басқа да ресурстарды ұсыну процесі.",
-    "ru": "Провайдинг — это процесс предоставления пользователям интернета, связи, облачных услуг или других ресурсов.",
-    "en": "Providing is the process of delivering internet, communication, cloud services, or other resources to users."
+    "kk": "Провайдер - Пайдаланушыларға интернет, телекоммуникация қызметтері немесе IT шешімдері сияқты ресурстарға қол жеткізуді қамтамасыз ету процесі. Ол инфрақұрылымды басқаруды, деректерді беруді және байланыс арналарына қызмет көрсетуді қамтиды. Провайдерлер коммерциялық, Мемлекеттік және жеке секторларда кеңінен қолданылады.",
+    "ru": "Провайдинг – процесс предоставления пользователям доступа к ресурсам, таким как интернет, телекоммуникационные услуги или IT-решения. Он включает управление инфраструктурой, передачу данных и обслуживание каналов связи. Провайдинг широко используется в коммерческом, государственном и частном секторах.",
+    "en": "Providing – the process of offering users access to resources such as internet, telecommunications services, or IT solutions. It involves infrastructure management, data transmission, and communication channel administration. Providing is widely applied in commercial, governmental, and private sectors."
   },
   "example": {
     "kk": "Интернет провайдинг қызметтері арқылы үйге интернет қосуға болады.",
@@ -2395,9 +2378,9 @@
   "ru": "Интернет",
   "en": "Internet",
   "definition": {
-    "kk": "Интернет – бүкіл әлемдегі компьютерлер мен желілерді байланыстыратын жаһандық ақпараттық желі.",
-    "ru": "Интернет — это глобальная информационная сеть, соединяющая компьютеры и сети по всему миру.",
-    "en": "The Internet is a global information network that connects computers and networks worldwide."
+    "kk": "Интернет - бүкіл әлем бойынша ақпарат алмасу мен коммуникацияны қамтамасыз ететін ғаламдық компьютерлік желі. Ол деректерді беру, сандық қызметтер және желілік протоколдар негізінде жұмыс істейді. Интернет миллиондаған серверлер мен пайдаланушы құрылғыларын біріктіретін орталықтандырылмаған құрылымға ие.",
+    "ru": "Интернет – глобальная компьютерная сеть, обеспечивающая обмен информацией и коммуникацию по всему миру. Она функционирует на основе передачи данных, цифровых сервисов и сетевых протоколов. Интернет имеет децентрализованную структуру, объединяющую миллионы серверов и пользовательских устройств.",
+    "en": "Internet – a global computer network that enables information exchange and communication worldwide. It operates through data transmission, digital services, and network protocols. The internet has a decentralized structure, connecting millions of servers and user devices."
   },
   "example": {
     "kk": "Интернет арқылы ақпарат алмасуға және байланыс орнатуға болады.",
@@ -2428,9 +2411,9 @@
   "ru": "TCP-документ",
   "en": "TCP Document",
   "definition": {
-    "kk": "TCP құжаты – Интернеттегі деректерді жіберу және қабылдау үшін пайдаланылатын Трансмиссиялық басқару протоколының сипаттамаларын анықтайтын техникалық құжат.",
-    "ru": "TCP-документ — это технический документ, определяющий спецификации протокола управления передачей для отправки и получения данных в интернете.",
-    "en": "A TCP document is a technical document that specifies the Transmission Control Protocol for sending and receiving data over the internet."
+    "kk": "TCP құжаты - деректерді желі арқылы тасымалдау кезінде Transmission Control Protocol (TCP) арқылы өңделетін ақпараттық файл. Ол қосылымды басқаруда, пакеттерді ұйымдастыруда және деректердің тұтастығын қамтамасыз етуде шешуші рөл атқарады. TCP құжаттары желілік хаттамаларда және байланыс архитектурасында кеңінен қолданылады.",
+    "ru": "TCP-документ – информационный файл, обрабатываемый по протоколу Transmission Control Protocol (TCP) во время передачи данных по сети. Он играет ключевую роль в управлении соединением, упорядочивании пакетов и обеспечении целостности данных. TCP-документы широко используются в сетевых протоколах и архитектуре связи.",
+    "en": "TCP document – an informational file processed according to the Transmission Control Protocol (TCP) during data transmission over a network. It plays a key role in connection management, packet sequencing, and data integrity assurance. TCP documents are widely applied in communication protocols and network architecture."
   },
   "example": {
     "kk": "TCP құжаты Интернетте сенімді байланыс орнатуға мүмкіндік береді.",
@@ -2461,9 +2444,9 @@
   "ru": "ARPANET",
   "en": "ARPANET",
   "definition": {
-    "kk": "ARPANET – АҚШ-тың Қорғаныс министрлігі құрған алғашқы компьютерлік желі, ол қазіргі Интернеттің негізін қалады.",
-    "ru": "ARPANET — это первая компьютерная сеть, созданная Министерством обороны США, которая положила основу современному интернету.",
-    "en": "ARPANET was the first computer network created by the U.S. Department of Defense, laying the foundation for the modern Internet."
+    "kk": "ARPANET - 1969 жылы АҚШ Қорғаныс министрлігінің жетілдірілген ғылыми жобалар басқармасы (ARPA) жасаған алғашқы пакеттік коммутациялық желі. Ол ақпаратты пакеттерге бөлу арқылы деректердің сенімді берілуін қамтамасыз етті. ARPANET заманауи Интернеттің негізі болды және желілік протоколдар мен инфрақұрылымды дамытуға ықпал етті.",
+    "ru": "ARPANET – первая сеть с пакетной коммутацией, разработанная в 1969 году Управлением перспективных исследовательских проектов Министерства обороны США (ARPA). Она обеспечивала надёжную передачу данных путём разбиения информации на пакеты. ARPANET стала основой для современного интернета и способствовала развитию сетевых протоколов и инфраструктуры.",
+    "en": "ARPANET – the first packet-switching network, developed in 1969 by the Advanced Research Projects Agency (ARPA) of the U.S. Department of Defense. It enabled reliable communication by transmitting data in small packets. ARPANET laid the foundation for the modern internet and contributed to the development of network protocols and infrastructure."
   },
   "example": {
     "kk": "ARPANET ғылыми-зерттеу мақсатында қолданылды.",
@@ -2490,13 +2473,13 @@
   }
 },
   {
-  "kk": "FTP",
-  "ru": "FTP",
-  "en": "FTP",
+  "kk": "Файлдарды тасымалдау протоколы",
+  "ru": "Протокол передачи файлов",
+  "en": "File Transfer Protocol (FTP)",
   "definition": {
-    "kk": "FTP (Файлдарды тасымалдау протоколы) – интернет арқылы файлдарды жіберу және қабылдау үшін пайдаланылатын стандартты желілік протокол.",
-    "ru": "FTP (Протокол передачи файлов) — это стандартный сетевой протокол для отправки и получения файлов через интернет.",
-    "en": "FTP (File Transfer Protocol) is a standard network protocol used to send and receive files over the Internet."
+    "kk": "Файлдарды тасымалдау протоколы - Компьютерлік желілер арқылы файлдарды тасымалдау және алу үшін қолданылатын протокол. Ол қашықтағы серверден файлдарды жүктеуге немесе оларды серверге жіберуге мүмкіндік беретін клиент-сервер архитектурасы негізінде жұмыс істейді. FTP файлдарды басқаруда, желіні сақтауда және деректерді бөлісу процестерінде кеңінен қолданылады.",
+    "ru": "Протокол передачи файлов — протокол, используемый для передачи и получения файлов через компьютерные сети. Он функционирует на основе клиент-серверной архитектуры, позволяя загружать файлы с удалённого сервера или передавать их на сервер. FTP широко применяется в управлении файлами, сетевых хранилищах и процессах обмена данными.",
+    "en": "FTP (File Transfer Protocol) – a protocol used for transferring and receiving files over computer networks. It operates on a client-server architecture, enabling users to download files from a remote server or upload files to it. FTP is widely used in file management, network storage, and data transfer processes."
   },
   "example": {
     "kk": "FTP сервері файлдарды орталықтандырылған түрде сақтауға мүмкіндік береді.",
@@ -2527,9 +2510,9 @@
   "ru": "Электронная почта",
   "en": "Email",
   "definition": {
-    "kk": "Электронды пошта – интернет арқылы мәтіндік хабарламалар мен файлдарды жіберуге және алуға мүмкіндік беретін байланыс құралы.",
-    "ru": "Электронная почта — это средство связи, позволяющее отправлять и получать текстовые сообщения и файлы через интернет.",
-    "en": "Email is a communication tool that allows sending and receiving text messages and files via the internet."
+    "kk": "Электрондық пошта - интернет арқылы мәтіндік хабарларды, файлдарды және басқа сандық деректерді жіберуге және алуға мүмкіндік беретін байланыс жүйесі. Ол POP3, IMAP және SMTP сияқты Протокол стандарттарын қолдана отырып, жіберуші мен алушы арасындағы хат алмасуды қамтамасыз етеді.",
+    "ru": "Электронная почта – система связи, позволяющая отправлять и получать текстовые сообщения, файлы и другие цифровые данные через интернет. Она обеспечивает обмен корреспонденцией между отправителем и получателем, используя стандарты протоколов, такие как POP3, IMAP и SMTP.",
+    "en": "Email (electronic mail) – a communication system that enables sending and receiving text messages, files, and other digital data over the internet. It facilitates correspondence between sender and recipient, utilizing protocol standards such as POP3, IMAP, and SMTP."
   },
   "example": {
     "kk": "Электронды пошта арқылы құжаттарды әріптестермен бөлісуге болады.",
@@ -2560,9 +2543,9 @@
   "ru": "IP (Интернет-протокол)",
   "en": "IP (Internet Protocol)",
   "definition": {
-    "kk": "ІР – интернет арқылы деректер пакеттерінің жеткізілуін реттейтін байланыс ережелерінің жиынтығы.",
-    "ru": "IP — это набор правил связи, регулирующих доставку пакетов данных через интернет.",
-    "en": "IP is a set of communication rules that govern the delivery of data packets over the internet."
+    "kk": "IP (Интернет протоколы) - компьютерлік желілерде адрестеу, бағыттау және деректерді беру үшін қолданылатын негізгі желілік протокол. Ол әр құрылғыға бірегей IP мекенжайын тағайындайды және ақпараттың дұрыс бағытын қамтамасыз етеді. IP протоколы IPv4 және IPv6 нұсқаларында ұсынылған.",
+    "ru": "IP (Интернет-протокол) – основной сетевой протокол, используемый для адресации, маршрутизации и передачи данных в компьютерных сетях. Он назначает каждому устройству уникальный IP-адрес и обеспечивает корректное направление информации. IP протокол представлен в версиях IPv4 и IPv6.",
+    "en": "IP (Internet Protocol) – a fundamental network protocol used for addressing, routing, and transmitting data in computer networks. It assigns a unique IP address to each device, ensuring proper information delivery. The IP protocol exists in versions IPv4 and IPv6."
   },
   "example": {
     "kk": "ІР мекенжайы құрылғылар арасындағы деректер жіберуді анықтайды.",
@@ -2593,10 +2576,10 @@
   "ru": "IP-адрес",
   "en": "IP Address",
   "definition": {
-    "kk": "IP мекенжай – желідегі әр құрылғыны бірегей идентификациялауға мүмкіндік беретін нөмір.",
-    "ru": "IP-адрес — это номер, позволяющий уникально идентифицировать каждое устройство в сети.",
-    "en": "IP Address is a unique number that identifies each device on a network."
-  },
+    "kk": "IP мекенжайы – интернет желісіндегі немесе жергілікті желідегі құрылғының бірегей сандық идентификаторы. Ол желілік құрылғыларды анықтау және деректерді беруді қамтамасыз ету үшін қолданылады. IP мекенжайларының екі түрі бар: IPv4 (32 биттік) және IPv6 (128 биттік), бұл нұсқалардың әрқайсысы желі архитектурасына және маршруттау механизмдеріне әсер етеді.",
+    "ru": "IP-адрес – уникальный числовой идентификатор устройства в интернет-сети или локальной сети. Он используется для определения сетевых устройств и обеспечения передачи данных. IP-адреса бывают двух типов: IPv4 (32-битный) и IPv6 (128-битный), каждая из этих версий влияет на архитектуру сети и механизмы маршрутизации.",
+    "en": "IP address – a unique numerical identifier assigned to a device within an internet or local network. It is used to identify network devices and enable data transmission. IP addresses exist in two formats: IPv4 (32-bit) and IPv6 (128-bit), each impacting network architecture and routing mechanisms."
+     },
   "example": {
     "kk": "IP мекенжайды пайдаланып, интернеттегі құрылғылар арасындағы байланыс орнатылады.",
     "ru": "С помощью IP-адреса устанавливается связь между устройствами в интернете.",
@@ -2622,13 +2605,13 @@
   }
 },
  {
-  "kk": "DNS (Domain Name System)",
-  "ru": "DNS (Система доменных имён)",
+  "kk": "Домендік атау жүйесі",
+  "ru": "Система доменных имён",
   "en": "DNS (Domain Name System)",
   "definition": {
-    "kk": "DNS – домендік атауларды IP мекенжайларға түрлендіретін интернет жүйесі.",
-    "ru": "DNS — это интернет-система, преобразующая доменные имена в IP-адреса.",
-    "en": "DNS is an internet system that converts domain names into IP addresses."
+    "kk": "Домендік атау жүйесі – интернеттегі құрылғылар мен серверлерді анықтау үшін оқылатын домендік атауларды сандық IP мекенжайларына түрлендіруді қамтамасыз ететін жүйе. Ол иерархиялық құрылымға негізделген және сұраныстарды өңдеу үшін атау серверлерін пайдаланады.",
+    "ru": "Система доменных имён – система, обеспечивающая преобразование удобочитаемых доменных имен в числовые IP-адреса для идентификации устройств и серверов в интернете. Она основана на иерархической структуре и использует серверы имён для обработки запросов.",
+    "en": "Domain Name System (DNS) – a system that translates human-readable domain names into numerical IP addresses to identify devices and servers on the internet. It is based on a hierarchical structure and utilizes name servers to process queries."
   },
   "example": {
     "kk": "DNS арқылы \"example.com\" доменін нақты IP мекенжайға бағыттауға болады.",
@@ -2655,13 +2638,13 @@
   }
 },
   {
-  "kk": "URL (Uniform Resource Locator)",
-  "ru": "URL (Единый указатель ресурса)",
-  "en": "URL (Uniform Resource Locator)",
+  "kk": "Бірыңғай ресурс локаторы",
+  "ru": "Единый указатель ресурса",
+  "en": "Uniform Resource Locator (URL)",
   "definition": {
-    "kk": "URL – интернеттегі ресурстың орналасу орнын анықтайтын мәтіндік жол.",
-    "ru": "URL — это текстовая строка, определяющая местоположение ресурса в интернете.",
-    "en": "URL is a text string that specifies the location of a resource on the internet."
+    "kk": "Бірыңғай ресурс локаторы - интернеттегі ресурстардың орналасуын анықтайтын стандартталған адрестеу жүйесі. Оған Хаттама, домендік атау, Жол және сұрау параметрлері кіреді. URL мекен-жайы веб-шолғыштарда, желілік қосымшаларда және деректер алмасу процестерінде кеңінен қолданылады.",
+    "ru": "Единый указатель ресурса – стандартизированная система адресации, определяющая расположение ресурсов в интернете. Он включает протокол, доменное имя, путь и параметры запроса. URL широко используется в веб-браузерах, сетевых приложениях и процессах обмена данными.",
+    "en": "Uniform Resource Locator (URL) – a standardized addressing system that defines the location of resources on the internet. It consists of a protocol, domain name, path, and query parameters. URLs are widely used in web browsers, network applications, and data exchange processes."
   },
   "example": {
     "kk": "https://example.com URL арқылы веб-сайтқа кіруге болады.",
@@ -2688,13 +2671,13 @@
   }
 },
   {
-  "kk": "HTTP (Hypertext Transfer Protocol)",
-  "ru": "HTTP (Протокол передачи гипертекста)",
-  "en": "HTTP (Hypertext Transfer Protocol)",
+  "kk": "Гипермәтінді тасмалдау протоколы",
+  "ru": "Протокол передачи гипертекста",
+  "en": "Hypertext Transfer Protocol (HTTP)",
   "definition": {
-    "kk": "HTTP – интернет арқылы гипермәтіндік ақпаратты жіберу және қабылдау үшін пайдаланылатын байланыс протоколы.",
-    "ru": "HTTP — это протокол связи, используемый для отправки и получения гипертекстовой информации через интернет.",
-    "en": "HTTP is a communication protocol used for transmitting and receiving hypertext information over the internet."
+    "kk": "Гипермәтінді тасмалдау протоколы – веб-шолғыштар мен серверлер арасындағы ақпарат алмасуды басқаратын желілік протокол. Ол гипермәтіндік деректерді сұрау, жіберу және қабылдау процесін реттейді. Қауіпсіздік пен шифрлауды қамтамасыз ету үшін HTTP HTTPS нұсқасымен жетілдірілген.",
+    "ru": "Протокол передачи гипертекста – сетевой протокол, управляющий обменом информацией между веб-браузерами и серверами. Он регулирует процесс запроса, отправки и получения гипертекстовых данных. Для обеспечения безопасности и шифрования HTTP усовершенствован версией HTTPS.",
+    "en": "Hypertext Transfer Protocol (HTTP) – a network protocol that manages information exchange between web browsers and servers. It regulates the process of requesting, sending, and receiving hypertext data. To ensure security and encryption, HTTP has been enhanced with the HTTPS version."
   },
   "example": {
     "kk": "HTTP веб-сервер мен браузер арасындағы байланыс орнатады.",
@@ -2721,13 +2704,13 @@
   }
 },
  {
-  "kk": "WWW",
-  "ru": "WWW (Всемирная паутина)",
+  "kk": "Дүниежүзілік желі (WWW)",
+  "ru": "Всемирная паутина",
   "en": "WWW (World Wide Web)",
   "definition": {
-    "kk": "WWW – интернет арқылы ақпаратқа қол жеткізуді қамтамасыз ететін өзара байланысқан гипермәтіндік құжаттардың ғаламдық жүйесі.",
-    "ru": "WWW — это глобальная система взаимосвязанных гипертекстовых документов, обеспечивающая доступ к информации через интернет.",
-    "en": "WWW is a global system of interconnected hypertext documents that provides access to information over the internet."
+    "kk": "Дүниежүзілік желі – интернеттегі гипермәтіндік ақпаратты сақтаудың, өңдеудің және таратудың ғаламдық жүйесі. Ол веб-шолғыштар арқылы қол жетімді веб-беттерді байланыстыратын гиперсілтемелерге негізделген. WWW маңызды протоколдары HTTP, HTTPS және HTML болып табылады.",
+    "ru": "Всемирная паутина – глобальная система хранения, обработки и распространения гипертекстовой информации в интернете. Она основана на гиперссылках, соединяющих веб-страницы, доступные через веб-браузеры. Важными протоколами WWW являются HTTP, HTTPS и HTML.",
+    "en": "World Wide Web (WWW) – a global system for storing, processing, and distributing hypertext information on the internet. It is based on hyperlinks connecting web pages accessible through web browsers. Key protocols of WWW include HTTP, HTTPS, and HTML."
   },
   "example": {
     "kk": "WWW арқылы веб-сайттарға қол жеткізуге болады.",
