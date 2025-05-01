@@ -53,16 +53,21 @@ if show_map:
             if 'relations' in term:
                 st.markdown(f"🔸 **{term['kk']}** — ", unsafe_allow_html=True)
                 rel = term['relations']
+
                 if rel.get('synonyms'):
                     synonyms = ', '.join([f"`{syn}`" for syn in rel['synonyms']])
                     st.markdown(f"  🔁 Синонимдер: {synonyms}")
-                if rel.get('broader_term'):
-                    st.markdown(f"  🔼 Жалпылама ұғым: `{rel['broader_term']}`")
-                if rel.get('narrower_terms'):
-                    nar = ', '.join([f"`{n}`" for n in rel['narrower_terms']])
+
+
+                if rel.get('general_concept'):
+                    st.markdown(f"  🔼 Жалпылама ұғым: `{rel['general_concept']}`")
+
+                if rel.get('specific_concepts'):
+                    nar = ', '.join([f"`{n}`" for n in rel['specific_concepts']])
                     st.markdown(f"  🔽 Арнайы ұғымдар: {nar}")
-                if rel.get('related_terms'):
-                    rels = ', '.join([f"`{r}`" for r in rel['related_terms']])
+
+                if rel.get('associative'):
+                    rels = ', '.join([f"`{r}`" for r in rel['associative']])
                     st.markdown(f"  🔗 Қатысты: {rels}")
 
 if search_query:
