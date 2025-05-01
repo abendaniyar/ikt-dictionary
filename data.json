@@ -222,9 +222,9 @@
   },
   "relations": {
     "synonyms": ["ЭЕМ"],
-    "broader_term": "Ақпараттық құрылғылар",
-    "narrower_terms": ["Ноутбук", "Жұмыс үстелі компьютері"],
-    "related_terms": ["Процессор", "Жад", "ОЖ"]
+    "general_concept": "Ақпараттық құрылғылар",
+    "specific_concepts": ["Ноутбук", "Жұмыс үстелі компьютері"],
+    "associative": ["Процессор", "Жад", "ОЖ"]
   },
   "source": "https://kk.wikipedia.org/wiki/Компьютер"
 },
@@ -737,9 +737,9 @@
         "en": "Windows and Linux are popular operating systems."
       },
       "relations": {
-        "broader_term": "Программалық қамтамасыз ету",
-        "narrower_terms": ["Windows", "Linux", "macOS"],
-        "related_terms": ["Файлдық жүйе", "Процессор", "Интерфейс"]
+        "general_concept": "Программалық қамтамасыз ету",
+        "specific_concepts": ["Windows", "Linux", "macOS"],
+        "associative": ["Файлдық жүйе", "Процессор", "Интерфейс"]
   },
       "image": "",
       "source": ""
