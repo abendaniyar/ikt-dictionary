@@ -16,9 +16,9 @@
       },
       "relations": {
         "synonyms": ["Дерек", "Мәлімет"],
-        "broader_term": "Ақпараттық технологиялар",
-        "narrower_terms": ["Деректер", "Білім"],
-        "related_terms": ["Цифрландыру", "Ақпаратты өңдеу"]
+        "general_concept": "Ақпараттық технологиялар",
+        "specific_concepts": ["Деректер", "Білім"],
+        "associative": ["Цифрландыру", "Ақпаратты өңдеу"]
   },
       "image": "",
       "source": "https://kk.wikipedia.org/wiki/Ақпарат"
