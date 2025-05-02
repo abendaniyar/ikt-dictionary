@@ -37,6 +37,12 @@
         "ru": "Информационные технологии широко применяются в сфере образования.",
         "en": "Information technologies are widely used in education."
       },
+  "relations": {
+    "synonyms": ["Цифрлық технологиялар", "Компьютерлік технологиялар"],
+    "general_concept": "Ақпараттық технологиялар әртүрлі салаларда цифрлық шешімдерді ұсынады.",
+    "specific_concepts": ["бұлттық есептеу", "деректерді өңдеу", "бағдарламалық жасақтама"],
+    "associative": ["компьютер", "желілік жүйелер", "интернет"]
+  }
             "image": "",
       "source": "https://kk.wikipedia.org/wiki/Ақпараттық_технология"
     },
@@ -72,6 +78,12 @@
         "ru": "Стандарты ISO используются на международном уровне.",
         "en": "ISO standards are used internationally."
       },
+      "relations": {
+    "synonyms": ["Норматив", "Регламент"],
+    "general_concept": "Стандарттар өнімнің сапасын және қауіпсіздігін реттеу үшін әзірленеді.",
+    "specific_concepts": ["ISO стандарттары", "ГОСТ", "Техникалық регламент"],
+    "associative": ["сапа", "құжат", "үйлесімділік"]
+  },
       "image": "",
       "source": "https://kk.wikipedia.org/wiki/Стандарт"
     },
@@ -98,7 +110,7 @@
   }
 },
 {
-  "kk": "Компьютермен жұмыс дағдылары (КД)",
+  "kk": "Компьютерлік дағдылар (КД)",
   "ru": "Компьютерные навыки (КН)",
   "en": "Computer Skills (CS)",
   "definition": {
@@ -110,6 +122,12 @@
     "kk": "Мысалы, мәтіндік редакторларды пайдалану, электрондық пошта арқылы байланысу және интернетте ақпарат іздеу.",
     "ru": "Например, использование текстовых редакторов, общение через электронную почту и поиск информации в интернете.",
     "en": "For instance, using word processors, communicating via email, and searching for information on the internet."
+  },
+  "relations": {
+    "synonyms": ["Цифрлық дағдылар", "IT-білім"],
+    "general_concept": "Компьютерлік дағдылар ақпараттық технологияларды тиімді пайдалану үшін қажет.",
+    "specific_concepts": ["Бағдарламалық қамтамасыз ету", "Желімен жұмыс", "Деректерді өңдеу"],
+    "associative": ["технология", "интернет", "бағдарламалау"]
   },   
       "image": "",
       "source": ""
@@ -161,6 +179,12 @@
         "ru": "Государственные услуги оцифровываются.",
         "en": "Public services are being digitalized."
       },
+  "relations": {
+    "synonyms": ["Сандық трансформация", "Ақпараттандыру"],
+    "general_concept": "Цифрландыру әртүрлі салаларда тиімділік пен инновацияны қамтамасыз етеді.",
+    "specific_concepts": ["Блокчейн", "Жасанды интеллект", "Автоматтандыру"],
+    "associative": ["технология", "деректер", "интернет"]
+  },
       "image": "",
       "source": "https://kk.wikipedia.org/wiki/Цифрландыру"
     }
@@ -239,6 +263,12 @@
         "ru": "Устройство управления интерпретирует команды и отправляет их в процессор.",
         "en": "The control unit interprets instructions and sends them to the processor."
       },
+  "relations": {
+    "synonyms": ["Басқару элементі", "Контроллер"],
+    "general_concept": "Басқару құрылғысы жүйені басқаруға және оңтайлы жұмыс істеуге көмектеседі.",
+    "specific_concepts": ["микроконтроллер", "сенсорлық интерфейс", "автоматтандырылған жүйе"],
+    "associative": ["жүйе", "интерактивтілік", "ақпаратты өңдеу"]
+  },
       "image": "",
       "source": ""
     },
@@ -256,6 +286,12 @@
         "ru": "Например, десятичное число 5 записывается в двоичном виде как «101».",
         "en": "For example, the decimal number 5 is represented in binary as \"101\"."
       },
+  "relations": {
+    "synonyms": ["Екілік жүйе", "Деректерді кодтау"],
+    "general_concept": "Екілік код цифрлық технологиялар мен есептеу жүйелерінің негізін құрайды.",
+    "specific_concepts": ["ASCII коды", "Машиналық тіл", "Бит және байт"],
+    "associative": ["алгоритм", "компьютер", "ақпаратты өңдеу"]
+  },
       "image": "",
       "source": ""
     },
@@ -273,6 +309,12 @@
         "ru": "Например, процессор использует регистры во время арифметических операций.",
         "en": "For example, the processor utilizes registers during arithmetic operations."
       },
+  "relations": {
+    "synonyms": ["Жад регистрі", "Уақытша сақтау"],
+    "general_concept": "Регистрлер компьютерлік архитектураның негізгі элементі болып табылады.",
+    "specific_concepts": ["Аккумуляторлық регистр", "Адрестік регистр", "Командалық регистр"],
+    "associative": ["деректер", "процессор", "жад"]
+  },
       "image": "",
       "source": ""
     },
@@ -290,6 +332,12 @@
         "ru": "Процессор используется для выполнения программ.",
         "en": "The processor is used to execute programs."
       },
+  "relations": {
+    "synonyms": ["Орталық процессор (CPU)", "Есептеу құрылғысы"],
+    "general_concept": "Процессор компьютерлік жүйенің негізгі компоненті ретінде деректерді өңдеу мен басқару қызметін атқарады.",
+    "specific_concepts": ["ядро", "кэш жады", "тактілік жиілік"],
+    "associative": ["компьютер", "жад", "алгоритм"]
+  },
       "image": "https://drive.google.com/file/d/1YOYRiENrynsYcSJAMkbccQIB-NE2sq0-/view?usp=sharing",
       "source": ""
     },
@@ -307,6 +355,12 @@
         "ru": "Например, арифметико-логическое устройство выполняет основные вычислительные операции в компьютере.",
         "en": "For example, the ALU executes fundamental computational operations in a computer."
       },
+  "relations": {
+    "synonyms": ["Арифметикалық процессор", "Есептеу құрылғысы"],
+    "general_concept": "Арифметикалық-логикалық құрылғы компьютерлік есептеулердің негізгі элементі ретінде жұмыс істейді.",
+    "specific_concepts": ["Регистр", "Қозғалтқыш тактісі", "Бүтін санды арифметика"],
+    "associative": ["процессор", "компьютерлік архитектура", "деректерді өңдеу"]
+  },
       "image": "",
       "source": ""
     },
@@ -324,6 +378,12 @@
         "ru": "Сумматор складывает два двоичных числа, вычисляя их сумму.",
         "en": "The adder computes the sum by adding two binary numbers."
       },
+  "relations": {
+    "synonyms": ["Қосу құрылғысы", "Арифметикалық блок"],
+    "general_concept": "Сумматор компьютерлік және цифрлық жүйелерде арифметикалық есептеулерді орындау үшін қажет.",
+    "specific_concepts": ["Жартылай сумматор", "Толық сумматор", "Кері байланысты сумматор"],
+    "associative": ["арифметика", "процессор", "логикалық схема"]
+  },
       "image": "",
       "source": ""
     },
@@ -341,6 +401,12 @@
         "ru": "Материнская плата – центральная печатная плата компьютера, объединяющая и координирующая работу его основных аппаратных компонентов. Она обеспечивает взаимодействие процессора, оперативной памяти, запоминающих устройств и периферийных интерфейсов, регулируя передачу данных и распределение системных ресурсов. Материнская плата играет ключевую роль в компьютерной архитектуре, определяя функциональность и расширяемость системы.",
         "en": "Motherboard – the central printed circuit board of a computer that integrates and coordinates the operation of its key hardware components. It facilitates interaction between the processor, memory, storage devices, and peripheral interfaces while managing data flow and system resources. The motherboard serves as a fundamental architectural element, influencing system functionality and expandability."
       },
+  "relations": {
+    "synonyms": ["Негізгі плата", "Жүйелік плата"],
+    "general_concept": "Аналық плата компьютер компоненттерінің өзара әрекеттесуін қамтамасыз етеді.",
+    "specific_concepts": ["Чипсет", "Шина", "BIOS"],
+    "associative": ["компьютер", "жүйе", "ақпарат алмасу"]
+  },
       "image": "",
       "source": ""
     },
@@ -358,6 +424,12 @@
         "ru": "Компьютерная память обеспечивает быструю работу программ и хранит информацию.",
         "en": "Computer memory ensures the fast operation of programs and stores information."
       },
+  "relations": {
+    "synonyms": ["Жады", "Ақпарат сақтау жүйесі"],
+    "general_concept": "Компьютерлік жады ақпаратты сақтау және өңдеу үшін қажетті технология.",
+    "specific_concepts": ["RAM", "ROM", "SSD", "HDD"],
+    "associative": ["деректер", "сақтау", "жылдамдық"]
+  },
       "image": "https://drive.google.com/file/d/1eGzP43ZolSR5MYWb2JGOTn2ckv_x6vYr/view?usp=drive_link",
       "source": ""
     }, 
@@ -375,6 +447,12 @@
         "ru": "Процессор использует внутреннюю память для быстрой обработки данных.",
         "en": "The processor accesses internal memory quickly to execute tasks faster."
       },
+  "relations": {
+    "synonyms": ["Жедел жады", "Тұрақты жады"],
+    "general_concept": "Ішкі жады құрылғының жұмыс өнімділігін арттыру үшін маңызды.",
+    "specific_concepts": ["RAM", "ROM", "Кэш жады"],
+    "associative": ["процессор", "ақпарат сақтау", "жылдамдық"]
+  },
       "image": "",
       "source": ""
     },
@@ -392,6 +470,12 @@
         "ru": "Внешняя память хранит большие объемы данных на длительный срок.",
         "en": "External memory is used to store large amounts of data for long-term use."
       },
+  "relations": {
+    "synonyms": ["Сыртқы сақтау құрылғысы", "Қосымша жады"],
+    "general_concept": "Сыртқы жады ақпаратты ұзақ мерзімді сақтауға және тасымалдауға мүмкіндік береді.",
+    "specific_concepts": ["HDD", "SSD", "USB флэш-дискі"],
+    "associative": ["деректер", "сақтау", "қолжетімділік"]
+  },
       "image": "",
       "source": ""
     }, 
@@ -409,6 +493,12 @@
         "ru": "Системный блок служит «мозгом» компьютера, так как в нем находятся все основные компоненты.",
         "en": "The system unit acts as the 'brain' of the computer, housing all the critical components."
       },
+  "relations": {
+    "synonyms": ["Компьютер корпусы", "Орталық құрылғы"],
+    "general_concept": "Жүйелік блок компьютердің барлық негізгі компоненттерін біріктіреді.",
+    "specific_concepts": ["Аналық плата", "Қуат көзі", "Сақтау құрылғылары"],
+    "associative": ["компьютер", "аппараттық бөлік", "деректерді өңдеу"]
+  },
       "image": "https://artemsannikov.ru/wp-content/uploads/2015/01/device-system-unit.jpg",
       "source": ""
     }, 
@@ -426,6 +516,12 @@
         "ru": "Оперативная память способствует быстрому выполнению программ.",
         "en": "RAM helps programs run quickly."
       },
+  "relations": {
+    "synonyms": ["Уақытша жад"],
+    "general_concept": "Жедел жады компьютердің жылдам әрі тиімді жұмыс істеуін қамтамасыз етеді.",
+    "specific_concepts": ["DDR4", "DDR5", "Кэш жады"],
+    "associative": ["процессор", "деректер", "жылдамдық"]
+  },
       "image": "https://vseplus.com/uploads/articles/749/749_1.jpg",
       "source": ""
     },
@@ -443,6 +539,12 @@
         "ru": "Постоянная память сохраняет системные программы.",
         "en": "ROM stores system programs."
       },
+  "relations": {
+    "synonyms": ["Тұрақты сақтау құрылғысы", "Ұзақ мерзімді жад"],
+    "general_concept": "Тұрақты жады ақпараттың ұзақ мерзімді сақталуын қамтамасыз етеді.",
+    "specific_concepts": ["SSD", "HDD", "ROM"],
+    "associative": ["деректер", "сақтау", "жылдамдық"]
+  },
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSZu1RZ72DsSs-aOp8qK-l_n8d3W060a67vw&s",
       "source": ""
     },
