@@ -113,9 +113,12 @@ if search_query:
 
             st.markdown("---")
 elif not st.session_state.get('show_map'):
-    selected_term = st.sidebar.selectbox(
-        "🖥 Термин таңдаңыз:",
-        sorted([t['kk'] for t in terms[lecture]]),
+    term_names = sorted([t['kk'] for t in terms[lecture]])
+st.write("### 📋 Терминдер тізімі:")
+for name in term_names:
+    if st.button(f"🔹 {name}"):
+        st.session_state['selected_term'] = name
+selected_term = st.session_state.get('selected_term'),
         key="term_select"
     )
     for term in terms[lecture]:
