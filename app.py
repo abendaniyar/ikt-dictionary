@@ -149,3 +149,4 @@ elif not st.session_state.get('show_map'):
                     st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
 
                 st.markdown("---")
+
