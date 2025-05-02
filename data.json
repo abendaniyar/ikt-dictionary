@@ -1314,7 +1314,10 @@
     "general_concept": "Топология желінің тиімділігін және құрылғылар арасындағы байланыс әдісін анықтайды.",
     "specific_concepts":["жұлдыз топологиясы", "сақина топологиясы"],
     "associative": ["байланыс", "құрылғы"]
-  }
+  },
+      "image": "https://it.rfei.ru/static/realms/rfei_it/courses/9xb8/2.1.jpg",
+      "source": "https://it.rfei.ru/course/~9xb8/~Gj4iWgLK/~sMVyHSka"
+      
 },
     {
   "kk": "Жұлдызша топологиясы",
