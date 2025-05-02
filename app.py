@@ -1,5 +1,6 @@
 import streamlit as st
 import json
+import pandas as pd
 from streamlit.components.v1 import html
 import streamlit.components.v1 as components
 
@@ -9,6 +10,18 @@ with open("data.json", "r", encoding="utf-8") as f:
 
 st.set_page_config(page_title="Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
 st.title("📘АКТ курсы бойынша электрондық ұғымдық-терминологиялық сөздік")
+
+# Excel жүктеу
+uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (жаңа терминдер)", type=["xlsx"])
+if uploaded_file:
+    df = pd.read_excel(uploaded_file)
+    new_terms = df.to_dict(orient="records")
+    lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
+    if st.sidebar.button("➕ Терминдерді қосу"):
+        terms[lecture_name].extend(new_terms)
+        with open("data.json", "w", encoding="utf-8") as f:
+            json.dump(terms, f, ensure_ascii=False, indent=2)
+        st.success(f"✅ {len(new_terms)} жаңа термин қосылды!")
 
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
@@ -149,4 +162,3 @@ elif not st.session_state.get('show_map'):
                     st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
 
                 st.markdown("---")
-
