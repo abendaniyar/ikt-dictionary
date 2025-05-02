@@ -114,38 +114,38 @@ if search_query:
             st.markdown("---")
 elif not st.session_state.get('show_map'):
     term_names = sorted([t['kk'] for t in terms[lecture]])
-st.write("### 📋 Терминдер тізімі:")
-for name in term_names:
-    if st.button(f"🔹 {name}"):
-        st.session_state['selected_term'] = name
-selected_term = st.session_state.get('selected_term'),
-        key="term_select"
-    )
-    for term in terms[lecture]:
-        if term['kk'] == selected_term:
-            term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
-            st.markdown(f"### 🖥 {term_text}")
-            speak_buttons(term)
+    st.write("### 📋 Терминдер тізімі:")
+    for name in term_names:
+        if st.button(f"🔹 {name}"):
+            st.session_state['selected_term'] = name
 
-            with st.expander("📖 Анықтама / Определение / Definition"):
-                st.markdown(f"**KK:** {term['definition']['kk']}")
-                st.markdown(f"**RU:** {term['definition']['ru']}")
-                st.markdown(f"**EN:** {term['definition']['en']}" )
+    selected_term = st.session_state.get('selected_term')
+    if selected_term:
+        for term in terms[lecture]:
+            if term['kk'] == selected_term:
+                term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
+                st.markdown(f"### 🖥 {term_text}")
+                speak_buttons(term)
 
-            with st.expander("💬 Мысал / Пример / Example"):
-                st.markdown(f"**KK:** {term['example']['kk']}")
-                st.markdown(f"**RU:** {term['example']['ru']}")
-                st.markdown(f"**EN:** {term['example']['en']}" )
+                with st.expander("📖 Анықтама / Определение / Definition"):
+                    st.markdown(f"**KK:** {term['definition']['kk']}")
+                    st.markdown(f"**RU:** {term['definition']['ru']}")
+                    st.markdown(f"**EN:** {term['definition']['en']}")
 
-            if term.get("image"):
-                st.markdown(
-                    f'<a href="{term["image"]}" target="_blank">'
-                    f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
-                    f'</a>',
-                    unsafe_allow_html=True
-                )
+                with st.expander("💬 Мысал / Пример / Example"):
+                    st.markdown(f"**KK:** {term['example']['kk']}")
+                    st.markdown(f"**RU:** {term['example']['ru']}")
+                    st.markdown(f"**EN:** {term['example']['en']}")
 
-            if term.get("source"):
-                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
+                if term.get("image"):
+                    st.markdown(
+                        f'<a href="{term["image"]}" target="_blank">'
+                        f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
+                        f'</a>',
+                        unsafe_allow_html=True
+                    )
 
-            st.markdown("---")
+                if term.get("source"):
+                    st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
+
+                st.markdown("---")
