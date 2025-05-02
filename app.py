@@ -46,6 +46,7 @@ lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys(
 
 # Семантикалық картаны көру батырмасы
 if st.sidebar.button("📚 Семантикалық картаны көру"):
+    st.session_state['show_map'] = True
     components.html(
         """
         <html>
@@ -73,6 +74,7 @@ if st.sidebar.button("📚 Семантикалық картаны көру"):
     )
 
 if search_query:
+    st.session_state['show_map'] = False
     st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
     found_terms = []
     for lecture_name, term_list in terms.items():
@@ -110,32 +112,5 @@ if search_query:
                 st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
 
             st.markdown("---")
-else:
-    st.header(lecture)
-    for term in terms[lecture]:
-        term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
-        st.markdown(f"### 🖥 {term_text}")
-        speak_buttons(term)
-
-        with st.expander("📖 Анықтама / Определение / Definition"):
-            st.markdown(f"**KK:** {term['definition']['kk']}")
-            st.markdown(f"**RU:** {term['definition']['ru']}")
-            st.markdown(f"**EN:** {term['definition']['en']}")
-
-        with st.expander("💬 Мысал / Пример / Example"):
-            st.markdown(f"**KK:** {term['example']['kk']}")
-            st.markdown(f"**RU:** {term['example']['ru']}")
-            st.markdown(f"**EN:** {term['example']['en']}")
-
-        if term.get("image"):
-            st.markdown(
-                f'<a href="{term["image"]}" target="_blank">'
-                f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
-                f'</a>',
-                unsafe_allow_html=True
-            )
-
-        if term.get("source"):
-            st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
-
-        st.markdown("---")
+elif not st.session_state.get('show_map'):
+    st.header(lecture)st.markdown("---")
