@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 from streamlit.components.v1 import html
+import streamlit.components.v1 as components
 
 # JSON файлды жүктеу
 with open("data.json", "r", encoding="utf-8") as f:
@@ -43,32 +44,33 @@ def speak_buttons(term):
 # Дәріс таңдауы
 lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
 
-# Семантикалық карта батырмасы
-show_map = st.sidebar.checkbox("📚 Семантикалық картаны көрсету")
-
-if show_map:
-    st.subheader("📚 Семантикалық карта / Semantic Map")
-    for lecture_name, term_list in terms.items():
-        for term in term_list:
-            if 'relations' in term:
-                st.markdown(f"🔸 **{term['kk']}** — ", unsafe_allow_html=True)
-                rel = term['relations']
-
-                if rel.get('synonyms'):
-                    synonyms = ', '.join([f"`{syn}`" for syn in rel['synonyms']])
-                    st.markdown(f"  🔁 Синонимдер: {synonyms}")
-
-
-                if rel.get('general_concept'):
-                    st.markdown(f"  🔼 Жалпылама ұғым: `{rel['general_concept']}`")
-
-                if rel.get('specific_concepts'):
-                    nar = ', '.join([f"`{n}`" for n in rel['specific_concepts']])
-                    st.markdown(f"  🔽 Арнайы ұғымдар: {nar}")
-
-                if rel.get('associative'):
-                    rels = ', '.join([f"`{r}`" for r in rel['associative']])
-                    st.markdown(f"  🔗 Қатысты: {rels}")
+# Семантикалық картаны көру батырмасы
+if st.sidebar.button("📚 Семантикалық картаны көру"):
+    components.html(
+        """
+        <html>
+        <head><title>Семантикалық карта</title></head>
+        <body>
+        <h2>📚 Семантикалық карта</h2>
+        <div style='font-family:Arial;'>
+        """ +
+        ''.join([
+            f"<p><b>{term['kk']}</b> - " +
+            (f"🔁 Синонимдер: {', '.join(term['relations'].get('synonyms', []))} | " if 'relations' in term and term['relations'].get('synonyms') else '') +
+            (f"🔼 Жалпылама: {term['relations'].get('general_concept')} | " if 'relations' in term and term['relations'].get('general_concept') else '') +
+            (f"🔽 Арнайы: {', '.join(term['relations'].get('specific_concepts', []))} | " if 'relations' in term and term['relations'].get('specific_concepts') else '') +
+            (f"🔗 Қатысты: {', '.join(term['relations'].get('associative', []))}" if 'relations' in term and term['relations'].get('associative') else '') +
+            "</p>"
+            for lecture_terms in terms.values() for term in lecture_terms
+        ]) +
+        """
+        </div>
+        </body>
+        </html>
+        """,
+        height=500,
+        scrolling=True
+    )
 
 if search_query:
     st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
