@@ -24,6 +24,17 @@ for term_list in terms.values():
     for t in term_list:
         all_kk_terms.append(t['kk'])
 
+# Барлық қазақша терминдерді тексеру үшін жинау (төменгі регистрде)
+all_kk_set = set(t.lower() for t in all_kk_terms)
+
+# Семантикалық ұқсас терминдер
+
+def get_similar_terms(query, top_k=3):
+    query_embedding = model.encode(query, convert_to_tensor=True)
+    corpus_embeddings = model.encode(all_kk_terms, convert_to_tensor=True)
+    hits = util.semantic_search(query_embedding, corpus_embeddings, top_k=top_k)[0]
+    return [all_kk_terms[hit['corpus_id']] for hit in hits if all_kk_terms[hit['corpus_id']].lower() != query.lower()]
+
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
 
@@ -56,14 +67,6 @@ def speak_buttons(term):
             }}
         </script>
     """, height=60)
-
-# Семантикалық ұқсас терминдер
-
-def get_similar_terms(query, top_k=3):
-    query_embedding = model.encode(query, convert_to_tensor=True)
-    corpus_embeddings = model.encode(all_kk_terms, convert_to_tensor=True)
-    hits = util.semantic_search(query_embedding, corpus_embeddings, top_k=top_k)[0]
-    return [all_kk_terms[hit['corpus_id']] for hit in hits if all_kk_terms[hit['corpus_id']].lower() != query.lower()]
 
 # Дәріс таңдауы
 lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
@@ -120,10 +123,10 @@ if search_query:
                 st.markdown(f"**RU:** {term['example']['ru']}")
                 st.markdown(f"**EN:** {term['example']['en']}")
 
-            if st.button(f"🔁 Ұқсас терминдерді көрсету – {term['kk']}"):
-                similar_terms = get_similar_terms(term['kk'])
-                if similar_terms:
-                    st.info("**Мағыналық жағынан ұқсас терминдер:** " + ", ".join(similar_terms))
+            similar_terms = get_similar_terms(term['kk'])
+            valid_similar_terms = [t for t in similar_terms if t.lower() in all_kk_set]
+            if valid_similar_terms:
+                st.markdown("**🔁 Мағыналық жағынан ұқсас терминдер:** " + ", ".join(f"`{t}`" for t in valid_similar_terms))
 
             if term.get("image"):
                 st.markdown(
@@ -153,6 +156,11 @@ else:
             st.markdown(f"**KK:** {term['example']['kk']}")
             st.markdown(f"**RU:** {term['example']['ru']}")
             st.markdown(f"**EN:** {term['example']['en']}")
+
+        similar_terms = get_similar_terms(term['kk'])
+        valid_similar_terms = [t for t in similar_terms if t.lower() in all_kk_set]
+        if valid_similar_terms:
+            st.markdown("**🔁 Мағыналық жағынан ұқсас терминдер:** " + ", ".join(f"`{t}`" for t in valid_similar_terms))
 
         if term.get("image"):
             st.markdown(
