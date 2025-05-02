@@ -1,8 +1,6 @@
 import streamlit as st
 import json
 from streamlit.components.v1 import html
-from sentence_transformers import SentenceTransformer, util
-import torch
 
 # JSON файлды жүктеу
 with open("data.json", "r", encoding="utf-8") as f:
@@ -11,34 +9,8 @@ with open("data.json", "r", encoding="utf-8") as f:
 st.set_page_config(page_title="Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
 st.title("📘АКТ курсы бойынша электрондық ұғымдық-терминологиялық сөздік")
 
-# NLP моделін жүктеу
-@st.cache_resource
-def load_similarity_model():
-    return SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
-
-model = load_similarity_model()
-
-# Барлық терминдерден қазақша атауларды жинау
-all_kk_terms = []
-for term_list in terms.values():
-    for t in term_list:
-        all_kk_terms.append(t['kk'])
-
-# Барлық қазақша терминдерді тексеру үшін жинау (төменгі регистрде)
-all_kk_set = set(t.lower() for t in all_kk_terms)
-
-# Семантикалық ұқсас терминдер
-
-def get_similar_terms(query, top_k=3):
-    query_embedding = model.encode(query, convert_to_tensor=True)
-    corpus_embeddings = model.encode(all_kk_terms, convert_to_tensor=True)
-    hits = util.semantic_search(query_embedding, corpus_embeddings, top_k=top_k)[0]
-    return [all_kk_terms[hit['corpus_id']] for hit in hits if all_kk_terms[hit['corpus_id']].lower() != query.lower()]
-
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
-
-# Дыбыстау батырмасы
 
 def speak_buttons(term):
     kk = term['kk']
@@ -86,6 +58,7 @@ if show_map:
                     synonyms = ', '.join([f"`{syn}`" for syn in rel['synonyms']])
                     st.markdown(f"  🔁 Синонимдер: {synonyms}")
 
+
                 if rel.get('general_concept'):
                     st.markdown(f"  🔼 Жалпылама ұғым: `{rel['general_concept']}`")
 
@@ -123,11 +96,6 @@ if search_query:
                 st.markdown(f"**RU:** {term['example']['ru']}")
                 st.markdown(f"**EN:** {term['example']['en']}")
 
-            similar_terms = get_similar_terms(term['kk'])
-            valid_similar_terms = [t for t in similar_terms if t.lower() in all_kk_set]
-            if valid_similar_terms:
-                st.markdown("**🔁 Мағыналық жағынан ұқсас терминдер:** " + ", ".join(f"`{t}`" for t in valid_similar_terms))
-
             if term.get("image"):
                 st.markdown(
                     f'<a href="{term["image"]}" target="_blank">'
@@ -156,11 +124,6 @@ else:
             st.markdown(f"**KK:** {term['example']['kk']}")
             st.markdown(f"**RU:** {term['example']['ru']}")
             st.markdown(f"**EN:** {term['example']['en']}")
-
-        similar_terms = get_similar_terms(term['kk'])
-        valid_similar_terms = [t for t in similar_terms if t.lower() in all_kk_set]
-        if valid_similar_terms:
-            st.markdown("**🔁 Мағыналық жағынан ұқсас терминдер:** " + ", ".join(f"`{t}`" for t in valid_similar_terms))
 
         if term.get("image"):
             st.markdown(
