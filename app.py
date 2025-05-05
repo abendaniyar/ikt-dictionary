@@ -159,6 +159,39 @@ else:
 
 # Дәріс таңдауы
 lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
+for lecture_name, term in found_terms:
+            term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
+            st.markdown(f"### 📂 {lecture_name}<br>🖥 {term_text}", unsafe_allow_html=True)
+            speak_buttons(term)
+
+            with st.expander("📖 Анықтама / Определение / Definition"):
+                if 'definition' in term:
+                    st.markdown(f"**KK:** {term['definition'].get('kk', 'Жоқ')}")
+                    st.markdown(f"**RU:** {term['definition'].get('ru', 'Нет')}")
+                    st.markdown(f"**EN:** {term['definition'].get('en', 'No')}")
+                else:
+                    st.info("❗ Бұл термин үшін анықтама берілмеген.")
+
+            with st.expander("💬 Мысал / Пример / Example"):
+                if 'example' in term:
+                    st.markdown(f"**KK:** {term['example'].get('kk', 'Жоқ')}")
+                    st.markdown(f"**RU:** {term['example'].get('ru', 'Нет')}")
+                    st.markdown(f"**EN:** {term['example'].get('en', 'No')}")
+                else:
+                    st.info("❗ Бұл термин үшін мысал берілмеген.")
+
+            if term.get("image"):
+                st.markdown(
+                    f'<a href="{term["image"]}" target="_blank">'
+                    f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
+                    f'</a>',
+                    unsafe_allow_html=True
+                )
+
+            if term.get("source"):
+                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
+
+            st.markdown("---")
 
 # Термин мәліметі
 selected = st.session_state.get("selected_term")
