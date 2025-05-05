@@ -1,3 +1,4 @@
+
 import streamlit as st
 import json
 import pandas as pd
@@ -158,53 +159,15 @@ else:
     st.info("📝 Термин таңдаңыз немесе сүзгі қолданыңыз.")
 
 # Дәріс таңдауы
-if search_query:
-    st.session_state['show_map'] = False
-    st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
-    found_terms = []
-    for lecture_name, term_list in terms.items():
-        for term in term_list:
-            if search_query in term.get('kk', '').lower() or search_query in term.get('ru', '').lower() or search_query in term.get('en', '').lower():
-                found_terms.append((lecture_name, term))
-
-    if not found_terms:
-        st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
-    else:
-        for lecture_name, term in found_terms:
-            term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
-            st.markdown(f"### 📂 {lecture_name}<br>🖥 {term_text}", unsafe_allow_html=True)
-            speak_buttons(term)
-
-            with st.expander("📖 Анықтама / Определение / Definition"):
-                if 'definition' in term:
-                    st.markdown(f"**KK:** {term['definition'].get('kk', 'Жоқ')}")
-                    st.markdown(f"**RU:** {term['definition'].get('ru', 'Нет')}")
-                    st.markdown(f"**EN:** {term['definition'].get('en', 'No')}")
-                else:
-                    st.info("❗ Бұл термин үшін анықтама берілмеген.")
-
-            with st.expander("💬 Мысал / Пример / Example"):
-                if 'example' in term:
-                    st.markdown(f"**KK:** {term['example'].get('kk', 'Жоқ')}")
-                    st.markdown(f"**RU:** {term['example'].get('ru', 'Нет')}")
-                    st.markdown(f"**EN:** {term['example'].get('en', 'No')}")
-                else:
-                    st.info("❗ Бұл термин үшін мысал берілмеген.")
-
-            if term.get("image"):
-                st.markdown(
-                    f'<a href="{term["image"]}" target="_blank">'
-                    f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
-                    f'</a>',
-                    unsafe_allow_html=True
-                )
-
-            if term.get("source"):
-                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
+lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
 
             st.markdown("---")
 
-
+# Термин тізімі
+for i, term in enumerate(filtered_terms):
+            name = term.get("kk", "")
+            if st.button(f"🔹 {name}", key=f"letter_term_{i}"):
+                st.session_state['selected_term'] = name
 # Термин мәліметі
 selected = st.session_state.get("selected_term")
 if selected:
