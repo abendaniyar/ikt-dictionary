@@ -85,8 +85,12 @@ if uploaded_file:
         lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
         if st.sidebar.button("➕ Терминдерді қосу"):
             terms[lecture_name].extend(new_terms)
-            update_json_to_github(terms, sha)
-    except Exception as e:
+            with open("data.json", "w", encoding="utf-8") as f:
+              json.dump(terms, f, ensure_ascii=False, indent=2)
+            st.success(f"✅ {len(new_terms)} жаңа термин қосылды!")
+            st.session_state['selected_term'] = None  # жаңадан бастау
+            st.experimental_rerun()
+            except Exception as e:
         st.error(f"❌ Excel оқу қатесі: {e}")
 
 # Іздеу функциясын қосу
@@ -199,11 +203,21 @@ if search_query:
 # Термин тізімі
 if not search_query:
     st.write("### 📋 Терминдер тізімі:")
-    for i, term in enumerate(terms[lecture]):
-        name = term.get("kk", "")
-        if st.button(f"🔹 {name}", key=f"term_{i}"):
-            st.session_state['selected_term'] = name
 
+    page_size = 10
+    total_terms = len(terms[lecture])
+    total_pages = (total_terms + page_size - 1) // page_size
+
+    page = st.number_input("📄 Бет таңдау", min_value=1, max_value=total_pages, step=1)
+
+    start = (page - 1) * page_size
+    end = start + page_size
+    paginated_terms = terms[lecture][start:end]
+
+    for i, term in enumerate(paginated_terms):
+        name = term.get("kk", "")
+        if st.button(f"🔹 {name}", key=f"term_{start + i}"):
+            st.session_state['selected_term'] = name
 # Термин мәліметі
 selected = st.session_state.get("selected_term")
 if selected:
