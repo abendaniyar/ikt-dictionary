@@ -1,20 +1,59 @@
 import streamlit as st
 import json
 import pandas as pd
+import base64
+import requests
+from streamlit.components.v1 import html
+import streamlit.components.v1 as components
 
-# JSON файлды жүктеу
-with open("data.json", "r", encoding="utf-8") as f:
-    terms = json.load(f)
+GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
+REPO_OWNER = st.secrets["REPO_OWNER"]
+REPO_NAME = st.secrets["REPO_NAME"]
+FILE_PATH = "data.json"
 
-st.set_page_config(page_title="Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
-st.title("📘АКТ курсы бойынша электрондық ұғымдық-терминологиялық сөздік")
+headers = {
+    "Authorization": f"token {GITHUB_TOKEN}",
+    "Accept": "application/vnd.github.v3+json"
+}
 
-if 'selected_term' not in st.session_state:
-    st.session_state['selected_term'] = None
-if 'show_map' not in st.session_state:
-    st.session_state['show_map'] = False
+# JSON файлды GitHub-тан жүктеу
+@st.cache_data
+def load_json_from_github():
+    url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
+    res = requests.get(url, headers=headers)
+    if res.status_code == 200:
+        content = base64.b64decode(res.json()["content"]).decode("utf-8")
+        sha = res.json()["sha"]
+        return json.loads(content), sha
+    else:
+        st.error(f"❌ GitHub-тан дерек жүктелмеді: {res.status_code}")
+        return {}, None
+
+# GitHub-қа жаңа JSON жазу
+def update_json_to_github(new_data, sha):
+    url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
+    updated_content = json.dumps(new_data, ensure_ascii=False, indent=2).encode("utf-8")
+    b64_content = base64.b64encode(updated_content).decode("utf-8")
+
+    data = {
+        "message": "🔄 Терминдер жаңартылды",
+        "content": b64_content,
+        "sha": sha
+    }
+    response = requests.put(url, headers=headers, json=data)
+    if response.status_code == 200 or response.status_code == 201:
+        st.success("✅ Терминдер GitHub-та жаңартылды!")
+    else:
+        st.error(f"❌ GitHub-қа жазу қатесі: {response.text}")
+
+# Интерфейс
+st.set_page_config("Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
+st.title("📘 АКТ курсы: Электрондық терминологиялық сөздік")
+
+terms, sha = load_json_from_github()
+
 # Excel жүктеу
-uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (жаңа терминдер)", type=["xlsx"])
+uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (xlsx)", type=["xlsx"])
 if uploaded_file:
     try:
         df = pd.read_excel(uploaded_file)
@@ -46,11 +85,9 @@ if uploaded_file:
         lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
         if st.sidebar.button("➕ Терминдерді қосу"):
             terms[lecture_name].extend(new_terms)
-            with open("data.json", "w", encoding="utf-8") as f:
-                json.dump(terms, f, ensure_ascii=False, indent=2)
-            st.success(f"✅ {len(new_terms)} жаңа термин қосылды!")
+            update_json_to_github(terms, sha)
     except Exception as e:
-        st.error(f"❌ Excel файлды оқу кезінде қате: {e}")
+        st.error(f"❌ Excel оқу қатесі: {e}")
 
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
