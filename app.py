@@ -4,8 +4,8 @@ import pandas as pd
 import base64
 import requests
 from streamlit.components.v1 import html
-import streamlit.components.v1 as components
 
+# GitHub баптаулары
 GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 REPO_OWNER = st.secrets["REPO_OWNER"]
 REPO_NAME = st.secrets["REPO_NAME"]
@@ -16,7 +16,6 @@ headers = {
     "Accept": "application/vnd.github.v3+json"
 }
 
-# JSON файлды GitHub-тан жүктеу
 @st.cache_data
 def load_json_from_github():
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
@@ -28,7 +27,6 @@ def load_json_from_github():
     else:
         st.error(f"❌ GitHub-тан дерек жүктелмеді: {res.status_code}")
         return {}, None
-
 # GitHub-қа жаңа JSON жазу
 def update_json_to_github(new_data, sha):
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
@@ -94,35 +92,71 @@ if uploaded_file:
     except Exception as e:
         st.error(f"❌ Excel оқу қатесі: {e}")
 # Іздеу функциясын қосу
-search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
+# --- ІЗДЕУ ЖӘНЕ СҮЗГІ ---
+all_terms = []
+for lecture, tlist in terms.items():
+    for term in tlist:
+        all_terms.append(term)
 
-def speak_buttons(term):
-    kk = term.get('kk', '')
-    ru = term.get('ru', '')
-    en = term.get('en', '')
-    html(f"""
-        <div style='margin-bottom: 10px;'>
-            <button onclick=\"speakRU()\" style='margin-right: 10px;'>🔊 Орысша</button>
-            <button onclick=\"speakEN()\">🔊 Ағылшынша</button>
-        </div>
-        <script>
-            function speakKK() {{
-                var msg = new SpeechSynthesisUtterance("{kk}");
-                msg.lang = "kk-KZ";
-                window.speechSynthesis.speak(msg);
-            }}
-            function speakRU() {{
-                var msg = new SpeechSynthesisUtterance("{ru}");
-                msg.lang = "ru-RU";
-                window.speechSynthesis.speak(msg);
-            }}
-            function speakEN() {{
-                var msg = new SpeechSynthesisUtterance("{en}");
-                msg.lang = "en-US";
-                window.speechSynthesis.speak(msg);
-            }}
-        </script>
-    """, height=60)
+# 1. Автоаяқтау (autocomplete) және көптілді іздеу
+all_titles = list({t.get("kk", "") for t in all_terms} | {t.get("ru", "") for t in all_terms} | {t.get("en", "") for t in all_terms})
+search_query = st.text_input("🔍 Термин іздеу (kk, ru, en):", value="", placeholder="мыс. алгоритм, network, база", help="Кез келген тілде іздеңіз")
+
+# 2. Алфавиттік сүзгі
+alphabet = sorted(set(term.get("kk", "")[:1].upper() for term in all_terms if term.get("kk", "")))
+selected_letter = st.selectbox("🔡 Әріп бойынша сүзгі (kk):", ["Барлығы"] + alphabet)
+
+filtered_terms = []
+for term in all_terms:
+    name_kk = term.get("kk", "").lower()
+    name_ru = term.get("ru", "").lower()
+    name_en = term.get("en", "").lower()
+
+    if search_query.lower() in name_kk or search_query.lower() in name_ru or search_query.lower() in name_en:
+        if selected_letter == "Барлығы" or name_kk.startswith(selected_letter.lower()):
+            filtered_terms.append(term)
+    elif not search_query and (selected_letter == "Барлығы" or name_kk.startswith(selected_letter.lower())):
+        filtered_terms.append(term)
+
+# 3. Ұсыныстар (recommendations)
+if search_query and not filtered_terms:
+    from difflib import get_close_matches
+    suggestions = get_close_matches(search_query, all_titles, n=5)
+    if suggestions:
+        st.warning("🛑 Нақты термин табылмады. Мүмкін сіз мынаны іздедіңіз:")
+        for s in suggestions:
+            st.write(f"👉 {s}")
+    else:
+        st.info("❗ Ұқсас терминдер табылмады.")
+
+# 4. Терминдерді визуализациялау
+if filtered_terms:
+    st.write(f"### 📋 Нәтижелер: {len(filtered_terms)} термин")
+    for term in filtered_terms:
+        term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
+        st.markdown(f"### 🖥 {term_text}")
+        
+        with st.expander("📖 Анықтама / Definition"):
+            st.markdown(f"**KK:** {term.get('definition', {}).get('kk', '')}")
+            st.markdown(f"**RU:** {term.get('definition', {}).get('ru', '')}")
+            st.markdown(f"**EN:** {term.get('definition', {}).get('en', '')}")
+
+        with st.expander("💬 Мысал / Example"):
+            st.markdown(f"**KK:** {term.get('example', {}).get('kk', '')}")
+            st.markdown(f"**RU:** {term.get('example', {}).get('ru', '')}")
+            st.markdown(f"**EN:** {term.get('example', {}).get('en', '')}")
+
+        relations = term.get("relations", {})
+        if relations:
+            with st.expander("🔗 Байланыстар"):
+                st.write(f"🔁 Синонимдер: {', '.join(relations.get('synonyms', []))}")
+                st.write(f"🔼 Жалпылама: {relations.get('general_concept', '')}")
+                st.write(f"🔽 Арнайы: {', '.join(relations.get('specific_concepts', []))}")
+                st.write(f"🔗 Қатысты: {', '.join(relations.get('associative', []))}")
+        st.markdown("---")
+else:
+    st.info("📝 Термин таңдаңыз немесе сүзгі қолданыңыз.")
+
 # Дәріс таңдауы
 lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
 # Семантикалық картаны көру батырмасы
