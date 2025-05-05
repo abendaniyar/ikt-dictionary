@@ -86,13 +86,13 @@ if uploaded_file:
         if st.sidebar.button("➕ Терминдерді қосу"):
             terms[lecture_name].extend(new_terms)
             with open("data.json", "w", encoding="utf-8") as f:
-              json.dump(terms, f, ensure_ascii=False, indent=2)
+                json.dump(terms, f, ensure_ascii=False, indent=2)
             st.success(f"✅ {len(new_terms)} жаңа термин қосылды!")
-            st.session_state['selected_term'] = None  # жаңадан бастау
+            st.session_state['selected_term'] = None
             st.experimental_rerun()
-            except Exception as e:
-        st.error(f"❌ Excel оқу қатесі: {e}")
 
+    except Exception as e:
+        st.error(f"❌ Excel оқу қатесі: {e}")
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
 
