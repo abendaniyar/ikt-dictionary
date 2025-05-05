@@ -89,32 +89,42 @@ def parse_excel(uploaded_file):
 
 # ==================== Вспомогательные функции ====================
 def display_term(term):
-    """Отображение карточки термина"""
+    """Отображение карточки термина с проверкой отсутствующих полей"""
     with st.container():
-        st.markdown(f"### 🌐 {term.get('kk', '')}")
+        st.markdown(f"### 🌐 {term.get('kk', 'Без названия')}")
         
         # Вкладки с информацией
         tabs = st.tabs(["📖 Определение", "💬 Пример", "🔗 Связи"])
         
+        # Безопасное получение данных
+        definition = term.get('definition', {})
+        example = term.get('example', {})
+        relations = term.get('relations', {})
+
         with tabs[0]:
-            st.markdown(f"**KK:** {term['definition'].get('kk', '-')}")
-            st.markdown(f"**RU:** {term['definition'].get('ru', '-')}")
-            st.markdown(f"**EN:** {term['definition'].get('en', '-')}")
+            st.markdown(f"**KK:** {definition.get('kk', '-')}")
+            st.markdown(f"**RU:** {definition.get('ru', '-')}")
+            st.markdown(f"**EN:** {definition.get('en', '-')}")
         
         with tabs[1]:
-            st.markdown(f"**KK:** {term['example'].get('kk', '-')}")
-            st.markdown(f"**RU:** {term['example'].get('ru', '-')}")
-            st.markdown(f"**EN:** {term['example'].get('en', '-')}")
+            st.markdown(f"**KK:** {example.get('kk', '-')}")
+            st.markdown(f"**RU:** {example.get('ru', '-')}")
+            st.markdown(f"**EN:** {example.get('en', '-')}")
         
         with tabs[2]:
             cols = st.columns(2)
             with cols[0]:
-                st.markdown("🔁 **Синонимы:**\n" + "\n".join(f"- {s}" for s in term['relations']['synonyms']))
-                st.markdown("🔼 **Общее понятие:**\n" + term['relations']['general'])
+                st.markdown("🔁 **Синонимы:**\n" + "\n".join(
+                    f"- {s}" for s in relations.get('synonyms', [])
+                ))
+                st.markdown("🔼 **Общее понятие:**\n" + relations.get('general', '-'))
             with cols[1]:
-                st.markdown("🔽 **Частные понятия:**\n" + "\n".join(f"- {s}" for s in term['relations']['specific']))
-                st.markdown("🔗 **Ассоциации:**\n" + "\n".join(f"- {s}" for s in term['relations']['associative']))
-
+                st.markdown("🔽 **Частные понятия:**\n" + "\n".join(
+                    f"- {s}" for s in relations.get('specific', [])
+                ))
+                st.markdown("🔗 **Ассоциации:**\n" + "\n".join(
+                    f"- {s}" for s in relations.get('associative', [])
+                ))
 # ==================== Интерфейс ====================
 def main():
     st.set_page_config("Электронный словарь", layout="wide")
