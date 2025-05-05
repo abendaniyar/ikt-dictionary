@@ -157,42 +157,59 @@ def main():
             for lecture in terms_data.values():
                 for term in lecture:
                     try:
-                        # Извлечение данных с защитой от отсутствующих ключей
                         kk = term.get('kk', 'Без названия')
                         relations = term.get('relations', {})
-                        
-                        # Формирование элементов связей
                         elements = []
                         if 'synonyms' in relations:
                             elements.extend(relations['synonyms'])
                         if 'specific' in relations:
                             elements.extend(relations['specific'])
-                        
                         html_content += f"<p><b>{kk}</b> → {', '.join(elements)}</p>"
-                        
                     except Exception as e:
-                        st.error(f"Ошибка обработки термина: {e}")
                         continue
             
             html_content += "</div>"
             html(html_content, height=500, scrolling=True)
-    
+
     # ==================== Основной интерфейс ====================
-    # Поиск и фильтрация
-    search_query = st.text_input("🔍 Поиск по всем терминам", help="Ищите на любом языке")
-    filtered_terms = [
-        term for term in all_terms
-        if search_query.lower() in str(term).lower()
-    ] if search_query else all_terms
-    
-    # Отображение результатов
-    if filtered_terms:
-        st.subheader(f"📚 Найдено терминов: {len(filtered_terms)}")
-        for term in filtered_terms:
+    # Переключатель режимов
+    view_mode = st.radio("🔍 Режим просмотра:", 
+                        ["📂 По темам", "🔎 Поиск по всем терминам"], 
+                        horizontal=True)
+
+    if view_mode == "📂 По темам":
+        # Отображение терминов по темам
+        selected_lecture = st.selectbox(
+            "📚 Выберите тему:",
+            list(terms_data.keys()),
+            index=0,
+            key="lecture_selector"
+        )
+
+        st.subheader(f"📖 Тема: {selected_lecture}")
+        st.write(f"🔢 Количество терминов: {len(terms_data[selected_lecture])}")
+        
+        # Отображение терминов выбранной темы
+        for term in terms_data[selected_lecture]:
             display_term(term)
             st.divider()
+
     else:
-        st.info("🔍 Ничего не найдено. Попробуйте другой запрос.")
+        # Поиск по всем терминам
+        search_query = st.text_input("🔍 Поиск по всем терминам", help="Ищите на любом языке")
+        filtered_terms = [
+            term for term in all_terms
+            if search_query.lower() in str(term).lower()
+        ] if search_query else all_terms
+        
+        # Отображение результатов
+        if filtered_terms:
+            st.subheader(f"📚 Найдено терминов: {len(filtered_terms)}")
+            for term in filtered_terms:
+                display_term(term)
+                st.divider()
+        else:
+            st.info("🔍 Ничего не найдено. Попробуйте другой запрос.")
 
 if __name__ == "__main__":
     main()
