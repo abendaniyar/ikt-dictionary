@@ -14,22 +14,25 @@ st.title("📘АКТ курсы бойынша электрондық ұғымд
 # Excel жүктеу
 uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (жаңа терминдер)", type=["xlsx"])
 if uploaded_file:
-    df = pd.read_excel(uploaded_file)
-    new_terms = df.to_dict(orient="records")
-    lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
-    if st.sidebar.button("➕ Терминдерді қосу"):
-        terms[lecture_name].extend(new_terms)
-        with open("data.json", "w", encoding="utf-8") as f:
-            json.dump(terms, f, ensure_ascii=False, indent=2)
-        st.success(f"✅ {len(new_terms)} жаңа термин қосылды!")
+    try:
+        df = pd.read_excel(uploaded_file)
+        new_terms = df.to_dict(orient="records")
+        lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
+        if st.sidebar.button("➕ Терминдерді қосу"):
+            terms[lecture_name].extend(new_terms)
+            with open("data.json", "w", encoding="utf-8") as f:
+                json.dump(terms, f, ensure_ascii=False, indent=2)
+            st.success(f"✅ {len(new_terms)} жаңа термин қосылды!")
+    except Exception as e:
+        st.error(f"❌ Excel файлды оқу кезінде қате: {e}")
 
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
 
 def speak_buttons(term):
-    kk = term['kk']
-    ru = term['ru']
-    en = term['en']
+    kk = term.get('kk', '')
+    ru = term.get('ru', '')
+    en = term.get('en', '')
     html(f"""
         <div style='margin-bottom: 10px;'>
             <button onclick=\"speakRU()\" style='margin-right: 10px;'>🔊 Орысша</button>
@@ -69,11 +72,11 @@ if st.sidebar.button("📚 Семантикалық картаны көру"):
         <div style='font-family:Arial;'>
         """ +
         ''.join([
-            f"<p><b>{term['kk']}</b> - " +
-            (f"🔁 Синонимдер: {', '.join(term['relations'].get('synonyms', []))} | " if 'relations' in term and term['relations'].get('synonyms') else '') +
-            (f"🔼 Жалпылама: {term['relations'].get('general_concept')} | " if 'relations' in term and term['relations'].get('general_concept') else '') +
-            (f"🔽 Арнайы: {', '.join(term['relations'].get('specific_concepts', []))} | " if 'relations' in term and term['relations'].get('specific_concepts') else '') +
-            (f"🔗 Қатысты: {', '.join(term['relations'].get('associative', []))}" if 'relations' in term and term['relations'].get('associative') else '') +
+            f"<p><b>{term.get('kk', '')}</b> - " +
+            (f"🔁 Синонимдер: {', '.join(term.get('relations', {{}}).get('synonyms', []))} | " if term.get('relations', {{}}).get('synonyms') else '') +
+            (f"🔼 Жалпылама: {term.get('relations', {{}}).get('general_concept')} | " if term.get('relations', {{}}).get('general_concept') else '') +
+            (f"🔽 Арнайы: {', '.join(term.get('relations', {{}}).get('specific_concepts', []))} | " if term.get('relations', {{}}).get('specific_concepts') else '') +
+            (f"🔗 Қатысты: {', '.join(term.get('relations', {{}}).get('associative', []))}" if term.get('relations', {{}}).get('associative') else '') +
             "</p>"
             for lecture_terms in terms.values() for term in lecture_terms
         ]) +
@@ -92,26 +95,32 @@ if search_query:
     found_terms = []
     for lecture_name, term_list in terms.items():
         for term in term_list:
-            if search_query in term['kk'].lower() or search_query in term['ru'].lower() or search_query in term['en'].lower():
+            if search_query in term.get('kk', '').lower() or search_query in term.get('ru', '').lower() or search_query in term.get('en', '').lower():
                 found_terms.append((lecture_name, term))
 
     if not found_terms:
         st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
     else:
         for lecture_name, term in found_terms:
-            term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
+            term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
             st.markdown(f"### 📂 {lecture_name}<br>🖥 {term_text}", unsafe_allow_html=True)
             speak_buttons(term)
 
             with st.expander("📖 Анықтама / Определение / Definition"):
-                st.markdown(f"**KK:** {term['definition']['kk']}")
-                st.markdown(f"**RU:** {term['definition']['ru']}")
-                st.markdown(f"**EN:** {term['definition']['en']}")
+                if 'definition' in term:
+                    st.markdown(f"**KK:** {term['definition'].get('kk', 'Жоқ')}")
+                    st.markdown(f"**RU:** {term['definition'].get('ru', 'Нет')}")
+                    st.markdown(f"**EN:** {term['definition'].get('en', 'No')}")
+                else:
+                    st.info("❗ Бұл термин үшін анықтама берілмеген.")
 
             with st.expander("💬 Мысал / Пример / Example"):
-                st.markdown(f"**KK:** {term['example']['kk']}")
-                st.markdown(f"**RU:** {term['example']['ru']}")
-                st.markdown(f"**EN:** {term['example']['en']}")
+                if 'example' in term:
+                    st.markdown(f"**KK:** {term['example'].get('kk', 'Жоқ')}")
+                    st.markdown(f"**RU:** {term['example'].get('ru', 'Нет')}")
+                    st.markdown(f"**EN:** {term['example'].get('en', 'No')}")
+                else:
+                    st.info("❗ Бұл термин үшін мысал берілмеген.")
 
             if term.get("image"):
                 st.markdown(
@@ -126,7 +135,7 @@ if search_query:
 
             st.markdown("---")
 elif not st.session_state.get('show_map'):
-    term_names = sorted([t['kk'] for t in terms[lecture]])
+    term_names = sorted([t.get('kk', '') for t in terms[lecture]])
     st.write("### 📋 Терминдер тізімі:")
     for name in term_names:
         if st.button(f"🔹 {name}"):
@@ -135,20 +144,26 @@ elif not st.session_state.get('show_map'):
     selected_term = st.session_state.get('selected_term')
     if selected_term:
         for term in terms[lecture]:
-            if term['kk'] == selected_term:
-                term_text = f"{term['kk']} / {term['ru']} / {term['en']}"
+            if term.get('kk', '') == selected_term:
+                term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
                 st.markdown(f"### 🖥 {term_text}")
                 speak_buttons(term)
 
                 with st.expander("📖 Анықтама / Определение / Definition"):
-                    st.markdown(f"**KK:** {term['definition']['kk']}")
-                    st.markdown(f"**RU:** {term['definition']['ru']}")
-                    st.markdown(f"**EN:** {term['definition']['en']}")
+                    if 'definition' in term:
+                        st.markdown(f"**KK:** {term['definition'].get('kk', 'Жоқ')}")
+                        st.markdown(f"**RU:** {term['definition'].get('ru', 'Нет')}")
+                        st.markdown(f"**EN:** {term['definition'].get('en', 'No')}")
+                    else:
+                        st.info("❗ Бұл термин үшін анықтама берілмеген.")
 
                 with st.expander("💬 Мысал / Пример / Example"):
-                    st.markdown(f"**KK:** {term['example']['kk']}")
-                    st.markdown(f"**RU:** {term['example']['ru']}")
-                    st.markdown(f"**EN:** {term['example']['en']}")
+                    if 'example' in term:
+                        st.markdown(f"**KK:** {term['example'].get('kk', 'Жоқ')}")
+                        st.markdown(f"**RU:** {term['example'].get('ru', 'Нет')}")
+                        st.markdown(f"**EN:** {term['example'].get('en', 'No')}")
+                    else:
+                        st.info("❗ Бұл термин үшін мысал берілмеген.")
 
                 if term.get("image"):
                     st.markdown(
