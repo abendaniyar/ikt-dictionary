@@ -11,6 +11,11 @@ with open("data.json", "r", encoding="utf-8") as f:
 st.set_page_config(page_title="Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
 st.title("📘АКТ курсы бойынша электрондық ұғымдық-терминологиялық сөздік")
 
+if 'selected_term' not in st.session_state:
+    st.session_state['selected_term'] = None
+if 'show_map' not in st.session_state:
+    st.session_state['show_map'] = False
+
 # Excel жүктеу
 uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (жаңа терминдер)", type=["xlsx"])
 if uploaded_file:
