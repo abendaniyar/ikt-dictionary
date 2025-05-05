@@ -17,11 +17,35 @@ if 'show_map' not in st.session_state:
     st.session_state['show_map'] = False
 
 # Excel жүктеу
-uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (жаңа терминдер)", type=["xlsx"])
 if uploaded_file:
     try:
         df = pd.read_excel(uploaded_file)
-        new_terms = df.to_dict(orient="records")
+
+        # Excel жолдарын қажетті JSON құрылымына түрлендіру
+        def transform_row(row):
+            return {
+                "kk": row["kk"],
+                "ru": row["ru"],
+                "en": row["en"],
+                "definition": {
+                    "kk": row.get("definition_kk", ""),
+                    "ru": row.get("definition_ru", ""),
+                    "en": row.get("definition_en", "")
+                },
+                "example": {
+                    "kk": row.get("example_kk", ""),
+                    "ru": row.get("example_ru", ""),
+                    "en": row.get("example_en", "")
+                },
+                "relations": {
+                    "synonyms": [s.strip() for s in str(row.get("relations_synonyms", "")).split(",") if s.strip()],
+                    "general_concept": row.get("relations_general_concept", ""),
+                    "specific_concepts": [s.strip() for s in str(row.get("relations_specific_concepts", "")).split(",") if s.strip()],
+                    "associative": [s.strip() for s in str(row.get("relations_associative", "")).split(",") if s.strip()]
+                }
+            }
+
+        new_terms = [transform_row(row) for index, row in df.iterrows()]
         lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
         if st.sidebar.button("➕ Терминдерді қосу"):
             terms[lecture_name].extend(new_terms)
