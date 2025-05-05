@@ -126,7 +126,7 @@ if search_query:
         for term in term_list:
             if search_query in term.get('kk', '').lower() or search_query in term.get('ru', '').lower() or search_query in term.get('en', '').lower():
                 found_terms.append((lecture_name, term))
-
+ 
     if not found_terms:
         st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
     else:
