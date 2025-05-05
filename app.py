@@ -167,17 +167,14 @@ if search_query:
 elif not st.session_state.get('show_map'):
     term_names = sorted([t.get('kk', '') for t in terms[lecture]])
     st.write("### 📋 Терминдер тізімі:")
-    for name in term_names:
-        if st.button(f"🔹 {name}"):
-            st.session_state['selected_term'] = name
 
-    selected_term = st.session_state.get('selected_term')
-    if selected_term:
-        for term in terms[lecture]:
-            if term.get('kk', '') == selected_term:
-                term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
-                st.markdown(f"### 🖥 {term_text}")
-                speak_buttons(term)
+    for name in term_names:
+        link = f'<a href="?selected_term={name}">🔹 {name}</a><br>'
+        st.markdown(link, unsafe_allow_html=True)
+
+    selected = st.experimental_get_query_params().get("selected_term", [None])[0]
+    if selected:
+                st.session_state['selected_term'] = selected
 
                 with st.expander("📖 Анықтама / Определение / Definition"):
                     if 'definition' in term:
