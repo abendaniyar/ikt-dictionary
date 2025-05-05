@@ -1,12 +1,12 @@
-
 import streamlit as st
 import json
 import pandas as pd
 import base64
 import requests
+from difflib import get_close_matches
 from streamlit.components.v1 import html
 
-# GitHub баптаулары
+# GitHub API настройки
 GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 REPO_OWNER = st.secrets["REPO_OWNER"]
 REPO_NAME = st.secrets["REPO_NAME"]
@@ -19,186 +19,152 @@ headers = {
 
 @st.cache_data
 def load_json_from_github():
+    """Загрузка JSON данных из GitHub репозитория"""
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
-    res = requests.get(url, headers=headers)
-    if res.status_code == 200:
-        content = base64.b64decode(res.json()["content"]).decode("utf-8")
-        sha = res.json()["sha"]
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        content = base64.b64decode(response.json()["content"]).decode("utf-8")
+        sha = response.json()["sha"]
         return json.loads(content), sha
     else:
-        st.error(f"❌ GitHub-тан дерек жүктелмеді: {res.status_code}")
+        st.error(f"❌ Ошибка загрузки данных: {response.status_code}")
         return {}, None
-# GitHub-қа жаңа JSON жазу
+
 def update_json_to_github(new_data, sha):
+    """Обновление JSON данных на GitHub"""
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
     updated_content = json.dumps(new_data, ensure_ascii=False, indent=2).encode("utf-8")
     b64_content = base64.b64encode(updated_content).decode("utf-8")
 
     data = {
-        "message": "🔄 Терминдер жаңартылды",
+        "message": "🔄 Обновление терминологии",
         "content": b64_content,
         "sha": sha
     }
     response = requests.put(url, headers=headers, json=data)
-    if response.status_code == 200 or response.status_code == 201:
-        st.success("✅ Терминдер GitHub-та жаңартылды!")
+    
+    if response.status_code in (200, 201):
+        st.success("✅ Данные успешно обновлены!")
     else:
-        st.error(f"❌ GitHub-қа жазу қатесі: {response.text}")
+        st.error(f"❌ Ошибка обновления: {response.text}")
 
-# Интерфейс
-st.set_page_config("Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
-st.title("📘 АКТ курсы: Электрондық терминологиялық сөздік")
+def display_term_info(term):
+    """Отображение информации о термине"""
+    term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
+    st.markdown(f"### 🖥 {term_text}")
+    
+    with st.expander("📖 Определения"):
+        st.markdown(f"**KK:** {term.get('definition', {}).get('kk', '')}")
+        st.markdown(f"**RU:** {term.get('definition', {}).get('ru', '')}")
+        st.markdown(f"**EN:** {term.get('definition', {}).get('en', '')}")
+    
+    with st.expander("💬 Примеры"):
+        st.markdown(f"**KK:** {term.get('example', {}).get('kk', '')}")
+        st.markdown(f"**RU:** {term.get('example', {}).get('ru', '')}")
+        st.markdown(f"**EN:** {term.get('example', {}).get('en', '')}")
+    
+    if relations := term.get("relations"):
+        with st.expander("🔗 Связи"):
+            st.write(f"🔁 Синонимы: {', '.join(relations.get('synonyms', []))}")
+            st.write(f"🔼 Общее понятие: {relations.get('general_concept', '')}")
+            st.write(f"🔽 Частные понятия: {', '.join(relations.get('specific_concepts', []))}")
+            st.write(f"🔗 Ассоциации: {', '.join(relations.get('associative', []))}")
 
+# Инициализация приложения
+st.set_page_config("Электронный терминологический словарь", layout="wide")
+st.title("📘 Электронный терминологический словарь")
+
+# Загрузка данных
 terms, sha = load_json_from_github()
 
-# Excel жүктеу
-uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (xlsx)", type=["xlsx"])
-if uploaded_file:
-    try:
-        df = pd.read_excel(uploaded_file)
-        new_terms = []
-        for _, row in df.iterrows():
-            term = {
-                'kk': row.get('kk', ''),
-                'ru': row.get('ru', ''),
-                'en': row.get('en', ''),
-                'definition': {
-                    'kk': row.get('definition_kk', ''),
-                    'ru': row.get('definition_ru', ''),
-                    'en': row.get('definition_en', '')
-                },
-                'example': {
-                    'kk': row.get('example_kk', ''),
-                    'ru': row.get('example_ru', ''),
-                    'en': row.get('example_en', '')
-                },
-                'relations': {
-                    'synonyms': str(row.get('relations_synonyms', '')).split(',') if row.get('relations_synonyms') else [],
-                    'general_concept': row.get('relations_general_concept', ''),
-                    'specific_concepts': str(row.get('relations_specific_concepts', '')).split(',') if row.get('relations_specific_concepts') else [],
-                    'associative': str(row.get('relations_associative', '')).split(',') if row.get('relations_associative') else []
+# Боковая панель
+with st.sidebar:
+    # Загрузка Excel файла
+    uploaded_file = st.file_uploader("📤 Загрузить Excel", type=["xlsx"])
+    if uploaded_file:
+        try:
+            df = pd.read_excel(uploaded_file)
+            new_terms = []
+            
+            for _, row in df.iterrows():
+                term = {
+                    'kk': row.get('kk', ''),
+                    'ru': row.get('ru', ''),
+                    'en': row.get('en', ''),
+                    'definition': {
+                        'kk': row.get('definition_kk', ''),
+                        'ru': row.get('definition_ru', ''),
+                        'en': row.get('definition_en', '')
+                    },
+                    'example': {
+                        'kk': row.get('example_kk', ''),
+                        'ru': row.get('example_ru', ''),
+                        'en': row.get('example_en', '')
+                    },
+                    'relations': {
+                        'synonyms': row.get('relations_synonyms', '').split(',') if row.get('relations_synonyms') else [],
+                        'general_concept': row.get('relations_general_concept', ''),
+                        'specific_concepts': row.get('relations_specific_concepts', '').split(',') if row.get('relations_specific_concepts') else [],
+                        'associative': row.get('relations_associative', '').split(',') if row.get('relations_associative') else []
+                    }
                 }
-            }
-            new_terms.append(term)
-
-        lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
-        if st.sidebar.button("➕ Терминдерді қосу"):
-            terms[lecture_name].extend(new_terms)
-            with open("data.json", "w", encoding="utf-8") as f:
-                json.dump(terms, f, ensure_ascii=False, indent=2)
-            st.success(f"✅ {len(new_terms)} жаңа термин қосылды!")
-            st.session_state['selected_term'] = None
-            st.experimental_rerun()
-
-    except Exception as e:
-        st.error(f"❌ Excel оқу қатесі: {e}")
-# Іздеу функциясын қосу
-# --- ІЗДЕУ ЖӘНЕ СҮЗГІ ---
-all_terms = []
-for lecture, tlist in terms.items():
-    for term in tlist:
-        all_terms.append(term)
-
-# 1. Автоаяқтау (autocomplete) және көптілді іздеу
-all_titles = list({t.get("kk", "") for t in all_terms} | {t.get("ru", "") for t in all_terms} | {t.get("en", "") for t in all_terms})
-search_query = st.text_input("🔍 Термин іздеу (kk, ru, en):", value="", placeholder="мыс. алгоритм, network, база", help="Кез келген тілде іздеңіз")
-
-# 2. Алфавиттік сүзгі
-alphabet = sorted(set(term.get("kk", "")[:1].upper() for term in all_terms if term.get("kk", "")))
-selected_letter = st.selectbox("🔡 Әріп бойынша сүзгі (kk):", ["Барлығы"] + alphabet)
-
-filtered_terms = []
-for term in all_terms:
-    name_kk = term.get("kk", "").lower()
-    name_ru = term.get("ru", "").lower()
-    name_en = term.get("en", "").lower()
-
-    if search_query.lower() in name_kk or search_query.lower() in name_ru or search_query.lower() in name_en:
-        if selected_letter == "Барлығы" or name_kk.startswith(selected_letter.lower()):
-            filtered_terms.append(term)
-    elif not search_query and (selected_letter == "Барлығы" or name_kk.startswith(selected_letter.lower())):
-        filtered_terms.append(term)
-
-# 3. Ұсыныстар (recommendations)
-if search_query and not filtered_terms:
-    from difflib import get_close_matches
-    suggestions = get_close_matches(search_query, all_titles, n=5)
-    if suggestions:
-        st.warning("🛑 Нақты термин табылмады. Мүмкін сіз мынаны іздедіңіз:")
-        for s in suggestions:
-            st.write(f"👉 {s}")
-    else:
-        st.info("❗ Ұқсас терминдер табылмады.")
-
-# 4. Терминдерді визуализациялау
-if filtered_terms:
-    st.write(f"### 📋 Нәтижелер: {len(filtered_terms)} термин")
-    for term in filtered_terms:
-        term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
-        st.markdown(f"### 🖥 {term_text}")
+                new_terms.append(term)
+            
+            lecture = st.selectbox("📚 Выберите лекцию", list(terms.keys()))
+            if st.button("➕ Добавить термины"):
+                terms[lecture].extend(new_terms)
+                update_json_to_github(terms, sha)
+                st.experimental_rerun()
         
-        with st.expander("📖 Анықтама / Definition"):
-            st.markdown(f"**KK:** {term.get('definition', {}).get('kk', '')}")
-            st.markdown(f"**RU:** {term.get('definition', {}).get('ru', '')}")
-            st.markdown(f"**EN:** {term.get('definition', {}).get('en', '')}")
+        except Exception as e:
+            st.error(f"❌ Ошибка обработки файла: {e}")
 
-        with st.expander("💬 Мысал / Example"):
-            st.markdown(f"**KK:** {term.get('example', {}).get('kk', '')}")
-            st.markdown(f"**RU:** {term.get('example', {}).get('ru', '')}")
-            st.markdown(f"**EN:** {term.get('example', {}).get('en', '')}")
+    # Семантическая карта
+    if st.button("📚 Показать семантическую карту"):
+        html_content = """
+        <html><body style='font-family:Arial; padding:20px;'>
+            <h2>📚 Семантическая карта</h2>
+            """ + "".join(
+            f"<p><b>{term.get('kk', '')}</b> - " + 
+            ", ".join(filter(None, [
+                f"🔁 {', '.join(term.get('relations', {}).get('synonyms', []))}" if term.get('relations', {}).get('synonyms') else None,
+                f"🔼 {term.get('relations', {}).get('general_concept', '')}" if term.get('relations', {}).get('general_concept') else None,
+                f"🔽 {', '.join(term.get('relations', {}).get('specific_concepts', []))}" if term.get('relations', {}).get('specific_concepts') else None,
+                f"🔗 {', '.join(term.get('relations', {}).get('associative', []))}" if term.get('relations', {}).get('associative') else None
+            ])) + "</p>"
+            for lecture_terms in terms.values() for term in lecture_terms
+        ) + "</body></html>"
+        
+        html(html_content, height=500, scrolling=True)
 
-        relations = term.get("relations", {})
-        if relations:
-            with st.expander("🔗 Байланыстар"):
-                st.write(f"🔁 Синонимдер: {', '.join(relations.get('synonyms', []))}")
-                st.write(f"🔼 Жалпылама: {relations.get('general_concept', '')}")
-                st.write(f"🔽 Арнайы: {', '.join(relations.get('specific_concepts', []))}")
-                st.write(f"🔗 Қатысты: {', '.join(relations.get('associative', []))}")
+# Основной интерфейс
+# Поиск и фильтрация
+all_terms = [term for lecture_terms in terms.values() for term in lecture_terms]
+search_query = st.text_input("🔍 Поиск термина:", placeholder="Введите запрос...")
+
+# Фильтрация результатов
+filtered_terms = [
+    term for term in all_terms
+    if search_query.lower() in term.get('kk', '').lower() or 
+       search_query.lower() in term.get('ru', '').lower() or 
+       search_query.lower() in term.get('en', '').lower()
+]
+
+# Отображение результатов
+if filtered_terms:
+    st.subheader(f"📋 Результаты поиска ({len(filtered_terms})")
+    for term in filtered_terms:
+        display_term_info(term)
         st.markdown("---")
 else:
-    st.info("📝 Термин таңдаңыз немесе сүзгі қолданыңыз.")
+    st.info("🔍 Термины не найдены. Попробуйте изменить запрос.")
 
-# Дәріс таңдауы
-lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
+# Отображение терминов по лекциям
+lecture = st.sidebar.radio("📂 Выберите лекцию:", list(terms.keys()))
+st.subheader(f"📚 Термины лекции: {lecture}")
 
-# Термин тізімі
-if not search_query:
-    st.write("### 📋 Терминдер тізімі:")
-
-    # Әріптер тізімі
-    alphabet = sorted(set(term.get("kk", "")[0].upper() for term in terms[lecture] if term.get("kk")))
-    selected_letter = st.selectbox("🔠 Әріп бойынша сүзу", options=alphabet)
-
-    # Таңдалған әріптен басталатын терминдерді сүзу
-    filtered_terms = [term for term in terms[lecture] if term.get("kk", "").startswith(selected_letter)]
-
-    if not filtered_terms:
-        st.warning("🛑 Бұл әріпке сәйкес терминдер табылмады.")
-    else:
-        for i, term in enumerate(filtered_terms):
-            name = term.get("kk", "")
-            if st.button(f"🔹 {name}", key=f"letter_term_{i}"):
-                st.session_state['selected_term'] = name
-
-# Термин мәліметі
-selected = st.session_state.get("selected_term")
-if selected:
-    for term in terms[lecture]:
-        if term.get("kk", "") == selected:
-            term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
-            st.markdown(f"### 🖥 {term_text}")
-
-            st.markdown("**📖 Анықтама:**")
-            st.markdown(f"**KK:** {term['definition'].get('kk', 'Жоқ')}")
-            st.markdown(f"**RU:** {term['definition'].get('ru', 'Нет')}")
-            st.markdown(f"**EN:** {term['definition'].get('en', 'No')}")
-
-            st.markdown("**💬 Мысал:**")
-            st.markdown(f"**KK:** {term['example'].get('kk', 'Жоқ')}")
-            st.markdown(f"**RU:** {term['example'].get('ru', 'Нет')}")
-            st.markdown(f"**EN:** {term['example'].get('en', 'No')}")
-
-            if term.get("image"):
-                st.image(term["image"], width=200)
-            if term.get("source"):
-                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
+for term in terms[lecture]:
+    if st.button(f"🔹 {term.get('kk', '')}", key=f"term_{term.get('kk', '')}"):
+        display_term_info(term)
+        st.markdown("---")
