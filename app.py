@@ -21,32 +21,31 @@ uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (жа
 if uploaded_file:
     try:
         df = pd.read_excel(uploaded_file)
-
-        # Excel жолдарын қажетті JSON құрылымына түрлендіру
-        def transform_row(row):
-            return {
-                "kk": row["kk"],
-                "ru": row["ru"],
-                "en": row["en"],
-                "definition": {
-                    "kk": row.get("definition_kk", ""),
-                    "ru": row.get("definition_ru", ""),
-                    "en": row.get("definition_en", "")
+        new_terms = []
+        for _, row in df.iterrows():
+            term = {
+                'kk': row.get('kk', ''),
+                'ru': row.get('ru', ''),
+                'en': row.get('en', ''),
+                'definition': {
+                    'kk': row.get('definition_kk', ''),
+                    'ru': row.get('definition_ru', ''),
+                    'en': row.get('definition_en', '')
                 },
-                "example": {
-                    "kk": row.get("example_kk", ""),
-                    "ru": row.get("example_ru", ""),
-                    "en": row.get("example_en", "")
+                'example': {
+                    'kk': row.get('example_kk', ''),
+                    'ru': row.get('example_ru', ''),
+                    'en': row.get('example_en', '')
                 },
-                "relations": {
-                    "synonyms": [s.strip() for s in str(row.get("relations_synonyms", "")).split(",") if s.strip()],
-                    "general_concept": row.get("relations_general_concept", ""),
-                    "specific_concepts": [s.strip() for s in str(row.get("relations_specific_concepts", "")).split(",") if s.strip()],
-                    "associative": [s.strip() for s in str(row.get("relations_associative", "")).split(",") if s.strip()]
+                'relations': {
+                    'synonyms': str(row.get('relations_synonyms', '')).split(',') if row.get('relations_synonyms') else [],
+                    'general_concept': row.get('relations_general_concept', ''),
+                    'specific_concepts': str(row.get('relations_specific_concepts', '')).split(',') if row.get('relations_specific_concepts') else [],
+                    'associative': str(row.get('relations_associative', '')).split(',') if row.get('relations_associative') else []
                 }
             }
+            new_terms.append(term)
 
-        new_terms = [transform_row(row) for index, row in df.iterrows()]
         lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
         if st.sidebar.button("➕ Терминдерді қосу"):
             terms[lecture_name].extend(new_terms)
@@ -103,10 +102,10 @@ if st.sidebar.button("📚 Семантикалық картаны көру"):
         """ +
         ''.join([
             f"<p><b>{term.get('kk', '')}</b> - " +
-            (f"🔁 Синонимдер: {', '.join(term.get('relations', {{}}).get('synonyms', []))} | " if term.get('relations', {{}}).get('synonyms') else '') +
-            (f"🔼 Жалпылама: {term.get('relations', {{}}).get('general_concept')} | " if term.get('relations', {{}}).get('general_concept') else '') +
-            (f"🔽 Арнайы: {', '.join(term.get('relations', {{}}).get('specific_concepts', []))} | " if term.get('relations', {{}}).get('specific_concepts') else '') +
-            (f"🔗 Қатысты: {', '.join(term.get('relations', {{}}).get('associative', []))}" if term.get('relations', {{}}).get('associative') else '') +
+            (f"🔁 Синонимдер: {', '.join(term.get('relations', {}).get('synonyms', []))} | " if term.get('relations', {}).get('synonyms') else '') +
+            (f"🔼 Жалпылама: {term.get('relations', {}).get('general_concept')} | " if term.get('relations', {}).get('general_concept') else '') +
+            (f"🔽 Арнайы: {', '.join(term.get('relations', {}).get('specific_concepts', []))} | " if term.get('relations', {}).get('specific_concepts') else '') +
+            (f"🔗 Қатысты: {', '.join(term.get('relations', {}).get('associative', []))}" if term.get('relations', {}).get('associative') else '') +
             "</p>"
             for lecture_terms in terms.values() for term in lecture_terms
         ]) +
@@ -164,6 +163,7 @@ if search_query:
                 st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
 
             st.markdown("---")
+
 elif not st.session_state.get('show_map'):
     term_names = sorted([t.get('kk', '') for t in terms[lecture]])
     st.write("### 📋 Терминдер тізімі:")
@@ -174,7 +174,15 @@ elif not st.session_state.get('show_map'):
 
     selected = st.experimental_get_query_params().get("selected_term", [None])[0]
     if selected:
-                st.session_state['selected_term'] = selected
+        st.session_state['selected_term'] = selected
+
+    selected_term = st.session_state.get('selected_term')
+    if selected_term:
+        for term in terms[lecture]:
+            if term.get('kk', '') == selected_term:
+                term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
+                st.markdown(f"### 🖥 {term_text}")
+                speak_buttons(term)
 
                 with st.expander("📖 Анықтама / Определение / Definition"):
                     if 'definition' in term:
