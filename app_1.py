@@ -150,13 +150,32 @@ def main():
                     st.rerun()
         
         # Семантическая карта
-        if st.button("🌍 Показать связи"):
-            html_content = "<div style='padding:20px; font-family:Arial;'>"
-            html_content += "<h3>🔗 Семантические связи</h3>"
-            for term in all_terms:
-                html_content += f"<p><b>{term['kk']}</b> → {', '.join(term['relations']['synonyms'] + term['relations']['specific'])}</p>"
-            html_content += "</div>"
-            html(html_content, height=500, scrolling=True)
+if st.button("🌍 Показать связи"):
+    html_content = "<div style='padding:20px; font-family:Arial;'>"
+    html_content += "<h3>🔗 Семантические связи</h3>"
+    
+    for lecture in terms_data.values():
+        for term in lecture:
+            try:
+                # Извлечение данных с защитой от отсутствующих ключей
+                kk = term.get('kk', 'Без названия')
+                relations = term.get('relations', {})
+                
+                # Формирование элементов связей
+                elements = []
+                if 'synonyms' in relations:
+                    elements.extend(relations['synonyms'])
+                if 'specific' in relations:
+                    elements.extend(relations['specific'])
+                
+                html_content += f"<p><b>{kk}</b> → {', '.join(elements)}</p>"
+                
+            except Exception as e:
+                st.error(f"Ошибка обработки термина: {e}")
+                continue
+    
+    html_content += "</div>"
+    html(html_content, height=500, scrolling=True)
     
     # ==================== Основной интерфейс ====================
     # Поиск и фильтрация
