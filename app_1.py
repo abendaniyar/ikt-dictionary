@@ -75,7 +75,7 @@ def parse_excel(uploaded_file):
                 },
                 'relations': {
                     'synonyms': [s.strip() for s in str(row.get('synonyms', '')).split(',')],
-                    'general': row.get('general_concept', ''),
+                    'general': row.get('general_concept', '').split(',')],
                     'specific': [s.strip() for s in str(row.get('specific_concepts', '')).split(',')],
                     'associative': [s.strip() for s in str(row.get('associative', '')).split(',')]
                 }
