@@ -11,7 +11,8 @@ st.title("📘АКТ курсы бойынша электрондық ұғымд
 
 if 'selected_term' not in st.session_state:
     st.session_state['selected_term'] = None
-
+if 'show_map' not in st.session_state:
+    st.session_state['show_map'] = False
 # Excel жүктеу
 uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (жаңа терминдер)", type=["xlsx"])
 if uploaded_file:
@@ -54,8 +55,109 @@ if uploaded_file:
 # Іздеу функциясын қосу
 search_query = st.text_input("🔍 Терминді іздеу:", "").strip().lower()
 
+def speak_buttons(term):
+    kk = term.get('kk', '')
+    ru = term.get('ru', '')
+    en = term.get('en', '')
+    html(f"""
+        <div style='margin-bottom: 10px;'>
+            <button onclick=\"speakRU()\" style='margin-right: 10px;'>🔊 Орысша</button>
+            <button onclick=\"speakEN()\">🔊 Ағылшынша</button>
+        </div>
+        <script>
+            function speakKK() {{
+                var msg = new SpeechSynthesisUtterance("{kk}");
+                msg.lang = "kk-KZ";
+                window.speechSynthesis.speak(msg);
+            }}
+            function speakRU() {{
+                var msg = new SpeechSynthesisUtterance("{ru}");
+                msg.lang = "ru-RU";
+                window.speechSynthesis.speak(msg);
+            }}
+            function speakEN() {{
+                var msg = new SpeechSynthesisUtterance("{en}");
+                msg.lang = "en-US";
+                window.speechSynthesis.speak(msg);
+            }}
+        </script>
+    """, height=60)
 # Дәріс таңдауы
 lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
+# Семантикалық картаны көру батырмасы
+if st.sidebar.button("📚 Семантикалық картаны көру"):
+    st.session_state['show_map'] = True
+    components.html(
+        """
+        <html>
+        <head><title>Семантикалық карта</title></head>
+        <body>
+        <h2>📚 Семантикалық карта</h2>
+        <div style='font-family:Arial;'>
+        """ +
+        ''.join([
+            f"<p><b>{term.get('kk', '')}</b> - " +
+            (f"🔁 Синонимдер: {', '.join(term.get('relations', {{}}).get('synonyms', []))} | " if term.get('relations', {{}}).get('synonyms') else '') +
+            (f"🔼 Жалпылама: {term.get('relations', {{}}).get('general_concept')} | " if term.get('relations', {{}}).get('general_concept') else '') +
+            (f"🔽 Арнайы: {', '.join(term.get('relations', {{}}).get('specific_concepts', []))} | " if term.get('relations', {{}}).get('specific_concepts') else '') +
+            (f"🔗 Қатысты: {', '.join(term.get('relations', {{}}).get('associative', []))}" if term.get('relations', {{}}).get('associative') else '') +
+            "</p>"
+            for lecture_terms in terms.values() for term in lecture_terms
+        ]) +
+        """
+        </div>
+        </body>
+        </html>
+        """,
+        height=500,
+        scrolling=True
+    )
+
+if search_query:
+    st.session_state['show_map'] = False
+    st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
+    found_terms = []
+    for lecture_name, term_list in terms.items():
+        for term in term_list:
+            if search_query in term.get('kk', '').lower() or search_query in term.get('ru', '').lower() or search_query in term.get('en', '').lower():
+                found_terms.append((lecture_name, term))
+
+    if not found_terms:
+        st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
+    else:
+        for lecture_name, term in found_terms:
+            term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
+            st.markdown(f"### 📂 {lecture_name}<br>🖥 {term_text}", unsafe_allow_html=True)
+            speak_buttons(term)
+
+            with st.expander("📖 Анықтама / Определение / Definition"):
+                if 'definition' in term:
+                    st.markdown(f"**KK:** {term['definition'].get('kk', 'Жоқ')}")
+                    st.markdown(f"**RU:** {term['definition'].get('ru', 'Нет')}")
+                    st.markdown(f"**EN:** {term['definition'].get('en', 'No')}")
+                else:
+                    st.info("❗ Бұл термин үшін анықтама берілмеген.")
+
+            with st.expander("💬 Мысал / Пример / Example"):
+                if 'example' in term:
+                    st.markdown(f"**KK:** {term['example'].get('kk', 'Жоқ')}")
+                    st.markdown(f"**RU:** {term['example'].get('ru', 'Нет')}")
+                    st.markdown(f"**EN:** {term['example'].get('en', 'No')}")
+                else:
+                    st.info("❗ Бұл термин үшін мысал берілмеген.")
+
+            if term.get("image"):
+                st.markdown(
+                    f'<a href="{term["image"]}" target="_blank">'
+                    f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
+                    f'</a>',
+                    unsafe_allow_html=True
+                )
+
+            if term.get("source"):
+                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
+
+            st.markdown("---")
 
 # Термин тізімі
 if not search_query:
