@@ -158,8 +158,19 @@ else:
     st.info("📝 Термин таңдаңыз немесе сүзгі қолданыңыз.")
 
 # Дәріс таңдауы
-lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
-for lecture_name, term in found_terms:
+if search_query:
+    st.session_state['show_map'] = False
+    st.header(f"🔎 Іздеу нәтижелері: \"{search_query}\"")
+    found_terms = []
+    for lecture_name, term_list in terms.items():
+        for term in term_list:
+            if search_query in term.get('kk', '').lower() or search_query in term.get('ru', '').lower() or search_query in term.get('en', '').lower():
+                found_terms.append((lecture_name, term))
+
+    if not found_terms:
+        st.warning("🛑 Бұл іздеу сұранысына сәйкес терминдер табылмады.")
+    else:
+        for lecture_name, term in found_terms:
             term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
             st.markdown(f"### 📂 {lecture_name}<br>🖥 {term_text}", unsafe_allow_html=True)
             speak_buttons(term)
@@ -192,6 +203,7 @@ for lecture_name, term in found_terms:
                 st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
 
             st.markdown("---")
+
 
 # Термин мәліметі
 selected = st.session_state.get("selected_term")
