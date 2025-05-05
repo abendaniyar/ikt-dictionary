@@ -204,20 +204,20 @@ if search_query:
 if not search_query:
     st.write("### 📋 Терминдер тізімі:")
 
-    page_size = 10
-    total_terms = len(terms[lecture])
-    total_pages = (total_terms + page_size - 1) // page_size
+    # Әріптер тізімі
+    alphabet = sorted(set(term.get("kk", "")[0].upper() for term in terms[lecture] if term.get("kk")))
+    selected_letter = st.selectbox("🔠 Әріп бойынша сүзу", options=alphabet)
 
-    page = st.number_input("📄 Бет таңдау", min_value=1, max_value=total_pages, step=1)
+    # Таңдалған әріптен басталатын терминдерді сүзу
+    filtered_terms = [term for term in terms[lecture] if term.get("kk", "").startswith(selected_letter)]
 
-    start = (page - 1) * page_size
-    end = start + page_size
-    paginated_terms = terms[lecture][start:end]
-
-    for i, term in enumerate(paginated_terms):
-        name = term.get("kk", "")
-        if st.button(f"🔹 {name}", key=f"term_{start + i}"):
-            st.session_state['selected_term'] = name
+    if not filtered_terms:
+        st.warning("🛑 Бұл әріпке сәйкес терминдер табылмады.")
+    else:
+        for i, term in enumerate(filtered_terms):
+            name = term.get("kk", "")
+            if st.button(f"🔹 {name}", key=f"letter_term_{i}"):
+                st.session_state['selected_term'] = name
 # Термин мәліметі
 selected = st.session_state.get("selected_term")
 if selected:
