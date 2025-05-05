@@ -161,13 +161,25 @@ else:
 # Дәріс таңдауы
 lecture = st.sidebar.radio("📂 Дәріс таңдаңыз:", list(terms.keys()))
 
-            st.markdown("---")
-
 # Термин тізімі
-for i, term in enumerate(filtered_terms):
+if not search_query:
+    st.write("### 📋 Терминдер тізімі:")
+
+    # Әріптер тізімі
+    alphabet = sorted(set(term.get("kk", "")[0].upper() for term in terms[lecture] if term.get("kk")))
+    selected_letter = st.selectbox("🔠 Әріп бойынша сүзу", options=alphabet)
+
+    # Таңдалған әріптен басталатын терминдерді сүзу
+    filtered_terms = [term for term in terms[lecture] if term.get("kk", "").startswith(selected_letter)]
+
+    if not filtered_terms:
+        st.warning("🛑 Бұл әріпке сәйкес терминдер табылмады.")
+    else:
+        for i, term in enumerate(filtered_terms):
             name = term.get("kk", "")
             if st.button(f"🔹 {name}", key=f"letter_term_{i}"):
                 st.session_state['selected_term'] = name
+
 # Термин мәліметі
 selected = st.session_state.get("selected_term")
 if selected:
