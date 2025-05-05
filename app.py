@@ -17,6 +17,7 @@ if 'show_map' not in st.session_state:
     st.session_state['show_map'] = False
 
 # Excel жүктеу
+uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (жаңа терминдер)", type=["xlsx"])
 if uploaded_file:
     try:
         df = pd.read_excel(uploaded_file)
