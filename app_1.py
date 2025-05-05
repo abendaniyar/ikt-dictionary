@@ -3,165 +3,196 @@ import json
 import pandas as pd
 import requests
 import base64
-import logging
 from difflib import get_close_matches
 from streamlit.components.v1 import html
 
-# Настройка логирования
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# ==================== Конфигурация ====================
+GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
+REPO_OWNER = st.secrets["REPO_OWNER"]
+REPO_NAME = st.secrets["REPO_NAME"]
+FILE_PATH = "data.json"
 
-# ==================== КОНФИГУРАЦИЯ ====================
-REQUIRED_SECRETS = ["GITHUB_TOKEN", "REPO_OWNER", "REPO_NAME"]
-REQUIRED_TERM_KEYS = ['kk', 'ru', 'en']
+headers = {
+    "Authorization": f"token {GITHUB_TOKEN}",
+    "Accept": "application/vnd.github.v3+json"
+}
 
-# ==================== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ====================
-def validate_secrets():
-    """Проверка наличия необходимых секретов"""
-    missing = [key for key in REQUIRED_SECRETS if key not in st.secrets]
-    if missing:
-        st.error(f"❌ Отсутствуют секреты: {', '.join(missing)}")
-        raise RuntimeError("Missing secrets")
-
+# ==================== Основные функции ====================
+@st.cache_data
 def load_github_data():
-    """Загрузка данных из GitHub"""
+    """Загрузка данных из GitHub репозитория"""
     try:
-        url = f"https://api.github.com/repos/{st.secrets.REPO_OWNER}/{st.secrets.REPO_NAME}/contents/data.json"
-        response = requests.get(
-            url,
-            headers={"Authorization": f"token {st.secrets.GITHUB_TOKEN}"}
-        )
+        url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
+        response = requests.get(url, headers=headers)
         response.raise_for_status()
         
         content = base64.b64decode(response.json()["content"]).decode("utf-8")
         return json.loads(content), response.json()["sha"]
     
     except Exception as e:
-        logger.error(f"Ошибка загрузки данных: {str(e)}")
-        st.error("❌ Ошибка загрузки данных из GitHub")
+        st.error(f"❌ Ошибка загрузки: {str(e)}")
         return {}, None
 
-def validate_term(term):
-    """Проверка структуры термина"""
-    return all(key in term for key in REQUIRED_TERM_KEYS)
-
-def safe_get(data, *keys, default=None):
-    """Безопасное получение данных из словаря"""
-    for key in keys:
-        data = data.get(key, {}) if isinstance(data, dict) else default
-    return data if data is not None else default
-
-# ==================== ОСНОВНЫЕ КОМПОНЕНТЫ ====================
-def display_term(term):
-    """Отображение карточки термина"""
+def update_github(data, sha):
+    """Обновление данных на GitHub"""
     try:
-        with st.container():
-            # Заголовок
-            title = safe_get(term, 'kk', default='Без названия')
-            st.markdown(f"### 🌐 {title}")
-            
-            # Вкладки с информацией
-            tabs = st.tabs(["📖 Определение", "💬 Пример", "🔗 Связи"])
-            
-            # Определения
-            with tabs[0]:
-                st.markdown(f"**KK:** {safe_get(term, 'definition', 'kk', default='-')}")
-                st.markdown(f"**RU:** {safe_get(term, 'definition', 'ru', default='-')}")
-                st.markdown(f"**EN:** {safe_get(term, 'definition', 'en', default='-')}")
-            
-            # Примеры
-            with tabs[1]:
-                st.markdown(f"**KK:** {safe_get(term, 'example', 'kk', default='-')}")
-                st.markdown(f"**RU:** {safe_get(term, 'example', 'ru', default='-')}")
-                st.markdown(f"**EN:** {safe_get(term, 'example', 'en', default='-')}")
-            
-            # Связи
-            with tabs[2]:
-                cols = st.columns(2)
-                with cols[0]:
-                    st.markdown("🔁 **Синонимы:**\n" + "\n".join(
-                        f"- {s}" for s in safe_get(term, 'relations', 'synonyms', default=[])
-                    ))
-                    st.markdown("🔼 **Общее понятие:**\n" + safe_get(term, 'relations', 'general', default='-'))
-                
-                with cols[1]:
-                    st.markdown("🔽 **Частные понятия:**\n" + "\n".join(
-                        f"- {s}" for s in safe_get(term, 'relations', 'specific', default=[])
-                    ))
-                    st.markdown("🔗 **Ассоциации:**\n" + "\n".join(
-                        f"- {s}" for s in safe_get(term, 'relations', 'associative', default=[])
-                    ))
+        url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
+        content = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
+        
+        response = requests.put(
+            url,
+            headers=headers,
+            json={
+                "message": "🔄 Обновление данных",
+                "content": base64.b64encode(content).decode("utf-8"),
+                "sha": sha
+            }
+        )
+        response.raise_for_status()
+        st.success("✅ Данные успешно обновлены!")
     
     except Exception as e:
-        logger.error(f"Ошибка отображения термина: {str(e)}")
-        st.error("⚠️ Ошибка отображения термина")
+        st.error(f"❌ Ошибка обновления: {str(e)}")
 
-def show_semantic_map(terms_data):
-    """Генерация семантической карты"""
-    html_content = "<div style='padding:20px; font-family:Arial;'><h3>🔗 Семантические связи</h3>"
+def parse_excel(uploaded_file):
+    """Обработка Excel-файла с терминами"""
+    try:
+        df = pd.read_excel(uploaded_file)
+        return [
+            {
+                'kk': row.get('kk', ''),
+                'ru': row.get('ru', ''),
+                'en': row.get('en', ''),
+                'definition': {
+                    'kk': row.get('definition_kk', ''),
+                    'ru': row.get('definition_ru', ''),
+                    'en': row.get('definition_en', '')
+                },
+                'example': {
+                    'kk': row.get('example_kk', ''),
+                    'ru': row.get('example_ru', ''),
+                    'en': row.get('example_en', '')
+                },
+                'relations': {
+                    'synonyms': [s.strip() for s in str(row.get('synonyms', '')).split(',')],
+                    'general': [s.strip() for s in str(row.get('general_concept', '')).split(',')],
+                    'specific': [s.strip() for s in str(row.get('specific_concepts', '')).split(',')],
+                    'associative': [s.strip() for s in str(row.get('associative', '')).split(',')]
+                }
+            }
+            for _, row in df.iterrows()
+        ]
     
-    for lecture in terms_data.values():
-        for term in lecture:
-            try:
-                title = safe_get(term, 'kk', default='Без названия')
-                synonyms = safe_get(term, 'relations', 'synonyms', default=[])
-                specific = safe_get(term, 'relations', 'specific', default=[])
-                relations = ', '.join(synonyms + specific)
-                
-                html_content += f"<p><b>{title}</b> → {relations or 'нет связей'}</p>"
-            
-            except Exception as e:
-                logger.error(f"Ошибка обработки термина: {str(e)}")
-                continue
-    
-    html_content += "</div>"
-    html(html_content, height=500, scrolling=True)
+    except Exception as e:
+        st.error(f"❌ Ошибка обработки Excel: {str(e)}")
+        return []
 
-# ==================== ОСНОВНОЙ ИНТЕРФЕЙС ====================
+# ==================== Вспомогательные функции ====================
+def display_term(term):
+    """Отображение карточки термина с проверкой отсутствующих полей"""
+    with st.container():
+        st.markdown(f"### 🌐 {term.get('kk', 'Без названия')}")
+        
+        # Вкладки с информацией
+        tabs = st.tabs(["📖 Определение", "💬 Пример", "🔗 Связи"])
+        
+        # Безопасное получение данных
+        definition = term.get('definition', {})
+        example = term.get('example', {})
+        relations = term.get('relations', {})
+
+        with tabs[0]:
+            st.markdown(f"**KK:** {definition.get('kk', '-')}")
+            st.markdown(f"**RU:** {definition.get('ru', '-')}")
+            st.markdown(f"**EN:** {definition.get('en', '-')}")
+        
+        with tabs[1]:
+            st.markdown(f"**KK:** {example.get('kk', '-')}")
+            st.markdown(f"**RU:** {example.get('ru', '-')}")
+            st.markdown(f"**EN:** {example.get('en', '-')}")
+        
+        with tabs[2]:
+            cols = st.columns(2)
+            with cols[0]:
+                st.markdown("🔁 **Синонимы:**\n" + "\n".join(
+                    f"- {s}" for s in relations.get('synonyms', [])
+                ))
+                st.markdown("🔼 **Общее понятие:**\n" + relations.get('general', '-'))
+            with cols[1]:
+                st.markdown("🔽 **Частные понятия:**\n" + "\n".join(
+                    f"- {s}" for s in relations.get('specific', [])
+                ))
+                st.markdown("🔗 **Ассоциации:**\n" + "\n".join(
+                    f"- {s}" for s in relations.get('associative', [])
+                ))
+# ==================== Интерфейс ====================
 def main():
     st.set_page_config("Электронный словарь", layout="wide")
     st.title("📚 Терминологический словарь АКТ")
     
-    try:
-        # Загрузка данных
-        terms_data, _ = load_github_data()
-        
-        # Фильтрация терминов
-        valid_terms = [
-            term for lecture in terms_data.values() 
-            for term in lecture 
-            if validate_term(term)
-        ]
-        
-        # Поиск
-        search_query = st.text_input("🔍 Поиск по всем терминам", help="Ищите на любом языке")
-        filtered_terms = [
-            term for term in valid_terms
-            if search_query.lower() in str(term).lower()
-        ] if search_query else valid_terms
-        
-        # Отображение результатов
-        if filtered_terms:
-            st.subheader(f"📚 Найдено терминов: {len(filtered_terms)}")
-            for term in filtered_terms:
-                display_term(term)
-                st.divider()
-        else:
-            st.info("🔍 Ничего не найдено. Попробуйте другой запрос.")
-        
-        # Боковая панель
-        with st.sidebar:
-            st.header("⚙️ Управление")
-            if st.button("🌍 Показать связи"):
-                show_semantic_map(terms_data)
+    # Инициализация данных
+    terms_data, sha = load_github_data()
+    all_terms = [term for lecture in terms_data.values() for term in lecture]
     
-    except Exception as e:
-        logger.error(f"Критическая ошибка: {str(e)}")
-        st.error("🚨 Произошла критическая ошибка. Пожалуйста, проверьте логи.")
+    # ==================== Боковая панель ====================
+    with st.sidebar:
+        st.header("⚙️ Управление данными")
+        
+        # Загрузка Excel
+        uploaded_file = st.file_uploader("📤 Загрузить Excel", type=["xlsx"])
+        if uploaded_file:
+            new_terms = parse_excel(uploaded_file)
+            if new_terms:
+                selected_lecture = st.selectbox("📚 Выберите лекцию", list(terms_data.keys()))
+                if st.button("💾 Сохранить термины"):
+                    terms_data[selected_lecture].extend(new_terms)
+                    update_github(terms_data, sha)
+                    st.rerun()
+        
+        # Семантическая карта
+        if st.button("🌍 Показать связи"):
+            html_content = "<div style='padding:20px; font-family:Arial;'>"
+            html_content += "<h3>🔗 Семантические связи</h3>"
+            
+            for lecture in terms_data.values():
+                for term in lecture:
+                    try:
+                        # Извлечение данных с защитой от отсутствующих ключей
+                        kk = term.get('kk', 'Без названия')
+                        relations = term.get('relations', {})
+                        
+                        # Формирование элементов связей
+                        elements = []
+                        if 'synonyms' in relations:
+                            elements.extend(relations['synonyms'])
+                        if 'specific' in relations:
+                            elements.extend(relations['specific'])
+                        
+                        html_content += f"<p><b>{kk}</b> → {', '.join(elements)}</p>"
+                        
+                    except Exception as e:
+                        st.error(f"Ошибка обработки термина: {e}")
+                        continue
+            
+            html_content += "</div>"
+            html(html_content, height=500, scrolling=True)
+    
+    # ==================== Основной интерфейс ====================
+    # Поиск и фильтрация
+    search_query = st.text_input("🔍 Поиск по всем терминам", help="Ищите на любом языке")
+    filtered_terms = [
+        term for term in all_terms
+        if search_query.lower() in str(term).lower()
+    ] if search_query else all_terms
+    
+    # Отображение результатов
+    if filtered_terms:
+        st.subheader(f"📚 Найдено терминов: {len(filtered_terms)}")
+        for term in filtered_terms:
+            display_term(term)
+            st.divider()
+    else:
+        st.info("🔍 Ничего не найдено. Попробуйте другой запрос.")
 
 if __name__ == "__main__":
-    try:
-        validate_secrets()
-        main()
-    except Exception as e:
-        st.error("❌ Приложение не может быть запущено")
+    main()
