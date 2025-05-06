@@ -197,10 +197,7 @@ def main():
         # Фильтрлер
         st.subheader(f"📖 Тақырып: {selected_lecture}")
         
-        # 1. Ішкі іздеу
-        topic_search = st.text_input("🔍 Тақырып ішінде іздеу")
-        
-        # 2. Әріп бойынша сүзгі
+        # Әріп бойынша сүзгі
         initial_terms = terms_data[selected_lecture]
         letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
         selected_letter = st.selectbox("🔤 Әріп бойынша сүзгі", ["Барлығы"] + letters)
@@ -212,7 +209,7 @@ def main():
                (selected_letter == "Барлығы" or term.get('kk', '').upper().startswith(selected_letter))
         ]
 
-        # 3. Сұрыптау
+        # Сұрыптау
         sort_option = st.selectbox(
             "🔃 Сұрыптау",
             options=["А → Я (қаз)", "Я → А (қаз)", "Мысалдары барлар алдымен"],
@@ -226,7 +223,7 @@ def main():
         elif sort_option == "Мысалдары барлар алдымен":
             filtered_terms.sort(key=lambda x: bool(x.get('example')), reverse=True)
 
-        # 4. Пагинация
+        #  Пагинация
         ITEMS_PER_PAGE = 15
         total_pages = max(1, (len(filtered_terms) + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE)
         page = st.number_input("📄 Бет", 
