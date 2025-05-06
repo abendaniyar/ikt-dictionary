@@ -46,6 +46,54 @@ def update_json_to_github(new_data, sha):
     else:
         st.error(f"❌ GitHub-қа жазу қатесі: {response.text}")
 
+# Интерфейс
+st.set_page_config("Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
+st.title("📘 АКТ курсы: Электрондық терминологиялық сөздік")
+
+terms, sha = load_json_from_github()
+
+# Excel жүктеу
+uploaded_file = st.sidebar.file_uploader("📤 Excel файл жүктеу (xlsx)", type=["xlsx"])
+if uploaded_file:
+    try:
+        df = pd.read_excel(uploaded_file)
+        new_terms = []
+        for _, row in df.iterrows():
+            term = {
+                'kk': row.get('kk', ''),
+                'ru': row.get('ru', ''),
+                'en': row.get('en', ''),
+                'definition': {
+                    'kk': row.get('definition_kk', ''),
+                    'ru': row.get('definition_ru', ''),
+                    'en': row.get('definition_en', '')
+                },
+                'example': {
+                    'kk': row.get('example_kk', ''),
+                    'ru': row.get('example_ru', ''),
+                    'en': row.get('example_en', '')
+                },
+                'relations': {
+                    'synonyms': str(row.get('relations_synonyms', '')).split(',') if row.get('relations_synonyms') else [],
+                    'general_concept': row.get('relations_general_concept', ''),
+                    'specific_concepts': str(row.get('relations_specific_concepts', '')).split(',') if row.get('relations_specific_concepts') else [],
+                    'associative': str(row.get('relations_associative', '')).split(',') if row.get('relations_associative') else []
+                }
+            }
+            new_terms.append(term)
+
+        lecture_name = st.sidebar.selectbox("📚 Қай дәріске қосылады?", list(terms.keys()))
+        if st.sidebar.button("➕ Терминдерді қосу"):
+            terms[lecture_name].extend(new_terms)
+            with open("data.json", "w", encoding="utf-8") as f:
+                json.dump(terms, f, ensure_ascii=False, indent=2)
+            st.success(f"✅ {len(new_terms)} жаңа термин қосылды!")
+            st.session_state['selected_term'] = None
+            st.experimental_rerun()
+
+    except Exception as e:
+        st.error(f"❌ Excel оқу қатесі: {e}")
+
 def parse_excel(uploaded_file):
     """Обработка Excel-файла с терминами"""
     try:
