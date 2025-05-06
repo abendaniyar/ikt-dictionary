@@ -52,38 +52,29 @@ def update_github(data, sha):
     except Exception as e:
         st.error(f"❌ Ошибка обновления: {str(e)}")
 
-def parse_excel(uploaded_file):
-    """Обработка Excel-файла с терминами"""
-    try:
-        df = pd.read_excel(uploaded_file)
-        return [
-            {
-                'kk': row.get('kk', ''),
-                'ru': row.get('ru', ''),
-                'en': row.get('en', ''),
-                'definition': {
-                    'kk': row.get('definition_kk', ''),
-                    'ru': row.get('definition_ru', ''),
-                    'en': row.get('definition_en', '')
-                },
-                'example': {
-                    'kk': row.get('example_kk', ''),
-                    'ru': row.get('example_ru', ''),
-                    'en': row.get('example_en', '')
-                },
-                'relations': {
-                    'synonyms': [s.strip() for s in str(row.get('synonyms', '')).split(',')],
-                    'general': [s.strip() for s in str(row.get('general_concept', '')).split(',')],
-                    'specific': [s.strip() for s in str(row.get('specific_concepts', '')).split(',')],
-                    'associative': [s.strip() for s in str(row.get('associative', '')).split(',')]
-                }
-            }
-            for _, row in df.iterrows()
-        ]
-    
-    except Exception as e:
-        st.error(f"❌ Ошибка обработки Excel: {str(e)}")
-        return []
+"3D модельдеу": [
+    {
+        "kk": "3D модельдеу",
+        "ru": "3D моделирование",
+        "en": "3D Modeling",
+        "definition": {
+            "kk": "Үш өлшемді модель...",
+            "ru": "",
+            "en": ""
+        },
+        "example": {
+            "kk": "",
+            "ru": "",
+            "en": ""
+        },
+        "relations": {
+            "synonyms": ["3D дизайн"],
+            "general_concept": "Компьютерлік графика",
+            "specific_concepts": ["Бүйымдар дизайны"],
+            "associative": []
+        }
+    }
+]
 
 # ==================== Вспомогательные функции ====================
 def display_term_compact(term, index):
@@ -153,8 +144,8 @@ def main():
             if new_terms:
                 selected_lecture = st.selectbox("📚 Дәріс таңдаңыз", list(terms_data.keys()))
                 if st.button("💾 Терминдерді сақтау"):
-                    terms_data[selected_lecture].extend(new_terms)
                     update_github(terms_data, sha)
+                    st.cache_data.clear()
                     st.rerun()
         
         # Семантикалық карта
