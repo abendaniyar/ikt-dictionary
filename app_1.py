@@ -253,7 +253,7 @@ def main():
             st.subheader(f"📚 Табылды: {len(filtered_terms)} термин")
             for idx, term in enumerate(filtered_terms):  # <-- enumerate қосылды
                 display_term_compact(term, idx)  # <-- индекс берілді
-                st.divider()
+                #st.divider()
         else:
             st.info("🔍 Ештеңе табылған жоқ. Іздеу сұранысын өзгертіңіз.")
 if __name__ == "__main__":
