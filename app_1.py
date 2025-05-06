@@ -19,7 +19,7 @@ headers = {
 
 # ==================== Основные функции ====================
 @st.cache_data(ttl=60, show_spinner=False)
-def load_github_data()
+def load_github_data():
     try:
         url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
         response = requests.get(url, headers=headers)
