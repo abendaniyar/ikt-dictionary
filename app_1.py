@@ -46,36 +46,67 @@ def update_github(data, sha):
                 "sha": sha
             }
         )
-        response.raise_for_status()
-        st.success("✅ Данные успешно обновлены!")
-    
+        if response.status_code == 200:
+            st.success("✅ Терминдер GitHub-та сақталды!")
+            st.balloons()
+            return True
+        else:
+            error_msg = response.json().get('message', 'Белгісіз қате')
+            st.error(f"❌ GitHub қатесі ({response.status_code}): {error_msg}")
+            return False
+
     except Exception as e:
-        st.error(f"❌ Ошибка обновления: {str(e)}")
+        st.error(f"❌ Сақтау қатесі: {str(e)}")
+        return False
 
-"3D модельдеу": [
-    {
-        "kk": "3D модельдеу",
-        "ru": "3D моделирование",
-        "en": "3D Modeling",
-        "definition": {
-            "kk": "Үш өлшемді модель...",
-            "ru": "",
-            "en": ""
-        },
-        "example": {
-            "kk": "",
-            "ru": "",
-            "en": ""
-        },
-        "relations": {
-            "synonyms": ["3D дизайн"],
-            "general_concept": "Компьютерлік графика",
-            "specific_concepts": ["Бүйымдар дизайны"],
-            "associative": []
-        }
-    }
-]
+def parse_excel(uploaded_file):
+    """Excel файлды дұрыс парсинг жасау (жаңартылған нұсқасы)"""
+    try:
+        df = pd.read_excel(uploaded_file)
+        
+        # Міндетті бағандарды тексеру
+        required_columns = ['kk', 'ru', 'en']
+        missing = [col for col in required_columns if col not in df.columns]
+        if missing:
+            st.error(f"❌ Қажетті бағандар жоқ: {', '.join(missing)}")
+            return []
 
+        new_terms = []
+        for _, row in df.iterrows():
+            # Негізгі ақпарат
+            term = {
+                'kk': str(row['kk']).strip(),
+                'ru': str(row['ru']).strip(),
+                'en': str(row['en']).strip(),
+                'definition': {
+                    'kk': str(row.get('definition_kk', '')).strip(),
+                    'ru': str(row.get('definition_ru', '')).strip(),
+                    'en': str(row.get('definition_en', '')).strip()
+                },
+                'example': {
+                    'kk': str(row.get('example_kk', '')).strip(),
+                    'ru': str(row.get('example_ru', '')).strip(),
+                    'en': str(row.get('example_en', '')).strip()
+                },
+                'relations': {
+                    'synonyms': [s.strip() for s in str(row.get('synonyms', '')).split(',') if s.strip()],
+                    'general_concept': str(row.get('general_concept', '')).strip(),
+                    'specific_concepts': [s.strip() for s in str(row.get('specific_concepts', '')).split(',') if s.strip()],
+                    'associative': [s.strip() for s in str(row.get('associative', '')).split(',') if s.strip()]
+                }
+            }
+            
+            # Пустық өрістерді өшіру
+            for key in ['definition', 'example']:
+                term[key] = {k: v for k, v in term[key].items() if v}
+            
+            new_terms.append(term)
+        
+        return new_terms
+
+    except Exception as e:
+        st.error(f"❌ Excel қатесі: {str(e)}")
+        return []
 # ==================== Вспомогательные функции ====================
 def display_term_compact(term, index):
     """Терминнің қысқаша көрінісі"""
@@ -135,18 +166,35 @@ def main():
     
     # ==================== Боковая панель ====================
     with st.sidebar:
-        st.header("⚙️ Деректерді басқару")
-        
-        # Загрузка Excel
         uploaded_file = st.file_uploader("📤 Excel файл жүктеу", type=["xlsx"])
         if uploaded_file:
             new_terms = parse_excel(uploaded_file)
             if new_terms:
-                selected_lecture = st.selectbox("📚 Дәріс таңдаңыз", list(terms_data.keys()))
-                if st.button("💾 Терминдерді сақтау"):
-                    update_github(terms_data, sha)
-                    st.cache_data.clear()
-                    st.rerun()
+                st.success(f"✅ {len(new_terms)} жаңа термин табылды!")
+                
+                # Тақырыпты таңдау
+                selected_lecture = st.selectbox(
+                    "📚 Тақырып таңдаңыз:",
+                    list(terms_data.keys()) + ["+ ЖАҢА ТАҚЫРЫП"],
+                    index=0
+                )
+                
+                # Жаңа тақырып қосу
+                if selected_lecture == "+ ЖАҢА ТАҚЫРЫП":
+                    new_lecture = st.text_input("Жаңа тақырып атауы:")
+                    if new_lecture:
+                        terms_data[new_lecture] = []
+                        selected_lecture = new_lecture
+                
+                if st.button("💾 Терминдерді сақтау", type="primary"):
+                    # Деректерді жаңарту
+                    terms_data[selected_lecture].extend(new_terms)
+                    
+                    # GitHub-ға жіберу
+                    if update_github(terms_data, sha):
+                        # Кэшті тазарту
+                        st.cache_data.clear()
+                        st.rerun()
         
         # Семантикалық карта
         if st.button("🌍 Байланыстарды көрсету"):
