@@ -20,7 +20,6 @@ headers = {
 # ==================== Основные функции ====================
 @st.cache_data
 def load_github_data():
-    """Загрузка данных из GitHub репозитория"""
     try:
         url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
         response = requests.get(url, headers=headers)
@@ -28,9 +27,8 @@ def load_github_data():
         
         content = base64.b64decode(response.json()["content"]).decode("utf-8")
         return json.loads(content), response.json()["sha"]
-    
     except Exception as e:
-        st.error(f"❌ Ошибка загрузки: {str(e)}")
+        st.error(f"❌ Деректер жүктелмеді: {str(e)}")
         return {}, None
 
 def update_github(data, sha):
