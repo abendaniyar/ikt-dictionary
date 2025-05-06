@@ -232,8 +232,10 @@ def main():
         # Терминдерді көрсету
         st.write(f"🔢 Жалпы терминдер: {len(filtered_terms)}")
         
-        for term in filtered_terms:
-            display_term_compact(term)
+        for idx, term in enumerate(filtered_terms):
+            display_term_compact(term, idx)
+        #for term in filtered_terms:
+        #    display_term_compact(term)
         
         # Толық ақпаратты көрсету
         if st.session_state.get('selected_term'):
@@ -256,6 +258,11 @@ def main():
                 st.divider()
         else:
             st.info("🔍 Ештеңе табылған жоқ. Іздеу сұранысын өзгертіңіз.")
-
+def display_term_compact(term, index):
+    """Терминнің қысқаша көрінісі"""
+    kk_title = term.get('kk', 'Атауы жоқ')
+    unique_key = f"term_{index}_{hash(kk_title)}"  # Бірегей кілт
+    if st.button(f"🔹 {kk_title}", key=unique_key):
+        st.session_state.selected_term = term
 if __name__ == "__main__":
     main()
