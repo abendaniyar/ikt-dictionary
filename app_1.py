@@ -188,7 +188,7 @@ def main():
         )
 
         st.subheader(f"📖 Тема: {selected_lecture}")
-        st.write(f"🔢 Количество терминов: {len(terms_data[selected_lecture])}")
+        st.write(f"🔢 Количество терминов 1: {len(terms_data[selected_lecture])}")
         
         # Инициализация состояния выбранного термина
         if 'selected_term' not in st.session_state:
