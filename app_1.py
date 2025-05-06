@@ -235,11 +235,7 @@ def main():
         
         for idx, term in enumerate(filtered_terms):
             display_term_compact(term, idx)
-    else:
-        # Іздеу нәтижелері
-        for idx, term in enumerate(filtered_terms):
-            display_term_compact(term, idx)
-        # Толық ақпаратты көрсету
+       # Толық ақпаратты көрсету
         if st.session_state.get('selected_term'):
             display_term_full(st.session_state.selected_term)
             if st.button("❌ Жабу"):
@@ -247,6 +243,8 @@ def main():
                 st.rerun()
     else:
         # Барлық терминдерден іздеу
+        for idx, term in enumerate(filtered_terms):
+            display_term_compact(term, idx)
         search_query = st.text_input("🔍 Терминдерді іздеу", help="Кез келген тілде іздеңіз")
         filtered_terms = [
             term for term in all_terms
