@@ -185,63 +185,62 @@ def main():
                         ["📂 Тақырып бойынша", "🔎 Барлық терминдерден іздеу"], 
                         horizontal=True)
 
-    if view_mode == "📂 Тақырып бойынша":
-        # Тақырыпты таңдау
-        selected_lecture = st.selectbox(
-            "📚 Тақырыпты таңдаңыз:",
-            list(terms_data.keys()),
-            index=0,
-            key="lecture_selector"
-        )
+if view_mode == "📂 Тақырып бойынша":
+    # Тақырыпты таңдау
+    selected_lecture = st.selectbox(
+        "📚 Тақырыпты таңдаңыз:",
+        list(terms_data.keys()),
+        index=0,
+        key="lecture_selector"
+    )
 
-        # Фильтрлер
-        st.subheader(f"📖 Тақырып: {selected_lecture}")
-        
-        # Әріп бойынша сүзгі
-        initial_terms = terms_data[selected_lecture]
-        letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
-        selected_letter = st.selectbox("🔤 Әріп бойынша сүзгі", ["Барлығы"] + letters)
-        
-        # Сұрыптау
+    # Фильтрлер
+    st.subheader(f"📖 Тақырып: {selected_lecture}")
+    
+    # 1. Әріп бойынша сүзгі
+    initial_terms = terms_data[selected_lecture]
+    letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
+    selected_letter = st.selectbox("🔤 Әріп бойынша сүзгі", ["Барлығы"] + letters)
+    
+    # Фильтрация
+    filtered_terms = [
+        term for term in initial_terms
+        if selected_letter == "Барлығы" or term.get('kk', '').upper().startswith(selected_letter)
+    ]
+
+    # 2. Сұрыптау параметрлері
+    col1, col2 = st.columns([3, 2])
+    with col1:
         sort_option = st.selectbox(
-            "🔃 Сұрыптау",
-            options=["А → Я (қаз)", "Я → А (қаз)", "Мысалдары барлар алдымен"],
+            "🔃 Сұрыптау түрі",
+            options=[
+                "Алфавит бойынша (А-Я)",
+                "Алфавит бойынша (Я-А)",
+                "Мысалдары барлар алдымен"
+            ],
             index=0
         )
-        
-        if sort_option == "А → Я (қаз)":
-            filtered_terms.sort(key=lambda x: x.get('kk', ''))
-        elif sort_option == "Я → А (қаз)":
-            filtered_terms.sort(key=lambda x: x.get('kk', ''), reverse=True)
-        elif sort_option == "Мысалдары барлар алдымен":
-            filtered_terms.sort(key=lambda x: bool(x.get('example')), reverse=True)
+    
+    # Сұрыптау логикасы
+    if sort_option == "Алфавит бойынша (А-Я)":
+        filtered_terms.sort(key=lambda x: x.get('kk', ''))
+    elif sort_option == "Алфавит бойынша (Я-А)":
+        filtered_terms.sort(key=lambda x: x.get('kk', ''), reverse=True)
+    elif sort_option == "Мысалдары барлар алдымен":
+        filtered_terms.sort(key=lambda x: len(x.get('example', {}).get('kk', '')), reverse=True)
 
-        #  Пагинация
-        ITEMS_PER_PAGE = 15
-        total_pages = max(1, (len(filtered_terms) + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE)
-        page = st.number_input("📄 Бет", 
-                              min_value=1, 
-                              max_value=total_pages, 
-                              value=1,
-                              key="pagination")
-        
-        # Терминдерді көрсету
-        start_idx = (page-1)*ITEMS_PER_PAGE
-        paginated_terms = filtered_terms[start_idx : start_idx+ITEMS_PER_PAGE]
-        
-        st.write(f"🔢 Терминдер саны: {len(filtered_terms)}")
-        st.caption(f"Бет {page} / {total_pages}")
-        
-        for term in paginated_terms:
-            display_term_compact(term)
-        
-        # Толық ақпаратты көрсету
-        if st.session_state.get('selected_term'):
-            display_term_full(st.session_state.selected_term)
-            if st.button("❌ Жабу"):
-                del st.session_state.selected_term
-                st.rerun()
-
+    # Терминдерді көрсету
+    st.write(f"🔢 Жалпы терминдер: {len(filtered_terms)}")
+    
+    for term in filtered_terms:
+        display_term_compact(term)
+    
+    # Толық ақпаратты көрсету
+    if st.session_state.get('selected_term'):
+        display_term_full(st.session_state.selected_term)
+        if st.button("❌ Жабу"):
+            del st.session_state.selected_term
+            st.rerun()
     else:
         # Барлық терминдерден іздеу
         search_query = st.text_input("🔍 Терминдерді іздеу", help="Кез келген тілде іздеңіз")
