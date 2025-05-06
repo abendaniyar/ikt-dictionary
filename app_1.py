@@ -202,13 +202,6 @@ def main():
         letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
         selected_letter = st.selectbox("🔤 Әріп бойынша сүзгі", ["Барлығы"] + letters)
         
-        # Фильтрация
-        filtered_terms = [
-            term for term in initial_terms
-            if (topic_search.lower() in term.get('kk', '').lower()) and 
-               (selected_letter == "Барлығы" or term.get('kk', '').upper().startswith(selected_letter))
-        ]
-
         # Сұрыптау
         sort_option = st.selectbox(
             "🔃 Сұрыптау",
