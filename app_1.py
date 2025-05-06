@@ -253,15 +253,15 @@ def main():
         
         if filtered_terms:
             st.subheader(f"📚 Табылды: {len(filtered_terms)} термин")
-            for term in filtered_terms:
-                display_term_compact(term)
+            for idx, term in enumerate(filtered_terms):  # <-- enumerate қосылды
+                display_term_compact(term, idx)  # <-- индекс берілді
                 st.divider()
         else:
             st.info("🔍 Ештеңе табылған жоқ. Іздеу сұранысын өзгертіңіз.")
 def display_term_compact(term, index):
     """Терминнің қысқаша көрінісі"""
     kk_title = term.get('kk', 'Атауы жоқ')
-    unique_key = f"term_{index}_{hash(kk_title)}"  # Бірегей кілт
+    unique_key = f"compact_{index}_{kk_title[:10]}"  # Индекс пен атаудан кілт
     if st.button(f"🔹 {kk_title}", key=unique_key):
         st.session_state.selected_term = term
 if __name__ == "__main__":
