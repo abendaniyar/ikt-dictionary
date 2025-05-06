@@ -243,8 +243,6 @@ def main():
                 st.rerun()
     else:
         # Барлық терминдерден іздеу
-        for idx, term in enumerate(filtered_terms):
-            display_term_compact(term, idx)
         search_query = st.text_input("🔍 Терминдерді іздеу", help="Кез келген тілде іздеңіз")
         filtered_terms = [
             term for term in all_terms
