@@ -18,8 +18,8 @@ headers = {
 }
 
 # ==================== Основные функции ====================
-@st.cache_data
-def load_github_data():
+@st.cache_data(ttl=60, show_spinner=False)
+def load_github_data()
     try:
         url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
         response = requests.get(url, headers=headers)
@@ -31,28 +31,32 @@ def load_github_data():
         st.error(f"❌ Деректер жүктелмеді: {str(e)}")
         return {}, None
 
-def update_github(data, sha):
-    """Обновление данных на GitHub"""
+def update_github(data):
+    """GitHub-та деректерді жаңарту (автоматты SHA алу арқылы)"""
     try:
-        url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}"
-        content = json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
-        
+        # 1. Ағымдағы SHA-ны алу
+        current_content = requests.get(
+            f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}",
+            headers=headers
+        ).json()
+        sha = current_content.get("sha")
+
+        # 2. Жаңа деректерді жіберу
         response = requests.put(
-            url,
+            f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}",
             headers=headers,
             json={
-                "message": "🔄 Обновление данных",
-                "content": base64.b64encode(content).decode("utf-8"),
-                "sha": sha
+                "message": "Терминдер жаңартылды",
+                "content": base64.b64encode(json.dumps(data, ensure_ascii=False).encode()).decode(),
+                "sha": sha  # Ағымдағы SHA қолдану
             }
         )
+
         if response.status_code == 200:
-            st.success("✅ Терминдер GitHub-та сақталды!")
-            st.balloons()
+            st.success("✅ Терминдер сәтті сақталды!")
             return True
         else:
-            error_msg = response.json().get('message', 'Белгісіз қате')
-            st.error(f"❌ GitHub қатесі ({response.status_code}): {error_msg}")
+            st.error(f"❌ GitHub қатесі: {response.json().get('message')}")
             return False
 
     except Exception as e:
@@ -186,14 +190,11 @@ def main():
                         terms_data[new_lecture] = []
                         selected_lecture = new_lecture
                 
-                if st.button("💾 Терминдерді сақтау", type="primary"):
-                    # Деректерді жаңарту
+                if st.button("💾 Терминдерді сақтау"):
+                    st.cache_data.clear()
+                    terms_data, _ = load_github_data()
                     terms_data[selected_lecture].extend(new_terms)
-                    
-                    # GitHub-ға жіберу
-                    if update_github(terms_data, sha):
-                        # Кэшті тазарту
-                        st.cache_data.clear()
+                    if update_github(terms_data):
                         st.rerun()
         
         # Семантикалық карта
