@@ -88,10 +88,11 @@ def parse_excel(uploaded_file):
         return []
 
 # ==================== Вспомогательные функции ====================
-def display_term_compact(term):
-    """Отображение термина в компактном режиме (только название)"""
-    kk_title = term.get('kk', 'Без названия')
-    if st.button(f"🔹 {kk_title}", key=f"compact_{kk_title}"):
+def display_term_compact(term, index):
+    """Терминнің қысқаша көрінісі"""
+    kk_title = term.get('kk', 'Атауы жоқ')
+    unique_key = f"compact_{index}_{kk_title[:10]}"  # Индекс пен атаудан кілт
+    if st.button(f"🔹 {kk_title}", key=unique_key):
         st.session_state.selected_term = term
 
 def display_term_full(term):
@@ -234,9 +235,10 @@ def main():
         
         for idx, term in enumerate(filtered_terms):
             display_term_compact(term, idx)
-        #for term in filtered_terms:
-        #    display_term_compact(term)
-        
+    else:
+        # Іздеу нәтижелері
+        for idx, term in enumerate(filtered_terms):
+            display_term_compact(term, idx
         # Толық ақпаратты көрсету
         if st.session_state.get('selected_term'):
             display_term_full(st.session_state.selected_term)
@@ -258,11 +260,5 @@ def main():
                 st.divider()
         else:
             st.info("🔍 Ештеңе табылған жоқ. Іздеу сұранысын өзгертіңіз.")
-def display_term_compact(term, index):
-    """Терминнің қысқаша көрінісі"""
-    kk_title = term.get('kk', 'Атауы жоқ')
-    unique_key = f"compact_{index}_{kk_title[:10]}"  # Индекс пен атаудан кілт
-    if st.button(f"🔹 {kk_title}", key=unique_key):
-        st.session_state.selected_term = term
 if __name__ == "__main__":
     main()
