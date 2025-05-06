@@ -174,7 +174,6 @@ def main():
             html(html_content, height=500, scrolling=True)
 
     # ==================== Основной интерфейс ====================
-    # Переключатель режимов
     view_mode = st.radio("🔍 Режим просмотра:", 
                         ["📂 По темам", "🔎 Поиск по всем терминам"], 
                         horizontal=True)
@@ -190,19 +189,43 @@ def main():
         st.subheader(f"📖 Тема: {selected_lecture}")
         st.write(f"🔢 Количество терминов 1: {len(terms_data[selected_lecture])}")
         
-        # Инициализация состояния выбранного термина
-        if 'selected_term' not in st.session_state:
-            st.session_state.selected_term = None
-            
-        # Отображение списка терминов
-        for term in terms_data[selected_lecture]:
-            display_term_compact(term)
+        ITEMS_PER_PAGE = 15
+        total_pages = max(1, (len(filtered_terms) + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE)
+        page = st.number_input("📄 Страница", 
+                              min_value=1, 
+                              max_value=total_pages, 
+                              value=1,
+                              key="pagination")
+        
+        # 4. Сортировка
+        sort_option = st.selectbox(
+            "🔃 Сортировка",
+            options=["А → Я (каз)", "Я → А (каз)", "С примерами сначала"],
+            index=0
+        )
+        
+        if sort_option == "А → Я (каз)":
+            filtered_terms.sort(key=lambda x: x.get('kk', ''))
+        elif sort_option == "Я → А (каз)":
+            filtered_terms.sort(key=lambda x: x.get('kk', ''), reverse=True)
+        elif sort_option == "С примерами сначала":
+            filtered_terms.sort(key=lambda x: bool(x.get('example')), reverse=True)
+
+        # Отображение с пагинацией
+        start_idx = (page-1)*ITEMS_PER_PAGE
+        paginated_terms = filtered_terms[start_idx : start_idx+ITEMS_PER_PAGE]
+        
+        st.subheader(f"📖 {selected_lecture} ({len(filtered_terms)} терминов)")
+        st.caption(f"Страница {page} из {total_pages}")
+        
+        for term in paginated_terms:
+            display_term_card(term)
         
         # Отображение выбранного термина
-        if st.session_state.selected_term:
+        if st.session_state.get('selected_term'):
             display_term_full(st.session_state.selected_term)
-            if st.button("❌ Закрыть"):
-                st.session_state.selected_term = None
+            if st.button("❌ Свернуть"):
+                del st.session_state.selected_term
                 st.rerun()
 
     else:
