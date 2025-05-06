@@ -238,7 +238,7 @@ def main():
     else:
         # Іздеу нәтижелері
         for idx, term in enumerate(filtered_terms):
-            display_term_compact(term, idx
+            display_term_compact(term, idx)
         # Толық ақпаратты көрсету
         if st.session_state.get('selected_term'):
             display_term_full(st.session_state.selected_term)
