@@ -88,15 +88,17 @@ def parse_excel(uploaded_file):
         return []
 
 # ==================== Вспомогательные функции ====================
-def display_term(term):
-    """Отображение карточки термина с проверкой отсутствующих полей"""
-    with st.container():
-        st.markdown(f"### 🌐 {term.get('kk', 'Без названия')}")
-        
-        # Вкладки с информацией
+def display_term_compact(term):
+    """Отображение термина в компактном режиме (только название)"""
+    kk_title = term.get('kk', 'Без названия')
+    if st.button(f"🔹 {kk_title}", key=f"compact_{kk_title}"):
+        st.session_state.selected_term = term
+
+def display_term_full(term):
+    """Отображение полной информации о термине"""
+    with st.expander(f"📘 {term.get('kk', 'Без названия')}", expanded=True):
         tabs = st.tabs(["📖 Определение", "💬 Пример", "🔗 Связи"])
         
-        # Безопасное получение данных
         definition = term.get('definition', {})
         example = term.get('example', {})
         relations = term.get('relations', {})
@@ -178,7 +180,6 @@ def main():
                         horizontal=True)
 
     if view_mode == "📂 По темам":
-        # Отображение терминов по темам
         selected_lecture = st.selectbox(
             "📚 Выберите тему:",
             list(terms_data.keys()),
@@ -189,10 +190,20 @@ def main():
         st.subheader(f"📖 Тема: {selected_lecture}")
         st.write(f"🔢 Количество терминов: {len(terms_data[selected_lecture])}")
         
-        # Отображение терминов выбранной темы
+        # Инициализация состояния выбранного термина
+        if 'selected_term' not in st.session_state:
+            st.session_state.selected_term = None
+            
+        # Отображение списка терминов
         for term in terms_data[selected_lecture]:
-            display_term(term)
-            st.divider()
+            display_term_compact(term)
+        
+        # Отображение выбранного термина
+        if st.session_state.selected_term:
+            display_term_full(st.session_state.selected_term)
+            if st.button("❌ Закрыть"):
+                st.session_state.selected_term = None
+                st.rerun()
 
     else:
         # Поиск по всем терминам
