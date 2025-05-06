@@ -185,7 +185,7 @@ def main():
             list(terms_data.keys()),
             index=0,
             key="lecture_selector"
-        )
+        ) 
 
         st.subheader(f"📖 Тема: {selected_lecture}")
         st.write(f"🔢 Количество терминов 1: {len(terms_data[selected_lecture])}")
