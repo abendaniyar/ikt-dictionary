@@ -177,24 +177,26 @@ def main():
                 st.success(f"✅ {len(new_terms)} жаңа термин табылды!")
                 
                 # Тақырыпты таңдау
+                lecture_options = list(terms_data.keys()) + ["+ ЖАҢА ТАҚЫРЫП"]
                 selected_lecture = st.selectbox(
-                    "📚 Тақырып таңдаңыз:",
-                    list(terms_data.keys()) + ["+ ЖАҢА ТАҚЫРЫП"],
+                    "📚 Тақырып таңдаңыз:", 
+                    lecture_options,
                     index=0
                 )
-                
-                # Жаңа тақырып қосу
+
                 if selected_lecture == "+ ЖАҢА ТАҚЫРЫП":
-                    new_lecture = st.text_input("Жаңа тақырып атауы:")
-                    if new_lecture:
-                        terms_data[new_lecture] = []
-                        selected_lecture = new_lecture
+                    new_lecture_name = st.text_input("Жаңа тақырып атауы:")
+                    if new_lecture_name:
+                        selected_lecture = new_lecture_name
+                        terms_data[selected_lecture] = []  
                 
-                if st.button("💾 Терминдерді сақтау"):
-                    st.cache_data.clear()
-                    terms_data, _ = load_github_data()
+                if selected_lecture not in terms_data:
+                    terms_data[selected_lecture] = []  # Кілт жоқ болса жасау
+
+                if st.button("💾 Сақтау"):
                     terms_data[selected_lecture].extend(new_terms)
-                    if update_github(terms_data):
+                    if update_github(terms_data, sha):
+                        st.cache_data.clear()
                         st.rerun()
         
         # Семантикалық карта
