@@ -35,11 +35,11 @@ def update_github(data):
     """GitHub-та деректерді жаңарту (автоматты SHA алу арқылы)"""
     try:
         # 1. Ағымдағы SHA-ны алу
-        current_content = requests.get(
+        response  = requests.get(
             f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}",
             headers=headers
         ).json()
-        sha = current_content.get("sha")
+        sha = response.json().get("sha")
 
         # 2. Жаңа деректерді жіберу
         response = requests.put(
@@ -48,17 +48,10 @@ def update_github(data):
             json={
                 "message": "Терминдер жаңартылды",
                 "content": base64.b64encode(json.dumps(data, ensure_ascii=False).encode()).decode(),
-                "sha": sha  # Ағымдағы SHA қолдану
+                "sha": sha
             }
         )
-
-        if response.status_code == 200:
-            st.success("✅ Терминдер сәтті сақталды!")
-            return True
-        else:
-            st.error(f"❌ GitHub қатесі: {response.json().get('message')}")
-            return False
-
+        return response.status_code == 200
     except Exception as e:
         st.error(f"❌ Сақтау қатесі: {str(e)}")
         return False
@@ -195,7 +188,7 @@ def main():
 
                 if st.button("💾 Сақтау"):
                     terms_data[selected_lecture].extend(new_terms)
-                    if update_github(terms_data, sha):
+                    if update_github(terms_data):
                         st.cache_data.clear()
                         st.rerun()
         
