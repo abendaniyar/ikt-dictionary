@@ -11,7 +11,8 @@ GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 REPO_OWNER = st.secrets["REPO_OWNER"]
 REPO_NAME = st.secrets["REPO_NAME"]
 FILE_PATH = "data.json"
-
+ITEMS_PER_PAGE = 20  
+COLUMN_ITEMS = 10 
 headers = {
     "Authorization": f"token {GITHUB_TOKEN}",
     "Accept": "application/vnd.github.v3+json"
@@ -113,12 +114,18 @@ def parse_excel(uploaded_file):
         return []
 # ==================== Вспомогательные функции ====================
 def display_term_compact(term, index):
-    """Терминнің қысқаша көрінісі"""
     kk_title = term.get('kk', 'Атауы жоқ')
     unique_key = f"compact_{index}_{kk_title[:10]}"  # Индекс пен атаудан кілт
     if st.button(f"🔹 {kk_title}", key=unique_key):
         st.session_state.selected_term = term
-
+def display_terms_in_columns(terms):
+    col1, col2 = st.columns(2)
+    with col1:
+        for term in terms[:COLUMN_ITEMS]:
+            display_term_compact(term)
+    with col2:
+        for term in terms[COLUMN_ITEMS:COLUMN_ITEMS*2]:
+            display_term_compact(term)
 def display_term_full(term):
     """Отображение полной информации о термине"""
     with st.expander(f"📘 {term.get('kk', 'Без названия')}", expanded=True):
@@ -152,7 +159,22 @@ def display_term_full(term):
                 st.markdown("🔗 **Ассоциации:**\n" + "\n".join(
                     f"- {s}" for s in relations.get('associative', [])
                 ))
-
+def display_pagination(total_terms):
+    """Беттер аралығындағы навигация"""
+    total_pages = (total_terms + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
+    prev_col, _, next_col = st.columns([1, 8, 1])
+    
+    with prev_col:
+        if st.button("◀️ Алдыңғы", disabled=(st.session_state.current_page == 0)):
+            st.session_state.current_page -= 1
+            st.rerun()
+    
+    with next_col:
+        if st.button("Келесі ▶️", disabled=(st.session_state.current_page >= total_pages-1)):
+            st.session_state.current_page += 1
+            st.rerun()
+    
+    st.caption(f"Бет {st.session_state.current_page + 1}/{total_pages}")
 # ==================== Интерфейс ====================
 def main():
     st.set_page_config("Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
@@ -270,10 +292,18 @@ def main():
             filtered_terms.sort(key=lambda x: x.get('kk', ''), reverse=True)
         elif sort_option == "Мысалдары барлар алдымен":
             filtered_terms.sort(key=lambda x: len(x.get('example', {}).get('kk', '')), reverse=True)
-    
+        
+        start_idx = st.session_state.current_page * ITEMS_PER_PAGE
+        paginated_terms = filtered_terms[start_idx : start_idx + ITEMS_PER_PAGE]
+            
         # Терминдерді көрсету
         st.write(f"🔢 Жалпы терминдер: {len(filtered_terms)}")
-        
+
+        if paginated_terms:
+            display_terms_in_columns(paginated_terms)  # <-- 2 бағанға бөлу
+            display_pagination(len(filtered_terms))
+        else:
+            st.warning("📭 Осы бетте терминдер жоқ")
         for idx, term in enumerate(filtered_terms):
             display_term_compact(term, idx)
        # Толық ақпаратты көрсету
@@ -282,6 +312,8 @@ def main():
             if st.button("❌ Жабу"):
                 del st.session_state.selected_term
                 st.rerun()
+        if 'current_page' not in st.session_state:
+        st.session_state.current_page = 0
     else:
         # Барлық терминдерден іздеу
         search_query = st.text_input("🔍 Терминдерді іздеу", help="Кез келген тілде іздеңіз")
