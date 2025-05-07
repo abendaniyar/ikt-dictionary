@@ -11,7 +11,7 @@ GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 REPO_OWNER = st.secrets["REPO_OWNER"]
 REPO_NAME = st.secrets["REPO_NAME"]
 FILE_PATH = "data.json"
-ITEMS_PER_PAGE = 20  
+ITEMS_PER_PAGE = 30  
 COLUMN_ITEMS = 10 
 headers = {
     "Authorization": f"token {GITHUB_TOKEN}",
@@ -108,13 +108,20 @@ def display_term_compact(term, index):
         st.session_state.selected_term = term
 
 def display_terms_in_columns(terms, start_idx):
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
+    
     with col1:
         for idx_in_page, term in enumerate(terms[:COLUMN_ITEMS]):
             global_index = start_idx + idx_in_page
             display_term_compact(term, global_index)
+    
     with col2:
         for idx_in_page, term in enumerate(terms[COLUMN_ITEMS:COLUMN_ITEMS*2], start=COLUMN_ITEMS):
+            global_index = start_idx + idx_in_page
+            display_term_compact(term, global_index)
+    
+    with col3:
+        for idx_in_page, term in enumerate(terms[COLUMN_ITEMS*2:], start=COLUMN_ITEMS*2):
             global_index = start_idx + idx_in_page
             display_term_compact(term, global_index)
 
