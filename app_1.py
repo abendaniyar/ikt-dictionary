@@ -33,23 +33,20 @@ def load_github_data():
         return {}, None
 
 def update_github(data):
-    """GitHub-та деректерді жаңарту (автоматты SHA алу арқылы)"""
     try:
-        # 1. Ағымдағы SHA-ны алу
         current_content = requests.get(
             f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}",
             headers=headers
         ).json()
         sha = current_content.get("sha")
 
-        # 2. Жаңа деректерді жіберу
         response = requests.put(
             f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/contents/{FILE_PATH}",
             headers=headers,
             json={
                 "message": "Терминдер жаңартылды",
                 "content": base64.b64encode(json.dumps(data, ensure_ascii=False).encode()).decode(),
-                "sha": sha  # Ағымдағы SHA қолдану
+                "sha": sha
             }
         )
 
@@ -59,17 +56,13 @@ def update_github(data):
         else:
             st.error(f"❌ GitHub қатесі: {response.json().get('message')}")
             return False
-
     except Exception as e:
         st.error(f"❌ Сақтау қатесі: {str(e)}")
         return False
 
 def parse_excel(uploaded_file):
-    """Excel файлды дұрыс парсинг жасау (жаңартылған нұсқасы)"""
     try:
         df = pd.read_excel(uploaded_file)
-        
-        # Міндетті бағандарды тексеру
         required_columns = ['kk', 'ru', 'en']
         missing = [col for col in required_columns if col not in df.columns]
         if missing:
@@ -78,7 +71,6 @@ def parse_excel(uploaded_file):
 
         new_terms = []
         for _, row in df.iterrows():
-            # Негізгі ақпарат
             term = {
                 'kk': str(row['kk']).strip(),
                 'ru': str(row['ru']).strip(),
@@ -100,37 +92,35 @@ def parse_excel(uploaded_file):
                     'associative': [s.strip() for s in str(row.get('associative', '')).split(',') if s.strip()]
                 }
             }
-            
-            # Пустық өрістерді өшіру
             for key in ['definition', 'example']:
                 term[key] = {k: v for k, v in term[key].items() if v}
-            
             new_terms.append(term)
-        
         return new_terms
-
     except Exception as e:
         st.error(f"❌ Excel қатесі: {str(e)}")
         return []
+
 # ==================== Вспомогательные функции ====================
 def display_term_compact(term, index):
     kk_title = term.get('kk', 'Атауы жоқ')
-    unique_key = f"compact_{index}_{kk_title[:10]}"  # Индекс пен атаудан кілт
+    unique_key = f"compact_{index}_{kk_title[:10]}"
     if st.button(f"🔹 {kk_title}", key=unique_key):
         st.session_state.selected_term = term
-def display_terms_in_columns(terms):
+
+def display_terms_in_columns(terms, start_idx):
     col1, col2 = st.columns(2)
     with col1:
-        for term in terms[:COLUMN_ITEMS]:
-            display_term_compact(term)
+        for idx_in_page, term in enumerate(terms[:COLUMN_ITEMS]):
+            global_index = start_idx + idx_in_page
+            display_term_compact(term, global_index)
     with col2:
-        for term in terms[COLUMN_ITEMS:COLUMN_ITEMS*2]:
-            display_term_compact(term)
+        for idx_in_page, term in enumerate(terms[COLUMN_ITEMS:COLUMN_ITEMS*2], start=COLUMN_ITEMS):
+            global_index = start_idx + idx_in_page
+            display_term_compact(term, global_index)
+
 def display_term_full(term):
-    """Отображение полной информации о термине"""
     with st.expander(f"📘 {term.get('kk', 'Без названия')}", expanded=True):
         tabs = st.tabs(["📖 Определение", "💬 Пример", "🔗 Связи"])
-        
         definition = term.get('definition', {})
         example = term.get('example', {})
         relations = term.get('relations', {})
@@ -148,19 +138,13 @@ def display_term_full(term):
         with tabs[2]:
             cols = st.columns(2)
             with cols[0]:
-                st.markdown("🔁 **Синонимы:**\n" + "\n".join(
-                    f"- {s}" for s in relations.get('synonyms', [])
-                ))
+                st.markdown("🔁 **Синонимы:**\n" + "\n".join(f"- {s}" for s in relations.get('synonyms', [])))
                 st.markdown("🔼 **Общее понятие:**\n" + relations.get('general', '-'))
             with cols[1]:
-                st.markdown("🔽 **Частные понятия:**\n" + "\n".join(
-                    f"- {s}" for s in relations.get('specific', [])
-                ))
-                st.markdown("🔗 **Ассоциации:**\n" + "\n".join(
-                    f"- {s}" for s in relations.get('associative', [])
-                ))
+                st.markdown("🔽 **Частные понятия:**\n" + "\n".join(f"- {s}" for s in relations.get('specific', [])))
+                st.markdown("🔗 **Ассоциации:**\n" + "\n".join(f"- {s}" for s in relations.get('associative', [])))
+
 def display_pagination(total_terms):
-    """Беттер аралығындағы навигация"""
     total_pages = (total_terms + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
     prev_col, _, next_col = st.columns([1, 8, 1])
     
@@ -175,36 +159,30 @@ def display_pagination(total_terms):
             st.rerun()
     
     st.caption(f"Бет {st.session_state.current_page + 1}/{total_pages}")
+
 # ==================== Интерфейс ====================
 def main():
     st.set_page_config("Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
     st.title("📘 АКТ курсы: Электрондық ұғымдық-терминологиялық сөздік")
     
-    # Инициализация данных
     terms_data, sha = load_github_data()
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = 0
     
-    # Проверка загруженных данных
     if not terms_data or not isinstance(terms_data, dict):
         st.error("❌ Деректер жүктелмеді немесе қате формат")
         return
     
     all_terms = [term for lecture in terms_data.values() for term in lecture]
     
-    # ==================== Боковая панель ====================
     with st.sidebar:
         uploaded_file = st.file_uploader("📤 Excel файл жүктеу", type=["xlsx"])
         if uploaded_file:
             new_terms = parse_excel(uploaded_file)
             if new_terms:
                 st.success(f"✅ {len(new_terms)} жаңа термин табылды!")
-                
-                # Тақырыпты таңдау
                 lecture_options = list(terms_data.keys()) + ["+ ЖАҢА ТАҚЫРЫП"]
-                selected_lecture = st.selectbox(
-                    "📚 Тақырып таңдаңыз:", 
-                    lecture_options,
-                    index=0
-                )
+                selected_lecture = st.selectbox("📚 Тақырып таңдаңыз:", lecture_options, index=0)
 
                 if selected_lecture == "+ ЖАҢА ТАҚЫРЫП":
                     new_lecture_name = st.text_input("Жаңа тақырып атауы:")
@@ -213,7 +191,7 @@ def main():
                         terms_data[selected_lecture] = []  
                 
                 if selected_lecture not in terms_data:
-                    terms_data[selected_lecture] = []  # Кілт жоқ болса жасау
+                    terms_data[selected_lecture] = []
 
                 if st.button("💾 Сақтау"):
                      st.cache_data.clear()
@@ -222,11 +200,8 @@ def main():
                      if update_github(terms_data):
                         st.rerun()
         
-        # Семантикалық карта
         if st.button("🌍 Байланыстарды көрсету"):
-            html_content = "<div style='padding:20px; font-family:Arial;'>"
-            html_content += "<h3>🔗 Семантикалық байланыстар</h3>"
-            
+            html_content = "<div style='padding:20px; font-family:Arial;'><h3>🔗 Семантикалық байланыстар</h3>"
             for lecture in terms_data.values():
                 for term in lecture:
                     try:
@@ -238,84 +213,66 @@ def main():
                         if 'specific' in relations:
                             elements.extend(relations['specific'])
                         html_content += f"<p><b>{kk}</b> → {', '.join(elements)}</p>"
-                    except Exception as e:
+                    except:
                         continue
-            
             html_content += "</div>"
             html(html_content, height=500, scrolling=True)
 
-    # ==================== Негізгі интерфейс ====================
-    view_mode = st.radio("🔍 Көріну режимі:", 
-                        ["📂 Тақырып бойынша", "🔎 Барлық терминдерден іздеу"], 
-                        horizontal=True)
+    view_mode = st.radio("🔍 Көріну режимі:", ["📂 Тақырып бойынша", "🔎 Барлық терминдерден іздеу"], horizontal=True)
 
     if view_mode == "📂 Тақырып бойынша":
-        # Тақырыпты таңдау
-        selected_lecture = st.selectbox(
-            "📚 Тақырыпты таңдаңыз:",
-            list(terms_data.keys()),
-            index=0,
-            key="lecture_selector"
-        )
-    
-        # Фильтрлер
+        selected_lecture = st.selectbox("📚 Тақырыпты таңдаңыз:", list(terms_data.keys()), index=0, key="lecture_selector")
         st.subheader(f"📖 Тақырып: {selected_lecture}")
         
-        # 1. Әріп бойынша сүзгі
         initial_terms = terms_data[selected_lecture]
         letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
         selected_letter = st.selectbox("🔤 Әріп бойынша сүзгі", ["Барлығы"] + letters)
         
-        # Фильтрация
         filtered_terms = [
             term for term in initial_terms
             if selected_letter == "Барлығы" or term.get('kk', '').upper().startswith(selected_letter)
         ]
     
-        # 2. Сұрыптау параметрлері
         col1, col2 = st.columns([3, 2])
         with col1:
             sort_option = st.selectbox(
                 "🔃 Сұрыптау түрі",
                 options=[
                     "Алфавит бойынша (А-Я)",
-                    "Алфавит бойынша (Я-А)",
-                    "Мысалдары барлар алдымен"
+                    "Алфавит бойынша (Я-А)"
                 ],
                 index=0
             )
         
-        # Сұрыптау логикасы
         if sort_option == "Алфавит бойынша (А-Я)":
             filtered_terms.sort(key=lambda x: x.get('kk', ''))
         elif sort_option == "Алфавит бойынша (Я-А)":
             filtered_terms.sort(key=lambda x: x.get('kk', ''), reverse=True)
         elif sort_option == "Мысалдары барлар алдымен":
             filtered_terms.sort(key=lambda x: len(x.get('example', {}).get('kk', '')), reverse=True)
+
+        if st.session_state.get('prev_lecture') != selected_lecture or st.session_state.get('prev_letter') != selected_letter:
+            st.session_state.current_page = 0
+            st.session_state.prev_lecture = selected_lecture
+            st.session_state.prev_letter = selected_letter
         
         start_idx = st.session_state.current_page * ITEMS_PER_PAGE
         paginated_terms = filtered_terms[start_idx : start_idx + ITEMS_PER_PAGE]
             
-        # Терминдерді көрсету
         st.write(f"🔢 Жалпы терминдер: {len(filtered_terms)}")
 
         if paginated_terms:
-            display_terms_in_columns(paginated_terms)  # <-- 2 бағанға бөлу
+            display_terms_in_columns(paginated_terms, start_idx)
             display_pagination(len(filtered_terms))
         else:
             st.warning("📭 Осы бетте терминдер жоқ")
-        for idx, term in enumerate(filtered_terms):
-            display_term_compact(term, idx)
-       # Толық ақпаратты көрсету
+
         if st.session_state.get('selected_term'):
             display_term_full(st.session_state.selected_term)
             if st.button("❌ Жабу"):
                 del st.session_state.selected_term
                 st.rerun()
-        if 'current_page' not in st.session_state:
-        st.session_state.current_page = 0
     else:
-        # Барлық терминдерден іздеу
         search_query = st.text_input("🔍 Терминдерді іздеу", help="Кез келген тілде іздеңіз")
         filtered_terms = [
             term for term in all_terms
@@ -324,10 +281,10 @@ def main():
         
         if filtered_terms:
             st.subheader(f"📚 Табылды: {len(filtered_terms)} термин")
-            for idx, term in enumerate(filtered_terms):  # <-- enumerate қосылды
-                display_term_compact(term, idx)  # <-- индекс берілді
-                #st.divider()
+            for idx, term in enumerate(filtered_terms):
+                display_term_compact(term, idx)
         else:
             st.info("🔍 Ештеңе табылған жоқ. Іздеу сұранысын өзгертіңіз.")
+
 if __name__ == "__main__":
     main()
