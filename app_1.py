@@ -24,21 +24,6 @@ KAZ_ALPHABET = [
     'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч',
     'Ш', 'Щ', 'Ы', 'Э', 'Ю', 'Я'
 ]
-st.markdown("""
-<style>
-    .center-buttons {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 5px;
-        margin: 10px 0;
-    }
-    .letter-btn {
-        flex: 0 0 auto;
-        padding: 0.5rem 1rem;
-    }
-</style>
-""", unsafe_allow_html=True)
 # ==================== Основные функции ====================
 @st.cache_data(ttl=60, show_spinner=False)
 def load_github_data():
@@ -270,21 +255,24 @@ def main():
                 st.rerun()
         
             # Два ряда кнопок
-            st.markdown('<div class="center-buttons">', unsafe_allow_html=True)
-    
-            for letter in KAZ_ALPHABET:
-                if letter in used_letters:
-                    if st.button(
-                        letter,
-                        key=f"btn_{letter}",
-                        help=f"Әріппен басталатын терминдер: {letter}",
-                    ):
-                        selected_letter = letter
-                        st.session_state.selected_letter = selected_letter
-                        st.session_state.current_page = 0
-                        st.rerun()
-            
-            st.markdown('</div>', unsafe_allow_html=True)
+            cols = st.columns(2)
+            for i in range(2):
+                with cols[i]:
+                    grid = st.columns(8)  # 8 кнопок в ряд
+                    letters_slice = KAZ_ALPHABET[i*18:(i+1)*18] if i == 0 else KAZ_ALPHABET[18:]
+                    for idx, letter in enumerate(letters_slice):
+                        if letter in used_letters:
+                            with grid[idx%8]:
+                                if st.button(
+                                    letter, 
+                                    key=f"letter_{letter}_{i}",
+                                    help=f"Әріппен басталатын терминдер: {letter}",
+                                    use_container_width=True
+                                ):
+                                    selected_letter = letter
+                                    st.session_state.selected_letter = selected_letter
+                                    st.session_state.current_page = 0
+                                    st.rerun()
 
         # Фильтрация терминов
         filtered_terms = [
