@@ -238,42 +238,41 @@ def main():
         st.subheader(f"📖 Тақырып: {selected_lecture}")
         
         initial_terms = terms_data[selected_lecture]
-        used_letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
+        used_letters = sorted(
+            {term['kk'][0].upper() for term in initial_terms if term.get('kk')},
+            key=lambda x: KAZ_ALPHABET.index(x) if x in KAZ_ALPHABET else 999
+        )
         
         # Создаем два ряда для кнопок
-        col1, col2 = st.columns(2)
         selected_letter = st.session_state.get('selected_letter', 'Барлығы')
         
-        with col1:
+        with st.container():
             # Кнопка "Все"
-            if st.button("Барлығы", key="all_terms"):
+            if st.button("🌐 Барлығы", use_container_width=True):
                 selected_letter = 'Барлығы'
                 st.session_state.selected_letter = selected_letter
                 st.session_state.current_page = 0
                 st.rerun()
-            
-            # Первый ряд букв
-            cols = st.columns(5)
-            for idx, letter in enumerate(KAZ_ALPHABET[:19]):
-                if letter in used_letters:
-                    with cols[idx%5]:
-                        if st.button(letter, key=f"letter_{letter}"):
-                            selected_letter = letter
-                            st.session_state.selected_letter = selected_letter
-                            st.session_state.current_page = 0
-                            st.rerun()
-
-        with col2:
-            # Второй ряд букв
-            cols = st.columns(5)
-            for idx, letter in enumerate(KAZ_ALPHABET[19:]):
-                if letter in used_letters:
-                    with cols[idx%5]:
-                        if st.button(letter, key=f"letter_{letter}_2"):
-                            selected_letter = letter
-                            st.session_state.selected_letter = selected_letter
-                            st.session_state.current_page = 0
-                            st.rerun()
+        
+            # Два ряда кнопок
+            cols = st.columns(2)
+            for i in range(2):
+                with cols[i]:
+                    grid = st.columns(8)  # 8 кнопок в ряд
+                    letters_slice = KAZ_ALPHABET[i*18:(i+1)*18] if i == 0 else KAZ_ALPHABET[18:]
+                    for idx, letter in enumerate(letters_slice):
+                        if letter in used_letters:
+                            with grid[idx%8]:
+                                if st.button(
+                                    letter, 
+                                    key=f"letter_{letter}_{i}",
+                                    help=f"Әріппен басталатын терминдер: {letter}",
+                                    use_container_width=True
+                                ):
+                                    selected_letter = letter
+                                    st.session_state.selected_letter = selected_letter
+                                    st.session_state.current_page = 0
+                                    st.rerun()
 
         # Фильтрация терминов
         filtered_terms = [
