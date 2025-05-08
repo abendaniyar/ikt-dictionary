@@ -238,12 +238,10 @@ def main():
         st.subheader(f"📖 Тақырып: {selected_lecture}")
         
         initial_terms = terms_data[selected_lecture]
-        used_letters = sorted(
-            {term['kk'][0].upper() for term in initial_terms if term.get('kk')},
-            key=lambda x: KAZ_ALPHABET.index(x) if x in KAZ_ALPHABET else 999
-        )
+        used_letters = [letter for letter in KAZ_ALPHABET 
+                       if any(term.get('kk', '').upper().startswith(letter) 
+                             for term in initial_terms)]
         
-        # Создаем два ряда для кнопок
         selected_letter = st.session_state.get('selected_letter', 'Барлығы')
         
         with st.container():
@@ -253,26 +251,25 @@ def main():
                 st.session_state.selected_letter = selected_letter
                 st.session_state.current_page = 0
                 st.rerun()
-        
-            # Два ряда кнопок
-            cols = st.columns(2)
-            for i in range(2):
-                with cols[i]:
-                    grid = st.columns(8)  # 8 кнопок в ряд
-                    letters_slice = KAZ_ALPHABET[i*18:(i+1)*18] if i == 0 else KAZ_ALPHABET[18:]
-                    for idx, letter in enumerate(letters_slice):
-                        if letter in used_letters:
-                            with grid[idx%8]:
-                                if st.button(
-                                    letter, 
-                                    key=f"letter_{letter}_{i}",
-                                    help=f"Әріппен басталатын терминдер: {letter}",
-                                    use_container_width=True
-                                ):
-                                    selected_letter = letter
-                                    st.session_state.selected_letter = selected_letter
-                                    st.session_state.current_page = 0
-                                    st.rerun()
+            BUTTONS_PER_ROW = 8
+            for i in range(0, len(used_letters), BUTTONS_PER_ROW):
+                row_letters = used_letters[i:i+BUTTONS_PER_ROW]
+                
+                empty_cols = (BUTTONS_PER_ROW - len(row_letters)) // 2
+                columns = st.columns([1]*empty_cols + [2]*len(row_letters) + [1]*empty_cols)
+                
+                for idx, letter in enumerate(row_letters):
+                    with columns[empty_cols + idx]:
+                        if st.button(
+                            letter,
+                            key=f"btn_{letter}_{i}",
+                            help=f"Әріппен басталатын терминдер: {letter}",
+                            use_container_width=True
+                        ):
+                            selected_letter = letter
+                            st.session_state.selected_letter = selected_letter
+                            st.session_state.current_page = 0
+                            st.rerun()
 
         # Фильтрация терминов
         filtered_terms = [
