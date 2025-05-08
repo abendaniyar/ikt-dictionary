@@ -17,7 +17,13 @@ headers = {
     "Authorization": f"token {GITHUB_TOKEN}",
     "Accept": "application/vnd.github.v3+json"
 }
-
+KAZ_ALPHABET = [
+    'Ә', 'І', 'Ң', 'Ғ', 'Ү', 'Ұ', 'Қ', 'Ө', 'Һ',
+    'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З',
+    'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П',
+    'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч',
+    'Ш', 'Щ', 'Ы', 'Э', 'Ю', 'Я'
+]
 # ==================== Основные функции ====================
 @st.cache_data(ttl=60, show_spinner=False)
 def load_github_data():
@@ -232,12 +238,48 @@ def main():
         st.subheader(f"📖 Тақырып: {selected_lecture}")
         
         initial_terms = terms_data[selected_lecture]
-        letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
-        selected_letter = st.selectbox("🔤 Әріп бойынша сүзгі", ["Барлығы"] + letters)
+        used_letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
         
+        # Создаем два ряда для кнопок
+        col1, col2 = st.columns(2)
+        selected_letter = st.session_state.get('selected_letter', 'Барлығы')
+        
+        with col1:
+            # Кнопка "Все"
+            if st.button("Барлығы", key="all_terms"):
+                selected_letter = 'Барлығы'
+                st.session_state.selected_letter = selected_letter
+                st.session_state.current_page = 0
+                st.rerun()
+            
+            # Первый ряд букв
+            cols = st.columns(5)
+            for idx, letter in enumerate(KAZ_ALPHABET[:19]):
+                if letter in used_letters:
+                    with cols[idx%5]:
+                        if st.button(letter, key=f"letter_{letter}"):
+                            selected_letter = letter
+                            st.session_state.selected_letter = selected_letter
+                            st.session_state.current_page = 0
+                            st.rerun()
+
+        with col2:
+            # Второй ряд букв
+            cols = st.columns(5)
+            for idx, letter in enumerate(KAZ_ALPHABET[19:]):
+                if letter in used_letters:
+                    with cols[idx%5]:
+                        if st.button(letter, key=f"letter_{letter}_2"):
+                            selected_letter = letter
+                            st.session_state.selected_letter = selected_letter
+                            st.session_state.current_page = 0
+                            st.rerun()
+
+        # Фильтрация терминов
         filtered_terms = [
             term for term in initial_terms
-            if selected_letter == "Барлығы" or term.get('kk', '').upper().startswith(selected_letter)
+            if selected_letter == 'Барлығы' or 
+            term.get('kk', '').upper().startswith(selected_letter)
         ]
     
         col1, col2 = st.columns([3, 2])
