@@ -262,7 +262,7 @@ def main():
                     letters_slice = KAZ_ALPHABET[i*18:(i+1)*18] if i == 0 else KAZ_ALPHABET[18:]
                     for idx, letter in enumerate(letters_slice):
                         if letter in used_letters:
-                            with grid[idx%8]:
+                            with grid[idx%18]:
                                 if st.button(
                                     letter, 
                                     key=f"letter_{letter}_{i}",
