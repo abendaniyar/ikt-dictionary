@@ -132,7 +132,14 @@ def display_terms_in_columns(terms, start_idx):
             display_term_compact(term, global_index)
 
 def display_term_full(term):
-    term_text = f"{term.get('kk', '')}  🇰🇿 / {term.get('ru', '')} 🇷🇺 / {term.get('en', '')} 🇺🇸"
+    kk_flag = "🇰🇿" if term.get('kk') else ""
+    ru_flag = "🇷🇺" if term.get('ru') else ""
+    en_flag = "🇺🇸" if term.get('en') else ""
+    term_text = f"""
+    {kk_flag} {term.get('kk', '')} 
+    | {ru_flag} {term.get('ru', '')} 
+    | {en_flag} {term.get('en', '')}
+    """.strip().replace("\n", " ")
     with st.expander(f"📘 {term_text}", expanded=True):
         cols = st.columns(5)
         with cols[0]:
