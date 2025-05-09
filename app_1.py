@@ -133,9 +133,9 @@ def display_terms_in_columns(terms, start_idx):
 
 def display_term_full(term):
     FLAGS = {
-        'kk': 'https://flagcdn.com/24x18/kz.png',    # Қазақстан
-        'ru': 'https://flagcdn.com/24x18/ru.png',    # Ресей
-        'en': 'https://flagcdn.com/24x18/us.png'     # АҚШ
+        'kk': 'https://img.icons8.com/?size=100&id=bTwapbmoLtc6&format=png&color=000000',    # Қазақстан
+        'ru': 'https://img.icons8.com/?size=100&id=hT4UdesmXlvG&format=png&color=000000',    # Ресей
+        'en': 'https://img.icons8.com/?size=100&id=Halaubi1vvya&format=png&color=000000'     # АҚШ
     }
     term_html = []
     for lang, url in FLAGS.items():
