@@ -132,8 +132,24 @@ def display_terms_in_columns(terms, start_idx):
             display_term_compact(term, global_index)
 
 def display_term_full(term):
+    term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
     with st.expander(f"📘 {term.get('kk', 'Без названия')}", expanded=True):
-        tabs = st.tabs(["📖 Определение", "💬 Пример", "🔗 Связи"])
+        cols = st.columns(5)
+        with cols[0]:
+            if term.get('kk'):
+                if st.button("🔊 Қазақша", key=f"sound_kk_{term['kk']}"):
+                    text_to_speech(term['kk'], 'kk')
+        with cols[1]:
+            if term.get('ru'):
+                if st.button("🔊 Русский", key=f"sound_ru_{term['ru']}"):
+                    text_to_speech(term['ru'], 'ru')
+        with cols[2]:
+            if term.get('en'):
+                if st.button("🔊 English", key=f"sound_en_{term['en']}"):
+                    text_to_speech(term['en'], 'en')
+        
+        # Основная информация
+        tabs = st.tabs(["📖 Анықтама", "💬 Мысал", "🔗 Байланыстар"])
         definition = term.get('definition', {})
         example = term.get('example', {})
         relations = term.get('relations', {})
@@ -151,12 +167,26 @@ def display_term_full(term):
         with tabs[2]:
             cols = st.columns(2)
             with cols[0]:
-                st.markdown("🔁 **Синонимы:**\n" + "\n".join(f"- {s}" for s in relations.get('synonyms', [])))
-                st.markdown("🔼 **Общее понятие:**\n" + relations.get('general', '-'))
+                st.markdown("🔁 **Синонимдер:**\n" + "\n".join(f"- {s}" for s in relations.get('synonyms', [])))
+                st.markdown("🔼 **Жалпы ұғым:**\n" + relations.get('general', '-'))
             with cols[1]:
-                st.markdown("🔽 **Частные понятия:**\n" + "\n".join(f"- {s}" for s in relations.get('specific', [])))
-                st.markdown("🔗 **Ассоциации:**\n" + "\n".join(f"- {s}" for s in relations.get('associative', [])))
-
+                st.markdown("🔽 **Арнайы ұғымдар:**\n" + "\n".join(f"- {s}" for s in relations.get('specific', [])))
+                st.markdown("🔗 **Ассоциациялар:**\n" + "\n".join(f"- {s}" for s in relations.get('associative', [])))
+def text_to_speech(text, lang):
+    """Текстті дыбыстау үшін JavaScript функциясы"""
+    js_code = f"""
+    <script>
+        function speak() {{
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance();
+            utterance.text = "{text}";
+            utterance.lang = "{'kk-KZ' if lang == 'kk' else lang + '-RU' if lang == 'ru' else 'en-US'}";
+            synth.speak(utterance);
+        }}
+        speak();
+    </script>
+    """
+    html(js_code, height=0)
 def display_pagination(total_terms):
     total_pages = (total_terms + ITEMS_PER_PAGE - 1) // ITEMS_PER_PAGE
     prev_col, _, next_col = st.columns([1, 8, 1])
