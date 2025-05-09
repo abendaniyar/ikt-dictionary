@@ -132,8 +132,8 @@ def display_terms_in_columns(terms, start_idx):
             display_term_compact(term, global_index)
 
 def display_term_full(term):
-    term_text = f"{term.get('kk', '')} / {term.get('ru', '')} / {term.get('en', '')}"
-    with st.expander(f"📘 {term.get('kk', 'Без названия')}", expanded=True):
+    term_text = f"{term.get('kk', '')}  🇰🇿 / {term.get('ru', '')} 🇷🇺 / {term.get('en', '')} 🇺🇸"
+    with st.expander(f"📘 {term_text}", expanded=True):
         cols = st.columns(5)
         with cols[0]:
             if term.get('kk'):
