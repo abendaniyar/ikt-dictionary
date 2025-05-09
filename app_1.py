@@ -237,7 +237,11 @@ def main():
         selected_lecture = st.selectbox("📚 Тақырыпты таңдаңыз:", list(terms_data.keys()), index=0, key="lecture_selector")
         st.subheader(f"📖 Тақырып: {selected_lecture}")
         
-        initial_terms = terms_data[selected_lecture]
+        initial_terms = sorted(
+            terms_data[selected_lecture],
+            key=lambda x: x.get('kk', '').lower() )
+        letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
+
         used_letters = [letter for letter in KAZ_ALPHABET 
                        if any(term.get('kk', '').upper().startswith(letter) 
                              for term in initial_terms)]
