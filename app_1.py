@@ -146,6 +146,7 @@ def display_term_full(term):
                 f'{term[lang]}'
                 f'</span>'
             )
+    term_text = ' | '.join(term_html) or 'Термин атауы жоқ'        
     with st.expander(f"📘 Термин ақпараты", expanded=True):
         st.markdown(f"""
         <div style="font-size: 1.2rem; margin-bottom: 15px;">
