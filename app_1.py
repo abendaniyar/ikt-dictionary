@@ -132,15 +132,26 @@ def display_terms_in_columns(terms, start_idx):
             display_term_compact(term, global_index)
 
 def display_term_full(term):
-    kk_flag = "🇰🇿" if term.get('kk') else ""
-    ru_flag = "🇷🇺" if term.get('ru') else ""
-    en_flag = "🇺🇸" if term.get('en') else ""
-    term_text = f"""
-    {kk_flag} {term.get('kk', '')} 
-    | {ru_flag} {term.get('ru', '')} 
-    | {en_flag} {term.get('en', '')}
-    """.strip().replace("\n", " ")
-    with st.expander(f"📘 {term_text}", expanded=True):
+    FLAGS = {
+        'kk': 'https://flagcdn.com/24x18/kz.png',    # Қазақстан
+        'ru': 'https://flagcdn.com/24x18/ru.png',    # Ресей
+        'en': 'https://flagcdn.com/24x18/us.png'     # АҚШ
+    }
+    term_html = []
+    for lang, url in FLAGS.items():
+        if term.get(lang):
+            term_html.append(
+                f'<span style="vertical-align: middle;">'
+                f'<img src="{url}" style="height: 18px; margin-right: 5px;">'
+                f'{term[lang]}'
+                f'</span>'
+            )
+    with st.expander(f"📘 Термин ақпараты", expanded=True):
+        st.markdown(f"""
+        <div style="font-size: 1.2rem; margin-bottom: 15px;">
+            {term_text}
+        </div>
+        """, unsafe_allow_html=True)
         cols = st.columns(5)
         with cols[0]:
             if term.get('kk'):
