@@ -187,9 +187,9 @@ def display_term_full(term):
             cols = st.columns(2)
             with cols[0]:
                 st.markdown("🔁 **Синонимдер:**\n" + "\n".join(f"- {s}" for s in relations.get('synonyms', [])))
-                st.markdown("🔼 **Жалпы ұғым:**\n" + "\n".join(f"- {s}" for s in relations.get('general', '-')))
+                st.markdown("🔼 **Жалпы ұғым:**\n" + "\n".join(f"- {s}" for s in relations.get('general_concept', '-')))
             with cols[1]:
-                st.markdown("🔽 **Арнайы ұғымдар:**\n" + "\n".join(f"- {s}" for s in relations.get('specific', [])))
+                st.markdown("🔽 **Арнайы ұғымдар:**\n" + "\n".join(f"- {s}" for s in relations.get('specific_concepts', [])))
                 st.markdown("🔗 **Ассоциациялар:**\n" + "\n".join(f"- {s}" for s in relations.get('associative', [])))
 def text_to_speech(text, lang):
     """Текстті дыбыстау үшін JavaScript функциясы"""
