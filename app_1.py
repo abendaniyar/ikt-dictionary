@@ -93,7 +93,7 @@ def parse_excel(uploaded_file):
                 },
                 'relations': {
                     'synonyms': [s.strip() for s in str(row.get('synonyms', '')).split(',') if s.strip()],
-                    'general_concept': [s.strip() for s in str(row.get('general_concept', '')).split(',') if s.strip()],
+                    'general_concept': str(row.get('general_concept', '')).strip(),
                     'specific_concepts': [s.strip() for s in str(row.get('specific_concepts', '')).split(',') if s.strip()],
                     'associative': [s.strip() for s in str(row.get('associative', '')).split(',') if s.strip()]
                 }
@@ -187,7 +187,7 @@ def display_term_full(term):
             cols = st.columns(2)
             with cols[0]:
                 st.markdown("🔁 **Синонимдер:**\n" + "\n".join(f"- {s}" for s in relations.get('synonyms', [])))
-                st.markdown("🔼 **Жалпы ұғым:**\n" + "\n".join(f"- {s}" for s in relations.get('general_concept', [])))
+                st.markdown("🔼 **Жалпы ұғым:**\n" + "\n" relations.get('general_concept', []))
             with cols[1]:
                 st.markdown("🔽 **Арнайы ұғымдар:**\n" + "\n".join(f"- {s}" for s in relations.get('specific_concepts', [])))
                 st.markdown("🔗 **Ассоциациялар:**\n" + "\n".join(f"- {s}" for s in relations.get('associative', [])))
