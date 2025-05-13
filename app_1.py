@@ -182,7 +182,19 @@ def display_term_full(term):
             st.markdown(f"**KK:** {example.get('kk', '-')}")
             st.markdown(f"**RU:** {example.get('ru', '-')}")
             st.markdown(f"**EN:** {example.get('en', '-')}")
-        
+            if term.get("image"):
+                st.markdown(
+                    f'<a href="{term["image"]}" target="_blank">'
+                    f'<img src="{term["image"]}" width="200" style="border-radius:10px;" />'
+                    f'</a>',
+                    unsafe_allow_html=True
+                )
+
+            if term.get("source"):
+                st.markdown(f"🔗 [Дереккөз / Источник / Source]({term['source']})")
+
+            st.markdown("---")
+
         with tabs[2]:
             cols = st.columns(2)
             with cols[0]:
