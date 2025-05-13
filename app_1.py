@@ -177,11 +177,7 @@ def display_term_full(term):
             st.markdown(f"**KK:** {definition.get('kk', '-')}")
             st.markdown(f"**RU:** {definition.get('ru', '-')}")
             st.markdown(f"**EN:** {definition.get('en', '-')}")
-        
-        with tabs[1]:
-            st.markdown(f"**KK:** {example.get('kk', '-')}")
-            st.markdown(f"**RU:** {example.get('ru', '-')}")
-            st.markdown(f"**EN:** {example.get('en', '-')}")
+
             if term.get("image"):
                 st.markdown(
                     f'<a href="{term["image"]}" target="_blank">'
@@ -195,6 +191,11 @@ def display_term_full(term):
 
             st.markdown("---")
 
+        with tabs[1]:
+            st.markdown(f"**KK:** {example.get('kk', '-')}")
+            st.markdown(f"**RU:** {example.get('ru', '-')}")
+            st.markdown(f"**EN:** {example.get('en', '-')}")
+            
         with tabs[2]:
             cols = st.columns(2)
             with cols[0]:
