@@ -154,10 +154,10 @@ def display_term_full(term):
         </div>
         """, unsafe_allow_html=True)
         cols = st.columns(5)
-        with cols[0]:
-            if term.get('kk'):
-                if st.button("🔊 Қазақша", key=f"sound_kk_{term['kk']}"):
-                    text_to_speech(term['kk'], 'kk')
+        #with cols[0]:
+        #    if term.get('kk'):
+        #        if st.button("🔊 Қазақша", key=f"sound_kk_{term['kk']}"):
+        #            text_to_speech(term['kk'], 'kk')
         with cols[1]:
             if term.get('ru'):
                 if st.button("🔊 Русский", key=f"sound_ru_{term['ru']}"):
