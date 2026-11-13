@@ -156,7 +156,7 @@ def display_pagination(total_terms):
 
 # ==================== Интерфейс ====================
 def main():
-    st.set_page_config(page_title="Информатика терминалогиялық сөздігі", page_icon="📘", layout="wide")
+    st.set_page_config(page_title="Информатика терминологиялық сөздігі", page_icon="📘", layout="wide")
     st.markdown("""
     <style>
     .block-container {max-width: 1100px; padding-top: 2rem; padding-bottom: 3rem;}
@@ -169,7 +169,7 @@ def main():
     }
     </style>
     """, unsafe_allow_html=True)
-    st.title("📘 Информатика терминалогиялық сөздігі")
+    st.title("📘 Информатика терминологиялық сөздігі")
     st.caption("Қазақша · Русский · English  |  Терминдерді іздеңіз және тақырыптар бойынша шолыңыз")
 
     terms_data, _ = load_github_data()
