@@ -156,147 +156,108 @@ def display_pagination(total_terms):
 
 # ==================== Интерфейс ====================
 def main():
-    st.set_page_config("Электрондық ұғымдық-терминологиялық сөздік", layout="wide")
-    st.title("📘 АКТ курсы: Электрондық ұғымдық-терминологиялық сөздік")
-    
-    terms_data, sha = load_github_data()
-    if 'current_page' not in st.session_state:
-        st.session_state.current_page = 0
-    
-    if not terms_data or not isinstance(terms_data, dict):
+    st.set_page_config(page_title="АКТ терминдер сөздігі", page_icon="📘", layout="wide")
+    st.markdown("""
+    <style>
+    .block-container {max-width: 1100px; padding-top: 2rem; padding-bottom: 3rem;}
+    [data-testid="stExpander"] {border: 1px solid #e4eaf2; border-radius: 12px; margin-bottom: .4rem;}
+    [data-testid="stExpander"] summary {font-size: 1rem; font-weight: 600;}
+    [data-testid="stCaptionContainer"] {color: #64748b;}
+    @media (max-width: 640px) {
+        .block-container {padding-top: 1rem; padding-left: 1rem; padding-right: 1rem;}
+        h1 {font-size: 1.7rem !important;}
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    st.title("📘 АКТ терминдер сөздігі")
+    st.caption("Қазақша · Русский · English  |  Терминдерді іздеңіз және тақырыптар бойынша шолыңыз")
+
+    terms_data, _ = load_github_data()
+    if not isinstance(terms_data, dict) or not terms_data:
         st.error("❌ Деректер жүктелмеді немесе қате формат")
         return
-    
-    all_terms = [term for lecture in terms_data.values() for term in lecture]
-    
-    with st.sidebar:
-        if st.button("🌍 Байланыстарды көрсету"):
-            html_content = "<div style='padding:20px; font-family:Arial;'><h3>🔗 Семантикалық байланыстар</h3>"
-            for lecture in terms_data.values():
-                for term in lecture:
-                    try:
-                        kk = term.get('kk', 'Атауы жоқ')
-                        relations = term.get('relations', {})
-                        elements = []
-                        if 'synonyms' in relations:
-                            elements.extend(relations['synonyms'])
-                        if 'specific' in relations:
-                            elements.extend(relations['specific'])
-                        html_content += f"<p><b>{kk}</b> → {', '.join(elements)}</p>"
-                    except:
-                        continue
-            html_content += "</div>"
-            html(html_content, height=500, scrolling=True)
 
-    view_mode = st.radio("🔍 Көріну режимі:", ["📂 Тақырып бойынша", "🔎 Барлық терминдерден іздеу"], horizontal=True)
+    query = st.text_input(
+        "🔍 Термин іздеу",
+        placeholder="Қазақша, орысша немесе ағылшынша іздеңіз",
+    )
+    topic_col, sort_col = st.columns([3, 2])
+    with topic_col:
+        topic = st.selectbox("📚 Тақырып", ["Барлық тақырыптар"] + list(terms_data.keys()))
+    with sort_col:
+        sort_order = st.selectbox("🔃 Сұрыптау", ["Алфавит бойынша (А–Я)", "Алфавит бойынша (Я–А)"])
 
-    if view_mode == "📂 Тақырып бойынша":
-        selected_lecture = st.selectbox("📚 Тақырыпты таңдаңыз:", list(terms_data.keys()), index=0, key="lecture_selector")
-        st.subheader(f"📖 Тақырып: {selected_lecture}")
-        
-        initial_terms = sorted(
-            terms_data[selected_lecture],
-            key=lambda x: x.get('kk', '').lower() )
-        letters = sorted({term['kk'][0].upper() for term in initial_terms if term.get('kk')})
+    terms = [term for group in terms_data.values() for term in group] if topic == "Барлық тақырыптар" else terms_data[topic]
+    query_normalized = query.strip().casefold()
+    if query_normalized:
+        terms = [term for term in terms if query_normalized in json.dumps(term, ensure_ascii=False).casefold()]
 
-        used_letters = [letter for letter in KAZ_ALPHABET 
-                       if any(term.get('kk', '').upper().startswith(letter) 
-                             for term in initial_terms)]
-        
-        selected_letter = st.session_state.get('selected_letter', 'Барлығы')
-        
-        with st.container():
-            # Кнопка "Все"
-            if st.button("🌐 Барлығы", use_container_width=True):
-                selected_letter = 'Барлығы'
-                st.session_state.selected_letter = selected_letter
-                st.session_state.current_page = 0
+    available_letters = [letter for letter in KAZ_ALPHABET if any(
+        str(term.get("kk", "")).upper().startswith(letter) for term in terms
+    )]
+    letter = st.selectbox("🔤 Бастапқы әріп", ["Барлығы"] + available_letters)
+    if letter != "Барлығы":
+        terms = [term for term in terms if str(term.get("kk", "")).upper().startswith(letter)]
+    terms = sorted(terms, key=lambda term: str(term.get("kk", "")).casefold(), reverse=sort_order.endswith("(Я–А)"))
+
+    filters = (query_normalized, topic, sort_order, letter)
+    if st.session_state.get("dictionary_filters") != filters:
+        st.session_state.dictionary_page = 0
+        st.session_state.dictionary_filters = filters
+    page = st.session_state.get("dictionary_page", 0)
+    page_size = 30
+    total = len(terms)
+    pages = max(1, (total + page_size - 1) // page_size)
+    page = min(page, pages - 1)
+    start = page * page_size
+    end = min(start + page_size, total)
+    st.markdown(f"**📚 Табылды: {total} термин**")
+    if total:
+        st.caption(f"Көрсетілгені: {start + 1}–{end} / {total}")
+        for term in terms[start:end]:
+            title = str(term.get("kk") or term.get("ru") or term.get("en") or "Атауы жоқ")
+            with st.expander("📘 " + title):
+                translations = [f"{label}: {term[lang]}" for lang, label in (("kk", "Қазақша"), ("ru", "Русский"), ("en", "English")) if term.get(lang)]
+                st.caption("  |  ".join(translations))
+                tabs = st.tabs(["📖 Анықтама", "💬 Мысал", "🔗 Байланыстар"])
+                with tabs[0]:
+                    definition = term.get("definition") or {}
+                    for lang, label in (("kk", "Қазақша"), ("ru", "Русский"), ("en", "English")):
+                        if definition.get(lang):
+                            st.markdown(f"**{label}:** {definition[lang]}")
+                    if term.get("image"):
+                        st.image(term["image"], width=200)
+                    if term.get("source"):
+                        st.link_button("🔗 Дереккөз / Источник / Source", term["source"])
+                with tabs[1]:
+                    examples = term.get("example") or {}
+                    if not any(examples.values()):
+                        st.caption("Мысалдар әзірге қосылмаған.")
+                    for lang, label in (("kk", "Қазақша"), ("ru", "Русский"), ("en", "English")):
+                        if examples.get(lang):
+                            st.markdown(f"**{label}:** {examples[lang]}")
+                with tabs[2]:
+                    relations = term.get("relations") or {}
+                    for key, label in (("synonyms", "Синонимдер"), ("general_concept", "Жалпы ұғым"), ("specific_concepts", "Арнайы ұғымдар"), ("associative", "Ассоциациялар")):
+                        value = relations.get(key)
+                        if value:
+                            text = ", ".join(map(str, value)) if isinstance(value, list) else str(value)
+                            st.markdown(f"**{label}:** {text}")
+                    if not any(relations.values()):
+                        st.caption("Байланыстар әзірге қосылмаған.")
+        prev_col, page_col, next_col = st.columns([1, 2, 1])
+        with prev_col:
+            if st.button("← Алдыңғы", disabled=page == 0, use_container_width=True):
+                st.session_state.dictionary_page = page - 1
                 st.rerun()
-            BUTTONS_PER_ROW = 8
-            for i in range(0, len(used_letters), BUTTONS_PER_ROW):
-                row_letters = used_letters[i:i+BUTTONS_PER_ROW]
-                
-                empty_cols = (BUTTONS_PER_ROW - len(row_letters)) // 2
-                columns = st.columns([1]*empty_cols + [2]*len(row_letters) + [1]*empty_cols)
-                
-                for idx, letter in enumerate(row_letters):
-                    with columns[empty_cols + idx]:
-                        if st.button(
-                            letter,
-                            key=f"btn_{letter}_{i}",
-                            help=f"Әріппен басталатын терминдер: {letter}",
-                            use_container_width=True
-                        ):
-                            selected_letter = letter
-                            st.session_state.selected_letter = selected_letter
-                            st.session_state.current_page = 0
-                            st.rerun()
-
-        # Фильтрация терминов
-        filtered_terms = [
-            term for term in initial_terms
-            if selected_letter == 'Барлығы' or 
-            term.get('kk', '').upper().startswith(selected_letter)
-        ]
-    
-        col1, col2 = st.columns([3, 2])
-        with col1:
-            sort_option = st.selectbox(
-                "🔃 Сұрыптау түрі",
-                options=[
-                    "Алфавит бойынша (А-Я)",
-                    "Алфавит бойынша (Я-А)"
-                ],
-                index=0
-            )
-        
-        if sort_option == "Алфавит бойынша (А-Я)":
-            filtered_terms.sort(key=lambda x: x.get('kk', ''))
-        elif sort_option == "Алфавит бойынша (Я-А)":
-            filtered_terms.sort(key=lambda x: x.get('kk', ''), reverse=True)
-        elif sort_option == "Мысалдары барлар алдымен":
-            filtered_terms.sort(key=lambda x: len(x.get('example', {}).get('kk', '')), reverse=True)
-
-        if st.session_state.get('prev_lecture') != selected_lecture or st.session_state.get('prev_letter') != selected_letter:
-            st.session_state.current_page = 0
-            st.session_state.prev_lecture = selected_lecture
-            st.session_state.prev_letter = selected_letter
-        
-        start_idx = st.session_state.current_page * ITEMS_PER_PAGE
-        paginated_terms = filtered_terms[start_idx : start_idx + ITEMS_PER_PAGE]
-            
-        st.write(f"🔢 Жалпы терминдер: {len(filtered_terms)}")
-
-        if paginated_terms:
-            display_terms_in_columns(paginated_terms, start_idx)
-            display_pagination(len(filtered_terms))
-        else:
-            st.warning("📭 Осы бетте терминдер жоқ")
-
-        if st.session_state.get('selected_term'):
-            display_term_full(st.session_state.selected_term)
-            if st.button("❌ Жабу"):
-                del st.session_state.selected_term
+        with page_col:
+            st.caption(f"Бет {page + 1} / {pages}")
+        with next_col:
+            if st.button("Келесі →", disabled=page >= pages - 1, use_container_width=True):
+                st.session_state.dictionary_page = page + 1
                 st.rerun()
     else:
-        search_query = st.text_input("🔍 Терминдерді іздеу", help="Кез келген тілде іздеңіз")
-        filtered_terms = [
-            term for term in all_terms
-            if search_query.lower() in str(term).lower()
-        ] if search_query else all_terms
-        
-        if filtered_terms:
-            st.subheader(f"📚 Табылды: {len(filtered_terms)} термин")
-            for idx, term in enumerate(filtered_terms):
-                display_term_compact(term, idx)
-        else:
-            st.info("🔍 Ештеңе табылған жоқ. Іздеу сұранысын өзгертіңіз.")
-
-        if st.session_state.get("selected_term"):
-            display_term_full(st.session_state.selected_term)
-            if st.button("❌ Жабу"):
-                del st.session_state.selected_term
-                st.rerun()
+        st.info("Термин табылмады. Іздеу сөзін немесе сүзгілерді өзгертіңіз.")
 
 if __name__ == "__main__":
     main()
