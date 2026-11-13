@@ -214,11 +214,18 @@ def main():
     st.markdown(f"**📚 Табылды: {total} термин**")
     if total:
         st.caption(f"Көрсетілгені: {start + 1}–{end} / {total}")
-        for term in terms[start:end]:
+        for term_index, term in enumerate(terms[start:end], start=start):
             title = str(term.get("kk") or term.get("ru") or term.get("en") or "Атауы жоқ")
             with st.expander("📘 " + title):
                 translations = [f"{label}: {term[lang]}" for lang, label in (("kk", "Қазақша"), ("ru", "Русский"), ("en", "English")) if term.get(lang)]
                 st.caption("  |  ".join(translations))
+                sound_ru, sound_en = st.columns(2)
+                with sound_ru:
+                    if term.get("ru") and st.button("🔊 Русский", key=f"ru_{term_index}"):
+                        text_to_speech(term["ru"], "ru")
+                with sound_en:
+                    if term.get("en") and st.button("🔊 English", key=f"en_{term_index}"):
+                        text_to_speech(term["en"], "en")
                 tabs = st.tabs(["📖 Анықтама", "💬 Мысал", "🔗 Байланыстар"])
                 with tabs[0]:
                     definition = term.get("definition") or {}
