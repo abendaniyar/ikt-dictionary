@@ -292,5 +292,11 @@ def main():
         else:
             st.info("🔍 Ештеңе табылған жоқ. Іздеу сұранысын өзгертіңіз.")
 
+        if st.session_state.get("selected_term"):
+            display_term_full(st.session_state.selected_term)
+            if st.button("❌ Жабу"):
+                del st.session_state.selected_term
+                st.rerun()
+
 if __name__ == "__main__":
     main()
