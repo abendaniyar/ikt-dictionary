@@ -1,5 +1,7 @@
 import streamlit as st
 import json
+import requests
+from urllib.parse import quote
 from pathlib import Path
 from difflib import get_close_matches
 from streamlit.components.v1 import html
@@ -154,6 +156,39 @@ def display_pagination(total_terms):
     
     st.caption(f"Бет {st.session_state.current_page + 1}/{total_pages}")
 
+@st.cache_data(ttl=86400, show_spinner=False)
+def find_wikipedia_image(english_term):
+    """Find a freely licensed lead image for an exact English Wikipedia article."""
+    if not english_term or len(english_term) > 200:
+        return None
+    try:
+        response = requests.get(
+            "https://en.wikipedia.org/w/api.php",
+            params={
+                "action": "query", "format": "json", "formatversion": 2,
+                "prop": "pageimages|pageprops", "piprop": "thumbnail|name",
+                "pithumbsize": 600, "titles": english_term.strip(), "redirects": 1,
+            },
+            headers={"User-Agent": "InformaticsDictionary/1.0 (educational Streamlit app)"},
+            timeout=5,
+        )
+        response.raise_for_status()
+        page = response.json().get("query", {}).get("pages", [{}])[0]
+        if page.get("missing") or "disambiguation" in page.get("pageprops", {}):
+            return None
+        thumbnail = page.get("thumbnail", {}).get("source")
+        filename = page.get("pageimage")
+        if not thumbnail or not filename:
+            return None
+        return {
+            "image": thumbnail,
+            "article": "https://en.wikipedia.org/wiki/" + quote(page["title"].replace(" ", "_")),
+            "file": "https://en.wikipedia.org/wiki/File:" + quote(filename.replace(" ", "_")),
+            "title": page["title"],
+        }
+    except (requests.RequestException, ValueError, KeyError, IndexError):
+        return None
+
 # ==================== Интерфейс ====================
 def main():
     st.set_page_config(page_title="Информатика терминологиялық сөздігі", page_icon="📘", layout="wide")
@@ -233,7 +268,24 @@ def main():
                         if definition.get(lang):
                             st.markdown(f"**{label}:** {definition[lang]}")
                     if term.get("image"):
-                        st.image(term["image"], width=200)
+                        st.image(term["image"], width=300)
+                    elif term.get("en"):
+                        image_key = f"wiki_image_{term_index}"
+                        if st.button("🖼️ Иллюстрацияны көрсету", key=f"find_image_{term_index}"):
+                            with st.spinner("Сурет ізделуде..."):
+                                st.session_state[image_key] = {
+                                    "term": term.get("en"),
+                                    "result": find_wikipedia_image(str(term["en"])),
+                                }
+                        image_state = st.session_state.get(image_key, {})
+                        if image_state.get("term") == term.get("en"):
+                            image_result = image_state.get("result")
+                            if image_result:
+                                st.image(image_result["image"], width=300)
+                                st.caption(f"Википедиядағы мақала: {image_result['title']}")
+                                st.markdown(f"[Сурет дереккөзі және лицензиясы]({image_result['file']}) · [Мақала]({image_result['article']})")
+                            else:
+                                st.caption("Осы терминге сурет табылмады немесе іздеу уақытша қолжетімсіз.")
                     if term.get("source"):
                         st.link_button("🔗 Дереккөз / Источник / Source", term["source"])
                 with tabs[1]:
